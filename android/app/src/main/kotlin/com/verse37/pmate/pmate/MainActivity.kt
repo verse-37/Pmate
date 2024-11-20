@@ -1,0 +1,5 @@
+package com.verse37.pmate.pmate
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity()
