@@ -1,3 +1,33 @@
 {
-    "@@locale": "en"
+    "@@locale": "en",
+    "first_name": "First name",
+    "@first_name": {},
+    "proceed": "Proceed",
+    "@proceed": {},
+    "intro_hello": "Hello,",
+    "@intro_hello": {},
+    "intro_name_field": "Can we have your first name?",
+    "@intro_name_field": {},
+    "intro_header_1": "Hello {user}, welcome to Pmate!",
+    "@intro_header_1": {
+        "placeholders": {
+            "user": {
+                "type": "String"
+            }
+        }
+    },
+    "intro_param_1": "Juggling between school, work, and social life? Pmate helps you stay on top of everything, so you can focus only on what matters.",
+    "@intro_param_1": {},
+    "intro_header_2": "The “Mate” in Pmate",
+    "@intro_header_2": {},
+    "intro_param_2": "Take a moment to smile. Pmate is the one friend who is destined to help you manage stress, improve your well-being, and find your zen.",
+    "@intro_param_2": {},
+    "intro_header_3": "Study more in less time",
+    "@intro_header_3": {},
+    "intro_param_3": "Overwhelmed spending hours revising everything? Pmate provides science-backed study techniques and assistive tools to supercharge the outcome of your study sessions. An organized, focused, and optimistic self of yours is waiting.",
+    "@intro_param_3": {},
+    "intro_header_4": "For free, for everyone",
+    "@intro_header_4": {},
+    "intro_param_4": "Experience the power of Pmate, absolutely free.  Ran completely on donations, Pmate is made and maintained by determined developers, who can’t wait to see your success.",
+    "@intro_param_4": {}
 }

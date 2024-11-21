@@ -1,3 +1,33 @@
 {
-    "@@locale": "vi"
+    "@@locale": "vi",
+    "first_name": "Tên",
+    "@first_name": {},
+    "proceed": "Tiếp tục",
+    "@proceed": {},
+    "intro_hello": "Xin chào,",
+    "@intro_hello": {},
+    "intro_name_field": "Hãy cho chúng tôi biết tên của bạn",
+    "@intro_name_field": {},
+    "intro_header_1": "Xin chào {user}, chào mừng đến Pmate!",
+    "@intro_header_1": {
+        "placeholders": {
+            "user": {
+                "type": "String"
+            }
+        }
+    },
+    "intro_param_1": "Đang tìm kiếm sự cân bằng trong cuộc sống? Pmate sẽ giúp bạn tối ưu hóa thời gian học tập và làm việc, giảm căng thẳng và giúp bạn khám phá sự bình yên trong bản thân.",
+    "@intro_param_1": {},
+    "intro_header_2": "Từ “Mate” trong Pmate",
+    "@intro_header_2": {},
+    "intro_param_2": "Pmate được thiết kế giống một người bạn thân sẵn sàng giúp đỡ bạn khi cần. Những tính năng hữu ích sẽ giúp bạn kiểm soát năng lượng, giảm căng thẳng, cải thiện sức khỏe và lấy lại sự tập trung.",
+    "@intro_param_2": {},
+    "intro_header_3": "Đừng chỉ học, hãy “học cách học”!",
+    "@intro_header_3": {},
+    "intro_param_3": "Cảm thấy mệt mỏi à? Những công cụ học tập hữu ích và những phương pháp học (đã được khoa học chứng minh) sẽ hướng bạn đến với một trải nghiệm học tập hoàn toàn mới: Ít thời gian hơn, hiệu quả cao hơn.",
+    "@intro_param_3": {},
+    "intro_header_4": "Từ Việt Nam ra thế giới!",
+    "@intro_header_4": {},
+    "intro_param_4": "Pmate là sản phẩm được nghiên cứu và phát triển kỹ lưỡng những lập trình viên trẻ người Việt. Song song với sự ra đời của Pmate là khát khao cháy bỏng cải thiện sức khỏe tinh thần và hiệu quả làm việc của sinh viên nói riêng và người dân Việt Nam nói chung. Cùng nhau đóng góp cho sự phát triển của Pmate bằng những đánh giá, góp ý cũng như những khoản tiền quyên góp quý giá của bạn.",
+    "@intro_param_4": {}
 }
