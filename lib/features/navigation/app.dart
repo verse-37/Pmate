@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pmate/env/constants/globals.dart';
 import 'package:pmate/features/task_management/business/task_provider.dart';
-import 'package:pmate/features/welcome/interface/welcome_page.dart';
+import 'package:pmate/features/welcome/interface/welcome_form.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -27,7 +27,7 @@ class PmateRoot extends StatelessWidget {
         themeMode: ThemeMode.system,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
-        home: const WelcomePage(),
+        home: const WelcomeFormPage(),
       ),
     );
   }

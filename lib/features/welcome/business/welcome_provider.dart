@@ -2,16 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:pmate/env/common/primitives.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class WelcomeProvider extends ChangeNotifier {
-  late final String userName;
-  late final List<Pair<String, String>> script;
+class WelcomeProvider {
+  static late final String userName;
+  static late final List<Pair<String, String>> script;
 
-  void setUsername(String user) {
-    userName = user;
-    notifyListeners();
-  }
-
-  void init(BuildContext context) {
+  static void init(BuildContext context) {
     final local = AppLocalizations.of(context);
 
     script = [
