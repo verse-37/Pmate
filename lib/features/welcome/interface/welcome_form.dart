@@ -28,19 +28,26 @@ class _WelcomeFormPageState extends State<WelcomeFormPage> {
     }
 
     return Scaffold(
-      body: Center(
-        child: Column(
-          children: [
-            Text(local.intro_hello),
-            Text(local.intro_name_field),
-            TextField(
-              controller: _controller,
+      body: SafeArea(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(local.intro_hello),
+                Text(local.intro_name_field),
+                TextField(
+                  controller: _controller,
+                ),
+                ElevatedButton(
+                  onPressed: onProceed,
+                  child: Text(local.proceed),
+                ),
+              ],
             ),
-            ElevatedButton(
-              onPressed: onProceed,
-              child: Text(local.proceed),
-            ),
-          ],
+          ),
         ),
       ),
     );

@@ -3,8 +3,8 @@ import 'package:pmate/env/common/primitives.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class WelcomeProvider {
-  static late final String userName;
-  static late final List<Pair<String, String>> script;
+  static late String userName;
+  static late List<Pair<String, String>> script;
 
   static void init(BuildContext context) {
     final local = AppLocalizations.of(context);

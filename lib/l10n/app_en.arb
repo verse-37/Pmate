@@ -4,6 +4,10 @@
     "@first_name": {},
     "proceed": "Proceed",
     "@proceed": {},
+    "next": "Next",
+    "@next": {},
+    "previous": "Previous",
+    "@previous": {},
     "intro_hello": "Hello,",
     "@intro_hello": {},
     "intro_name_field": "Can we have your first name?",
@@ -29,5 +33,7 @@
     "intro_header_4": "For free, for everyone",
     "@intro_header_4": {},
     "intro_param_4": "Experience the power of Pmate, absolutely free.  Ran completely on donations, Pmate is made and maintained by determined developers, who can’t wait to see your success.",
-    "@intro_param_4": {}
+    "@intro_param_4": {},
+    "intro_button": "Get Started",
+    "@intro_button": {}
 }

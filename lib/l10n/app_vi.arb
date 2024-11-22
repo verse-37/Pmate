@@ -4,6 +4,10 @@
     "@first_name": {},
     "proceed": "Tiếp tục",
     "@proceed": {},
+    "next": "Tiếp theo",
+    "@next": {},
+    "previous": "Trước đó",
+    "@previous": {},
     "intro_hello": "Xin chào,",
     "@intro_hello": {},
     "intro_name_field": "Hãy cho chúng tôi biết tên của bạn",
@@ -29,5 +33,7 @@
     "intro_header_4": "Từ Việt Nam ra thế giới!",
     "@intro_header_4": {},
     "intro_param_4": "Pmate là sản phẩm được nghiên cứu và phát triển kỹ lưỡng những lập trình viên trẻ người Việt. Song song với sự ra đời của Pmate là khát khao cháy bỏng cải thiện sức khỏe tinh thần và hiệu quả làm việc của sinh viên nói riêng và người dân Việt Nam nói chung. Cùng nhau đóng góp cho sự phát triển của Pmate bằng những đánh giá, góp ý cũng như những khoản tiền quyên góp quý giá của bạn.",
-    "@intro_param_4": {}
+    "@intro_param_4": {},
+    "intro_button": "Bắt đầu thôi nào",
+    "@intro_button": {}
 }
