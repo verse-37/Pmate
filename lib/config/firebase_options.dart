@@ -64,7 +64,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '479102879940',
     projectId: 'verse37-pmate',
     storageBucket: 'verse37-pmate.firebasestorage.app',
-    iosBundleId: 'com.verse37.pmate.pmate',
+    iosBundleId: 'com.verse37.pmate',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
@@ -73,7 +73,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '479102879940',
     projectId: 'verse37-pmate',
     storageBucket: 'verse37-pmate.firebasestorage.app',
-    iosBundleId: 'com.verse37.pmate.pmate',
+    iosBundleId: 'com.verse37.pmate',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
