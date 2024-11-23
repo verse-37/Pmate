@@ -157,6 +157,9 @@ class LoginEmailField extends StatelessWidget {
         ),
         TextField(
           controller: _email,
+          keyboardType: TextInputType.emailAddress,
+          autocorrect: false,
+          enableSuggestions: false,
           decoration: InputDecoration(
             filled: true,
             hintText: local.email_example,
@@ -171,7 +174,7 @@ class LoginEmailField extends StatelessWidget {
   }
 }
 
-class LoginPasswordField extends StatelessWidget {
+class LoginPasswordField extends StatefulWidget {
   const LoginPasswordField({
     super.key,
     required TextEditingController passwordController,
@@ -180,8 +183,21 @@ class LoginPasswordField extends StatelessWidget {
   final TextEditingController _password;
 
   @override
+  State<LoginPasswordField> createState() => _LoginPasswordFieldState();
+}
+
+class _LoginPasswordFieldState extends State<LoginPasswordField> {
+  bool passwordVisibility = false;
+
+  @override
   Widget build(BuildContext context) {
     final local = AppLocalizations.of(context);
+
+    void onVisibilityChanged() {
+      setState(() {
+        passwordVisibility = !passwordVisibility;
+      });
+    }
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -195,13 +211,24 @@ class LoginPasswordField extends StatelessWidget {
           height: 10.0,
         ),
         TextField(
-          controller: _password,
-          obscureText: true,
+          controller: widget._password,
+          keyboardType: TextInputType.visiblePassword,
+          autocorrect: false,
+          enableSuggestions: false,
+          obscureText: !passwordVisibility,
           decoration: InputDecoration(
             filled: true,
             border: OutlineInputBorder(
               borderSide: BorderSide.none,
               borderRadius: BorderRadius.circular(15.0),
+            ),
+            suffixIcon: IconButton(
+              onPressed: onVisibilityChanged,
+              icon: Icon(
+                (passwordVisibility)
+                    ? Icons.visibility //
+                    : Icons.visibility_off,
+              ),
             ),
           ),
         ),
