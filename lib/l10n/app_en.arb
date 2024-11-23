@@ -54,6 +54,10 @@
     "@login_new_user": {},
     "login_create_account": "Create Account",
     "@login_create_account": {},
+    "sign_up_title": "Register Account",
+    "@sign_up_title": {},
+    "sign_up_retype_password": "Retype password",
+    "@sign_up_retype_password": {},
     "sign_up_account_already": "Already Have Account? ",
     "@sign_up_account_already": {}
 }
