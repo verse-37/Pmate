@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pmate/env/common/buttons.dart';
 import 'package:pmate/features/user_authentication/interface/auth_page.dart';
 import 'package:pmate/features/welcome/business/welcome_provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -75,33 +76,33 @@ class _WelcomePageState extends State<WelcomePage> {
                 ),
               ),
               Container(
-                alignment: Alignment(0, 0.7),
+                alignment: Alignment(0, 0.75),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    ElevatedButton(
-                      onPressed: () => prevPage(),
-                      child: Text(local.previous),
+                    IconButton(
+                      onPressed: prevPage,
+                      icon: Icon(Icons.arrow_back_ios_new_rounded),
                     ),
                     SmoothPageIndicator(
                       controller: _pageController,
                       count: n,
                     ),
-                    ElevatedButton(
-                      onPressed: () => nextPage(),
-                      child: Text(local.next),
-                    )
+                    IconButton(
+                      onPressed: nextPage,
+                      icon: Icon(Icons.arrow_forward_ios_rounded),
+                    ),
                   ],
                 ),
               ),
               if (onLastPage)
                 Container(
-                  alignment: Alignment(0, 0.8),
-                  child: ElevatedButton(
-                    onPressed: openAuthPage,
-                    child: Text(local.intro_button),
+                  alignment: Alignment(0, 0.95),
+                  child: LargeButton(
+                    text: local.intro_button,
+                    action: openAuthPage,
                   ),
-                )
+                ),
             ],
           ),
         ),
