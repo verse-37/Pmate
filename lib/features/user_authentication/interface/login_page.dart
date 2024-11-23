@@ -11,10 +11,6 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    void onExit() {
-      Navigator.pop(context);
-    }
-
     return Scaffold(
       resizeToAvoidBottomInset: true,
       bottomNavigationBar: SignupLink(),
