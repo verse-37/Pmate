@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pmate/features/user_authentication/interface/auth_page.dart';
 import 'package:pmate/features/welcome/business/welcome_provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -12,6 +13,7 @@ class WelcomePage extends StatefulWidget {
 
 class _WelcomePageState extends State<WelcomePage> {
   final PageController _pageController = PageController();
+  bool onLastPage = false;
 
   @override
   void initState() {
@@ -20,6 +22,7 @@ class _WelcomePageState extends State<WelcomePage> {
 
   @override
   Widget build(BuildContext context) {
+    WelcomeProvider.init(context);
     final local = AppLocalizations.of(context);
     final n = WelcomeProvider.script.length;
 
@@ -38,10 +41,14 @@ class _WelcomePageState extends State<WelcomePage> {
     }
 
     void openAuthPage() {
-      //TODO: Implement
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => AuthenticationPage(),
+        ),
+      );
     }
 
-    WelcomeProvider.init(context);
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -49,6 +56,11 @@ class _WelcomePageState extends State<WelcomePage> {
           child: Stack(
             children: [
               PageView(
+                onPageChanged: (index) {
+                  setState(() {
+                    onLastPage = index == n - 1;
+                  });
+                },
                 controller: _pageController,
                 children: List.generate(
                   n,
@@ -57,13 +69,6 @@ class _WelcomePageState extends State<WelcomePage> {
                       children: [
                         Text(WelcomeProvider.script[i].a),
                         Text(WelcomeProvider.script[i].b),
-                        if (i == (n - 1)) ...[
-                          Expanded(child: Container()),
-                          ElevatedButton(
-                            onPressed: openAuthPage,
-                            child: Text(local.intro_button),
-                          ),
-                        ],
                       ],
                     );
                   },
@@ -89,6 +94,14 @@ class _WelcomePageState extends State<WelcomePage> {
                   ],
                 ),
               ),
+              if (onLastPage)
+                Container(
+                  alignment: Alignment(0, 0.8),
+                  child: ElevatedButton(
+                    onPressed: openAuthPage,
+                    child: Text(local.intro_button),
+                  ),
+                )
             ],
           ),
         ),
