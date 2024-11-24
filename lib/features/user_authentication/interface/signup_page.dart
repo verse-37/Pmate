@@ -6,6 +6,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:logger/logger.dart';
 import 'package:pmate/env/common/buttons.dart';
 import 'package:pmate/env/common/snackbars.dart';
+import 'package:pmate/features/contact_service/interface/error_complaint_page.dart';
+import 'package:pmate/features/contact_service/models/pmate_areas.dart';
 import 'package:pmate/features/user_authentication/business/auth_service.dart';
 import 'package:pmate/features/user_authentication/business/auth_validators.dart';
 import 'package:pmate/features/user_authentication/interface/login_page.dart';
@@ -126,6 +128,17 @@ class _SignupFormState extends State<SignupForm> {
       }
     }
 
+    void onVerse37Contact() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ErrorComplaintPage(
+            erroredFeature: PmateFeatures.Authentication_Sign_Up,
+          ),
+        ),
+      );
+    }
+
     return Form(
       key: _signupFormKey,
       child: Column(
@@ -165,6 +178,31 @@ class _SignupFormState extends State<SignupForm> {
             text: local.sign_up,
             action: onSignupAttempt,
           ),
+          const SizedBox(
+            height: 10,
+          ),
+          RichText(
+            text: TextSpan(
+              children: [
+                TextSpan(
+                  text: local.sign_up_contact_1,
+                  style: TextStyle(
+                    color: theme.colorScheme.secondary,
+                    fontWeight: FontWeight.normal,
+                    fontSize: theme.textTheme.bodyMedium?.fontSize ?? 16,
+                  ),
+                ),
+                TextSpan(
+                  text: local.contact_v37,
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    color: theme.colorScheme.primary,
+                  ),
+                  recognizer: TapGestureRecognizer()..onTap = onVerse37Contact,
+                  //?Chain method works somehow...
+                )
+              ],
+            ),
+          )
         ],
       ),
     );
