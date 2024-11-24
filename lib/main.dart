@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:pmate/env/constants/globals.dart';
+import 'package:pmate/env/common/globals.dart';
 import 'package:pmate/features/navigation/app.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'env/config/firebase_options.dart';

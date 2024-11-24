@@ -88,6 +88,7 @@ class LoginForm extends StatefulWidget {
 class _LoginFormState extends State<LoginForm> {
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
+  final _loginFormKey = GlobalKey<FormState>();
   //When I decide to separate the login fields into their own widgets, I am concerned that the controller being passed to the individual fields will not in sync with the controllers here.
   //Turns out, the controllers in the field widgets still holds the reference to the controllers here, which is a day-saving thing.
 
@@ -98,32 +99,35 @@ class _LoginFormState extends State<LoginForm> {
 
     void onLoginAttempt() {}
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const SizedBox(
-          height: 50,
-        ),
-        Text(
-          local.login_title,
-          style: theme.textTheme.headlineMedium,
-        ),
-        const SizedBox(
-          height: 50,
-        ),
-        LoginEmailField(emailController: _email),
-        const SizedBox(
-          height: 20,
-        ),
-        LoginPasswordField(passwordController: _password),
-        const SizedBox(
-          height: 30,
-        ),
-        LargeButton(
-          text: local.log_in,
-          action: onLoginAttempt,
-        ),
-      ],
+    return Form(
+      key: _loginFormKey,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const SizedBox(
+            height: 50,
+          ),
+          Text(
+            local.login_title,
+            style: theme.textTheme.headlineMedium,
+          ),
+          const SizedBox(
+            height: 50,
+          ),
+          LoginEmailField(emailController: _email),
+          const SizedBox(
+            height: 20,
+          ),
+          LoginPasswordField(passwordController: _password),
+          const SizedBox(
+            height: 30,
+          ),
+          LargeButton(
+            text: local.log_in,
+            action: onLoginAttempt,
+          ),
+        ],
+      ),
     );
   }
 }
@@ -151,7 +155,7 @@ class LoginEmailField extends StatelessWidget {
         const SizedBox(
           height: 10.0,
         ),
-        TextField(
+        TextFormField(
           controller: _email,
           keyboardType: TextInputType.emailAddress,
           autocorrect: false,
@@ -206,7 +210,7 @@ class _LoginPasswordFieldState extends State<LoginPasswordField> {
         const SizedBox(
           height: 10.0,
         ),
-        TextField(
+        TextFormField(
           controller: widget._password,
           keyboardType: TextInputType.visiblePassword,
           autocorrect: false,
