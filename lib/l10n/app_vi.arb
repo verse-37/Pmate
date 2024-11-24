@@ -65,5 +65,7 @@
     "auth_password_missing": "Thiếu mật khẩu",
     "@auth_password_missing": {},
     "auth_password_retype_missing": "Hãy gõ lại mật khẩu vào ô này",
-    "@auth_password_retype_missing": {}
+    "@auth_password_retype_missing": {},
+    "auth_passwords_do_not_match": "Hai mật khẩu không trùng khớp. Kiểm tra và gõ lại nhé!",
+    "@auth_passwords_do_not_match": {}
 }
