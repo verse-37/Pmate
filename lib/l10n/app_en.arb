@@ -65,5 +65,7 @@
     "auth_password_missing": "Password is missing",
     "@auth_password_missing": {},
     "auth_password_retype_missing": "Please retype the password above here",
-    "@auth_password_retype_missing": {}
+    "@auth_password_retype_missing": {},
+    "auth_passwords_do_not_match": "The two passwords do not match :(",
+    "@auth_passwords_do_not_match": {}
 }

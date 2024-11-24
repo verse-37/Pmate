@@ -96,7 +96,9 @@ class _SignupFormState extends State<SignupForm> {
     final theme = Theme.of(context);
 
     void onSignupAttempt() {
-      String email
+      String email = _email.text.trim();
+      String password = _password.text.trim();
+      String passwordRetyped = _passwordRetype.text.trim();
     }
 
     return Column(
