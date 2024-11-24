@@ -60,6 +60,8 @@
     "@sign_up_retype_password": {},
     "sign_up_account_already": "Đã có tài khoản? ",
     "@sign_up_account_already": {},
+    "sign_up_fields_incomplete": "Hãy kiểm tra lại các thông tin được nhập.",
+    "@sign_up_fields_incomplete": {},
     "auth_email_missing": "Thiếu địa chỉ Email",
     "@auth_email_missing": {},
     "auth_password_missing": "Thiếu mật khẩu",
@@ -67,5 +69,7 @@
     "auth_password_retype_missing": "Hãy gõ lại mật khẩu vào ô này",
     "@auth_password_retype_missing": {},
     "auth_passwords_do_not_match": "Hai mật khẩu không trùng khớp. Kiểm tra và gõ lại nhé!",
-    "@auth_passwords_do_not_match": {}
+    "@auth_passwords_do_not_match": {},
+    "auth_failed": "Đăng ký thất bại",
+    "@auth_failed": {}
 }

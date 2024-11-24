@@ -3,7 +3,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:pmate/env/constants/globals.dart';
 import 'package:pmate/features/navigation/app.dart';
 import 'package:firebase_core/firebase_core.dart';
-import '../config/firebase_options.dart';
+import 'env/config/firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

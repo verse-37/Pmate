@@ -1,9 +1,11 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 // ignore: unused_import
 import 'package:logger/logger.dart';
 import 'package:pmate/env/common/buttons.dart';
+import 'package:pmate/env/common/snackbars.dart';
 import 'package:pmate/features/user_authentication/interface/login_page.dart';
 
 class SignupPage extends StatelessWidget {
@@ -89,6 +91,11 @@ class _SignupFormState extends State<SignupForm> {
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
   final TextEditingController _passwordRetype = TextEditingController();
+  final _signupFormKey = GlobalKey<FormState>();
+  //? Create a global key that uniquely identifies the Form widget
+  //? and allows validation of the form.
+  //? Also, Using a GlobalKey is the recommended way to access a form.
+  //? See additional info at: https://docs.flutter.dev/cookbook/forms/validation
 
   @override
   Widget build(BuildContext context) {
@@ -96,49 +103,59 @@ class _SignupFormState extends State<SignupForm> {
     final theme = Theme.of(context);
 
     void onSignupAttempt() {
-      String email = _email.text.trim();
-      String password = _password.text.trim();
-      String passwordRetyped = _passwordRetype.text.trim();
+      if (!_signupFormKey.currentState!.validate()) {
+        SnackbarGenerator(
+          title: local.auth_failed,
+          message: local.sign_up_fields_incomplete,
+          contentType: ContentType.failure,
+        ).showSnackbar(context);
+      } else if  {
+
+      } else {
+      }
     }
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const SizedBox(
-          height: 50,
-        ),
-        Text(
-          local.sign_up_title,
-          style: theme.textTheme.headlineMedium,
-        ),
-        const SizedBox(
-          height: 50,
-        ),
-        SignupEmailField(emailController: _email),
-        const SizedBox(
-          height: 20,
-        ),
-        SignupPasswordField(
-          title: local.password,
-          passwordController: _password,
-          errorText: local.auth_password_missing,
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        SignupPasswordField(
-          title: local.sign_up_retype_password,
-          passwordController: _passwordRetype,
-          errorText: local.auth_password_retype_missing,
-        ),
-        const SizedBox(
-          height: 30,
-        ),
-        LargeButton(
-          text: local.sign_up,
-          action: onSignupAttempt,
-        ),
-      ],
+    return Form(
+      key: _signupFormKey,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const SizedBox(
+            height: 50,
+          ),
+          Text(
+            local.sign_up_title,
+            style: theme.textTheme.headlineMedium,
+          ),
+          const SizedBox(
+            height: 50,
+          ),
+          SignupEmailField(emailController: _email),
+          const SizedBox(
+            height: 20,
+          ),
+          SignupPasswordField(
+            title: local.password,
+            passwordController: _password,
+            errorText: local.auth_password_missing,
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          SignupPasswordField(
+            title: local.sign_up_retype_password,
+            passwordController: _passwordRetype,
+            errorText: local.auth_password_retype_missing,
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          LargeButton(
+            text: local.sign_up,
+            action: onSignupAttempt,
+          ),
+        ],
+      ),
     );
   }
 }
@@ -168,6 +185,14 @@ class _SignupEmailFieldState extends State<SignupEmailField> {
       });
     }
 
+    String? validator(String? value) {
+      if (value == null || value.isEmpty) {
+        return local.auth_email_missing;
+      }
+
+      return null;
+    }
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -179,7 +204,7 @@ class _SignupEmailFieldState extends State<SignupEmailField> {
         const SizedBox(
           height: 10.0,
         ),
-        TextField(
+        TextFormField(
           controller: widget._email,
           keyboardType: TextInputType.emailAddress,
           autocorrect: false,
@@ -194,6 +219,7 @@ class _SignupEmailFieldState extends State<SignupEmailField> {
               borderRadius: BorderRadius.circular(15.0),
             ),
           ),
+          validator: validator,
         ),
       ],
     );
