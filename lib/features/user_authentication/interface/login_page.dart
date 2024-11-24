@@ -4,6 +4,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 // ignore: unused_import
 import 'package:logger/logger.dart';
 import 'package:pmate/env/common/buttons.dart';
+import 'package:pmate/features/contact_service/interface/error_complaint_page.dart';
+import 'package:pmate/features/contact_service/models/pmate_areas.dart';
 import 'package:pmate/features/user_authentication/interface/signup_page.dart';
 
 class LoginPage extends StatelessWidget {
@@ -97,7 +99,22 @@ class _LoginFormState extends State<LoginForm> {
     final local = AppLocalizations.of(context);
     final theme = Theme.of(context);
 
+    void onPasswordReset() {
+      //TODO: Implement
+    }
+
     void onLoginAttempt() {}
+
+    void onVerse37Contact() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ErrorComplaintPage(
+            erroredFeature: PmateFeatures.Authentication_Log_In,
+          ),
+        ),
+      );
+    }
 
     return Form(
       key: _loginFormKey,
@@ -120,12 +137,57 @@ class _LoginFormState extends State<LoginForm> {
           ),
           LoginPasswordField(passwordController: _password),
           const SizedBox(
-            height: 30,
+            height: 10,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              RichText(
+                text: TextSpan(
+                  text: local.login_password_forgot,
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    color: theme.colorScheme.primary,
+                  ),
+                  recognizer: TapGestureRecognizer()..onTap = onPasswordReset,
+                ),
+              ),
+              const SizedBox(
+                width: 10.0,
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 20,
           ),
           LargeButton(
             text: local.log_in,
             action: onLoginAttempt,
           ),
+          const SizedBox(
+            height: 10,
+          ),
+          RichText(
+            text: TextSpan(
+              children: [
+                TextSpan(
+                  text: local.login_contact_1,
+                  style: TextStyle(
+                    color: theme.colorScheme.secondary,
+                    fontWeight: FontWeight.normal,
+                    fontSize: theme.textTheme.bodyMedium?.fontSize ?? 16,
+                  ),
+                ),
+                TextSpan(
+                  text: local.contact_v37,
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    color: theme.colorScheme.primary,
+                  ),
+                  recognizer: TapGestureRecognizer()..onTap = onVerse37Contact,
+                  //?Chain method works somehow...
+                )
+              ],
+            ),
+          )
         ],
       ),
     );
