@@ -95,7 +95,9 @@ class _SignupFormState extends State<SignupForm> {
     final local = AppLocalizations.of(context);
     final theme = Theme.of(context);
 
-    void onSignupAttempt() {}
+    void onSignupAttempt() {
+      String email
+    }
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -117,6 +119,7 @@ class _SignupFormState extends State<SignupForm> {
         SignupPasswordField(
           title: local.password,
           passwordController: _password,
+          errorText: local.auth_password_missing,
         ),
         const SizedBox(
           height: 20,
@@ -124,6 +127,7 @@ class _SignupFormState extends State<SignupForm> {
         SignupPasswordField(
           title: local.sign_up_retype_password,
           passwordController: _passwordRetype,
+          errorText: local.auth_password_retype_missing,
         ),
         const SizedBox(
           height: 30,
@@ -137,7 +141,7 @@ class _SignupFormState extends State<SignupForm> {
   }
 }
 
-class SignupEmailField extends StatelessWidget {
+class SignupEmailField extends StatefulWidget {
   const SignupEmailField({
     super.key,
     required TextEditingController emailController,
@@ -146,8 +150,21 @@ class SignupEmailField extends StatelessWidget {
   final TextEditingController _email;
 
   @override
+  State<SignupEmailField> createState() => _SignupEmailFieldState();
+}
+
+class _SignupEmailFieldState extends State<SignupEmailField> {
+  bool isFieldEmpty = false;
+
+  @override
   Widget build(BuildContext context) {
     final local = AppLocalizations.of(context);
+
+    void onInputChanged(String input) {
+      setState(() {
+        isFieldEmpty = input.trim().isEmpty;
+      });
+    }
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -161,13 +178,15 @@ class SignupEmailField extends StatelessWidget {
           height: 10.0,
         ),
         TextField(
-          controller: _email,
+          controller: widget._email,
           keyboardType: TextInputType.emailAddress,
           autocorrect: false,
           enableSuggestions: false,
+          onChanged: onInputChanged,
           decoration: InputDecoration(
             filled: true,
             hintText: local.email_example,
+            errorText: (isFieldEmpty ? local.auth_email_missing : null),
             border: OutlineInputBorder(
               borderSide: BorderSide.none,
               borderRadius: BorderRadius.circular(15.0),
@@ -184,10 +203,12 @@ class SignupPasswordField extends StatefulWidget {
     super.key,
     required TextEditingController passwordController,
     required this.title,
+    required this.errorText,
   }) : _password = passwordController;
 
   final TextEditingController _password;
   final String title;
+  final String errorText;
 
   @override
   State<SignupPasswordField> createState() => _SignupPasswordFieldState();
@@ -195,12 +216,19 @@ class SignupPasswordField extends StatefulWidget {
 
 class _SignupPasswordFieldState extends State<SignupPasswordField> {
   bool passwordVisibility = false;
+  bool isFieldEmpty = false;
 
   @override
   Widget build(BuildContext context) {
     void onVisibilityChanged() {
       setState(() {
         passwordVisibility = !passwordVisibility;
+      });
+    }
+
+    void onInputChanged(String value) {
+      setState(() {
+        isFieldEmpty = value.trim().isEmpty;
       });
     }
 
@@ -221,8 +249,10 @@ class _SignupPasswordFieldState extends State<SignupPasswordField> {
           autocorrect: false,
           enableSuggestions: false,
           obscureText: !passwordVisibility,
+          onChanged: onInputChanged,
           decoration: InputDecoration(
             filled: true,
+            errorText: (isFieldEmpty) ? widget.errorText : null,
             border: OutlineInputBorder(
               borderSide: BorderSide.none,
               borderRadius: BorderRadius.circular(15.0),

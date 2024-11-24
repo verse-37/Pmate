@@ -10,7 +10,6 @@ class AuthenticationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final local = AppLocalizations.of(context);
-    final theme = Theme.of(context);
 
     void onLogin() {
       Navigator.push(

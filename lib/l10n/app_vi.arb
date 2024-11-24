@@ -59,5 +59,11 @@
     "sign_up_retype_password": "Gõ lại mật khẩu",
     "@sign_up_retype_password": {},
     "sign_up_account_already": "Đã có tài khoản? ",
-    "@sign_up_account_already": {}
+    "@sign_up_account_already": {},
+    "auth_email_missing": "Thiếu địa chỉ Email",
+    "@auth_email_missing": {},
+    "auth_password_missing": "Thiếu mật khẩu",
+    "@auth_password_missing": {},
+    "auth_password_retype_missing": "Hãy gõ lại mật khẩu vào ô này",
+    "@auth_password_retype_missing": {}
 }
