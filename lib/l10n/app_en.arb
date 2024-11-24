@@ -12,6 +12,8 @@
     "@log_in": {},
     "sign_up": "Sign up",
     "@sign_up": {},
+    "error": "Error",
+    "@error": {},
     "email": "Email",
     "@email": {},
     "email_address": "Email Address",
