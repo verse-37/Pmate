@@ -68,8 +68,20 @@
     "@auth_password_missing": {},
     "auth_password_retype_missing": "Hãy gõ lại mật khẩu vào ô này",
     "@auth_password_retype_missing": {},
-    "auth_passwords_do_not_match": "Hai mật khẩu không trùng khớp. Kiểm tra và gõ lại nhé!",
+    "auth_passwords_do_not_match": "Hai mật khẩu không trùng khớp!",
     "@auth_passwords_do_not_match": {},
+    "auth_password_too_short": "Mật khẩu phải có ít nhất {min} kí tự",
+    "@auth_password_too_short": {
+        "placeholders": {
+            "min": {
+                "type": "int"
+            }
+        }
+    },
+    "auth_no_space_allowed": "Kí tự trống không được cho phép",
+    "@auth_no_space_allowed": {},
+    "auth_email_not_valid": "Hãy nhập địa chỉ email hợp lệ",
+    "@auth_email_not_valid": {},
     "auth_failed": "Đăng ký thất bại",
     "@auth_failed": {}
 }

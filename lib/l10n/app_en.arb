@@ -68,8 +68,20 @@
     "@auth_password_missing": {},
     "auth_password_retype_missing": "Please retype the password above here",
     "@auth_password_retype_missing": {},
-    "auth_passwords_do_not_match": "The two passwords do not match :(",
+    "auth_passwords_do_not_match": "Passwords do not match :(",
     "@auth_passwords_do_not_match": {},
+    "auth_password_too_short": "Passwords must have at least {min} characters",
+    "@auth_password_too_short": {
+        "placeholders": {
+            "min": {
+                "type": "int"
+            }
+        }
+    },
+    "auth_no_space_allowed": "No whitespaces are allowed",
+    "@auth_no_space_allowed": {},
+    "auth_email_not_valid": "Please type a valid email",
+    "@auth_email_not_valid": {},
     "auth_failed": "Registration failed",
     "@auth_failed": {}
 }

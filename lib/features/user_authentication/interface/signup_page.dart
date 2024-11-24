@@ -6,6 +6,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:logger/logger.dart';
 import 'package:pmate/env/common/buttons.dart';
 import 'package:pmate/env/common/snackbars.dart';
+import 'package:pmate/features/user_authentication/business/auth_validators.dart';
 import 'package:pmate/features/user_authentication/interface/login_page.dart';
 
 class SignupPage extends StatelessWidget {
@@ -109,10 +110,13 @@ class _SignupFormState extends State<SignupForm> {
           message: local.sign_up_fields_incomplete,
           contentType: ContentType.failure,
         ).showSnackbar(context);
-      } else if  {
-
-      } else {
-      }
+      } else if (_password.text != _passwordRetype.text) {
+        SnackbarGenerator(
+          title: local.auth_failed,
+          message: local.auth_passwords_do_not_match,
+          contentType: ContentType.failure,
+        ).showSnackbar(context);
+      } else {}
     }
 
     return Form(
@@ -179,20 +183,6 @@ class _SignupEmailFieldState extends State<SignupEmailField> {
   Widget build(BuildContext context) {
     final local = AppLocalizations.of(context);
 
-    void onInputChanged(String input) {
-      setState(() {
-        isFieldEmpty = input.trim().isEmpty;
-      });
-    }
-
-    String? validator(String? value) {
-      if (value == null || value.isEmpty) {
-        return local.auth_email_missing;
-      }
-
-      return null;
-    }
-
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -209,7 +199,7 @@ class _SignupEmailFieldState extends State<SignupEmailField> {
           keyboardType: TextInputType.emailAddress,
           autocorrect: false,
           enableSuggestions: false,
-          onChanged: onInputChanged,
+          validator: AuthValidator().emailValidator(context: context).call,
           decoration: InputDecoration(
             filled: true,
             hintText: local.email_example,
@@ -219,7 +209,6 @@ class _SignupEmailFieldState extends State<SignupEmailField> {
               borderRadius: BorderRadius.circular(15.0),
             ),
           ),
-          validator: validator,
         ),
       ],
     );
@@ -254,12 +243,6 @@ class _SignupPasswordFieldState extends State<SignupPasswordField> {
       });
     }
 
-    void onInputChanged(String value) {
-      setState(() {
-        isFieldEmpty = value.trim().isEmpty;
-      });
-    }
-
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -271,13 +254,18 @@ class _SignupPasswordFieldState extends State<SignupPasswordField> {
         const SizedBox(
           height: 10.0,
         ),
-        TextField(
+        TextFormField(
           controller: widget._password,
           keyboardType: TextInputType.visiblePassword,
           autocorrect: false,
           enableSuggestions: false,
           obscureText: !passwordVisibility,
-          onChanged: onInputChanged,
+          validator: AuthValidator()
+              .passwordValidator(
+                context: context,
+                missingMessage: widget.errorText,
+              )
+              .call,
           decoration: InputDecoration(
             filled: true,
             errorText: (isFieldEmpty) ? widget.errorText : null,

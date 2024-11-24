@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pmate/env/constants/globals.dart';
+import 'package:pmate/env/common/globals.dart';
 import 'package:pmate/features/task_management/business/task_provider.dart';
 import 'package:pmate/features/welcome/interface/welcome_form.dart';
 import 'package:provider/provider.dart';
