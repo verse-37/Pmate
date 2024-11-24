@@ -29,5 +29,24 @@ class SnackbarGenerator {
       ..showSnackBar(snackBar);
   }
 
-  //TODO: Show material banner function here!
+  void showMaterialBanner(BuildContext context) {
+    final AwesomeSnackbarContent materialBannerContent = AwesomeSnackbarContent(
+      title: snackbarContent.title,
+      message: snackbarContent.message,
+      contentType: snackbarContent.contentType,
+      inMaterialBanner: true,
+    );
+
+    final MaterialBanner materialBanner = MaterialBanner(
+      elevation: 0,
+      backgroundColor: Colors.transparent,
+      forceActionsBelow: true,
+      content: materialBannerContent,
+      actions: const [SizedBox.shrink()],
+    );
+
+    ScaffoldMessenger.of(context)
+      ..clearMaterialBanners()
+      ..showMaterialBanner(materialBanner);
+  }
 }
