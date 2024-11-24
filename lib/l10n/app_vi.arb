@@ -12,6 +12,8 @@
     "@log_in": {},
     "sign_up": "Đăng ký",
     "@sign_up": {},
+    "error": "Lỗi",
+    "@error": {},
     "email": "Email",
     "@email": {},
     "email_address": "Địa chỉ Email",

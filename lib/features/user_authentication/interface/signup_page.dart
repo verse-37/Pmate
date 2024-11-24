@@ -106,19 +106,20 @@ class _SignupFormState extends State<SignupForm> {
 
     void onSignupAttempt() async {
       if (!_signupFormKey.currentState!.validate()) {
-        SnackbarGenerator(
+        InAppNotifierGenerator(
           title: local.auth_failed,
           message: local.sign_up_fields_incomplete,
           contentType: ContentType.failure,
         ).showSnackbar(context);
       } else if (_password.text != _passwordRetype.text) {
-        SnackbarGenerator(
+        InAppNotifierGenerator(
           title: local.auth_failed,
           message: local.auth_passwords_do_not_match,
           contentType: ContentType.failure,
         ).showSnackbar(context);
       } else {
         await AuthService().signUp(
+          context: context,
           email: _email.text.trim(),
           password: _password.text.trim(),
         );

@@ -34,7 +34,7 @@ class AuthService {
       }
       if (context.mounted) {
         //If the parent widget still exists...
-        SnackbarGenerator(
+        InAppNotifierGenerator(
           title: local.auth_failed,
           message: message,
           contentType: ContentType.failure,
@@ -42,6 +42,12 @@ class AuthService {
       }
     } catch (e) {
       Logger().e(e);
+      if (context.mounted) {
+        InAppNotifierGenerator(
+          title: local.error,
+          message: e.toString(),
+        ).showErrorToast(context: context);
+      }
     }
   }
 }
