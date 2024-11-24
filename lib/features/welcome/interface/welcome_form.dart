@@ -16,15 +16,18 @@ class _WelcomeFormPageState extends State<WelcomeFormPage> {
   @override
   Widget build(BuildContext context) {
     final local = AppLocalizations.of(context);
+    final theme = Theme.of(context);
 
     void onProceed() {
       WelcomeProvider.userName = _controller.text.trim();
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => WelcomePage(),
-        ),
-      );
+      if (WelcomeProvider.userName.isNotEmpty) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => WelcomePage(),
+          ),
+        );
+      }
     }
 
     return Scaffold(
@@ -36,15 +39,33 @@ class _WelcomeFormPageState extends State<WelcomeFormPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(local.intro_hello),
-                Text(local.intro_name_field),
+                Text(
+                  local.intro_hello,
+                  style: theme.textTheme.headlineSmall,
+                ),
+                Text(
+                  local.intro_name_field,
+                  style: theme.textTheme.bodyLarge,
+                ),
                 TextField(
                   controller: _controller,
                 ),
-                ElevatedButton(
-                  onPressed: onProceed,
-                  child: Text(local.proceed),
+                const SizedBox(
+                  height: 15.0,
                 ),
+                GestureDetector(
+                  onTap: onProceed,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(
+                        local.proceed,
+                        style: theme.textTheme.headlineSmall,
+                      ),
+                      const Icon(Icons.keyboard_arrow_right)
+                    ],
+                  ),
+                )
               ],
             ),
           ),

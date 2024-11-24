@@ -60,6 +60,8 @@
     "@sign_up_retype_password": {},
     "sign_up_account_already": "Already Have Account? ",
     "@sign_up_account_already": {},
+    "sign_up_fields_incomplete": "Please check the sign-up credentials.",
+    "@sign_up_fields_incomplete": {},
     "auth_email_missing": "Email is missing",
     "@auth_email_missing": {},
     "auth_password_missing": "Password is missing",
@@ -67,5 +69,7 @@
     "auth_password_retype_missing": "Please retype the password above here",
     "@auth_password_retype_missing": {},
     "auth_passwords_do_not_match": "The two passwords do not match :(",
-    "@auth_passwords_do_not_match": {}
+    "@auth_passwords_do_not_match": {},
+    "auth_failed": "Registration failed",
+    "@auth_failed": {}
 }
