@@ -78,10 +78,16 @@
             }
         }
     },
+    "auth_password_too_weak": "Password is too weak",
+    "@auth_password_too_weak": {},
     "auth_no_space_allowed": "No whitespaces are allowed",
     "@auth_no_space_allowed": {},
     "auth_email_not_valid": "Please type a valid email",
     "@auth_email_not_valid": {},
+    "auth_email_already_exists": "Email has already been used in another account",
+    "@auth_email_already_exists": {},
+    "auth_unidentified_error": "Something went wrong...",
+    "@auth_unidentified_error": {},
     "auth_failed": "Registration failed",
     "@auth_failed": {}
 }

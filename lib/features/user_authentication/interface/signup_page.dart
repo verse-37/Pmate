@@ -6,6 +6,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:logger/logger.dart';
 import 'package:pmate/env/common/buttons.dart';
 import 'package:pmate/env/common/snackbars.dart';
+import 'package:pmate/features/user_authentication/business/auth_service.dart';
 import 'package:pmate/features/user_authentication/business/auth_validators.dart';
 import 'package:pmate/features/user_authentication/interface/login_page.dart';
 
@@ -103,7 +104,7 @@ class _SignupFormState extends State<SignupForm> {
     final local = AppLocalizations.of(context);
     final theme = Theme.of(context);
 
-    void onSignupAttempt() {
+    void onSignupAttempt() async {
       if (!_signupFormKey.currentState!.validate()) {
         SnackbarGenerator(
           title: local.auth_failed,
@@ -116,7 +117,12 @@ class _SignupFormState extends State<SignupForm> {
           message: local.auth_passwords_do_not_match,
           contentType: ContentType.failure,
         ).showSnackbar(context);
-      } else {}
+      } else {
+        await AuthService().signUp(
+          email: _email.text.trim(),
+          password: _password.text.trim(),
+        );
+      }
     }
 
     return Form(

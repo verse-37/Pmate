@@ -78,10 +78,16 @@
             }
         }
     },
+    "auth_password_too_weak": "Mật khẩu quá dễ đoán",
+    "@auth_password_too_weak": {},
     "auth_no_space_allowed": "Kí tự trống không được cho phép",
     "@auth_no_space_allowed": {},
     "auth_email_not_valid": "Hãy nhập địa chỉ email hợp lệ",
     "@auth_email_not_valid": {},
+    "auth_email_already_exists": "Email đã được sử dụng trong tài khoản khác",
+    "@auth_email_already_exists": {},
+    "auth_unidentified_error": "Có gì đó sai sai...",
+    "@auth_unidentified_error": {},
     "auth_failed": "Đăng ký thất bại",
     "@auth_failed": {}
 }
