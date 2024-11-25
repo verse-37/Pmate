@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pmate/env/common/snackbars.dart';
+import 'package:pmate/features/home/interface/home_page.dart';
+import 'package:pmate/features/user_authentication/interface/auth_page.dart';
 
 class AuthService {
   Future<void> signUp({
@@ -27,6 +29,12 @@ class AuthService {
           message: local.sign_up_success_2,
           contentType: ContentType.success,
         ).showSnackbar(context);
+
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const HomePage()),
+        );
+        //?Push to HomePage and pop all other pages
       }
     } on FirebaseAuthException catch (e) {
       Logger().e(e.code);
@@ -82,6 +90,11 @@ class AuthService {
           message: local.login_success_2,
           contentType: ContentType.success,
         ).showSnackbar(context);
+
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const HomePage()),
+        );
       }
     } on FirebaseAuthException catch (e) {
       Logger().e(e.code);
@@ -127,6 +140,11 @@ class AuthService {
         message: local.sign_out_message,
         contentType: ContentType.success,
       ).showSnackbar(context);
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const AuthenticationPage()),
+      );
     }
   }
 }
