@@ -1,4 +1,4 @@
-package com.verse37.pmate.pmate
+package com.verse37.pmate
 
 import io.flutter.embedding.android.FlutterActivity
 
