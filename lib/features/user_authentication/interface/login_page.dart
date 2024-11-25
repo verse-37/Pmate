@@ -6,6 +6,7 @@ import 'package:logger/logger.dart';
 import 'package:pmate/env/common/buttons.dart';
 import 'package:pmate/features/contact_service/interface/error_complaint_page.dart';
 import 'package:pmate/features/contact_service/models/pmate_areas.dart';
+import 'package:pmate/features/user_authentication/business/auth_service.dart';
 import 'package:pmate/features/user_authentication/interface/signup_page.dart';
 
 class LoginPage extends StatelessWidget {
@@ -103,7 +104,13 @@ class _LoginFormState extends State<LoginForm> {
       //TODO: Implement
     }
 
-    void onLoginAttempt() {}
+    void onLoginAttempt() async {
+      await AuthService().signIn(
+        email: _email.text.trim(),
+        password: _password.text.trim(),
+        context: context,
+      );
+    }
 
     void onVerse37Contact() {
       Navigator.push(
