@@ -18,6 +18,16 @@ class AuthService {
         email: email,
         password: password,
       );
+
+      await Future.delayed(const Duration(seconds: 1));
+
+      if (context.mounted) {
+        InAppNotifierGenerator(
+          title: local.sign_up_success,
+          message: local.sign_up_success_2,
+          contentType: ContentType.success,
+        ).showSnackbar(context);
+      }
     } on FirebaseAuthException catch (e) {
       Logger().e(e.code);
       String message = '';
@@ -48,6 +58,75 @@ class AuthService {
           message: e.toString(),
         ).showErrorToast(context: context);
       }
+    }
+  }
+
+  Future<void> signIn({
+    required String email,
+    required String password,
+    required BuildContext context,
+  }) async {
+    final local = AppLocalizations.of(context);
+
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      await Future.delayed(const Duration(seconds: 1));
+
+      if (context.mounted) {
+        InAppNotifierGenerator(
+          title: local.login_success,
+          message: local.login_success_2,
+          contentType: ContentType.success,
+        ).showSnackbar(context);
+      }
+    } on FirebaseAuthException catch (e) {
+      Logger().e(e.code);
+      String message = '';
+      switch (e.code) {
+        case 'invalid-credential':
+          message = local.auth_invalid_credentials;
+          break;
+        default:
+          message = local.auth_unidentified_error;
+          break;
+      }
+      if (context.mounted) {
+        InAppNotifierGenerator(
+          title: local.auth_failed,
+          message: message,
+          contentType: ContentType.failure,
+        ).showSnackbar(context);
+      }
+    } catch (e) {
+      Logger().e(e);
+      if (context.mounted) {
+        InAppNotifierGenerator(
+          title: local.error,
+          message: e.toString(),
+        ).showErrorToast(context: context);
+      }
+    }
+  }
+
+  Future<void> signOut({
+    required BuildContext context,
+  }) async {
+    final local = AppLocalizations.of(context);
+
+    await FirebaseAuth.instance.signOut();
+
+    await Future.delayed(const Duration(seconds: 1));
+
+    if (context.mounted) {
+      InAppNotifierGenerator(
+        title: local.sign_out_success,
+        message: local.sign_out_message,
+        contentType: ContentType.success,
+      ).showSnackbar(context);
     }
   }
 }
