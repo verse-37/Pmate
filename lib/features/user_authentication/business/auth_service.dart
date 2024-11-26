@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pmate/env/common/snackbars.dart';
-import 'package:pmate/features/home/interface/home_page.dart';
+import 'package:pmate/features/app/navigation.dart';
 import 'package:pmate/features/user_authentication/interface/auth_page.dart';
 
 class AuthService {
@@ -32,9 +32,9 @@ class AuthService {
 
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => const HomePage()),
+          MaterialPageRoute(builder: (context) => const NavigationCenter()),
         );
-        //?Push to HomePage and pop all other pages
+        //?Push to NavigationCenter and pop all other pages
       }
     } on FirebaseAuthException catch (e) {
       Logger().e(e.code);
@@ -93,7 +93,7 @@ class AuthService {
 
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => const HomePage()),
+          MaterialPageRoute(builder: (context) => const NavigationCenter()),
         );
       }
     } on FirebaseAuthException catch (e) {

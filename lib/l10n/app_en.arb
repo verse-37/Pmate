@@ -115,5 +115,9 @@
     "auth_invalid_credentials": "The email or password is incorrect",
     "@auth_invalid_credentials": {},
     "auth_failed": "Registration failed",
-    "@auth_failed": {}
+    "@auth_failed": {},
+    "home_page_title": "Home",
+    "@home_page_title": {},
+    "task_page_title": "Tasks",
+    "@task_page_title": {}
 }

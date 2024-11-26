@@ -1,12 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pmate/env/common/globals.dart';
-import 'package:pmate/features/home/interface/home_page.dart';
+import 'package:pmate/features/app/navigation.dart';
 import 'package:pmate/features/task_management/business/task_provider.dart';
 import 'package:pmate/features/welcome/interface/welcome_form.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:toastification/toastification.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class PmateRoot extends StatelessWidget {
   const PmateRoot({super.key});
@@ -26,14 +27,16 @@ class PmateRoot extends StatelessWidget {
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
-                child: CircularProgressIndicator(),
+              return const Center(
+                child: SpinKitWaveSpinner(
+                  color: Color.fromARGB(255, 32, 152, 36),
+                  size: 50,
+                ),
               );
-              //TODO: Replace with loading animation
             }
 
             if (snapshot.hasData) {
-              homePage = const HomePage();
+              homePage = const NavigationCenter();
             } else {
               homePage = const WelcomeFormPage();
             }

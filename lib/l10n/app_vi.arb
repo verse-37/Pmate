@@ -115,5 +115,9 @@
     "auth_invalid_credentials": "Email hoặc mật khẩu không đúng",
     "@auth_invalid_credentials": {},
     "auth_failed": "Đăng ký thất bại",
-    "@auth_failed": {}
+    "@auth_failed": {},
+    "home_page_title": "Trang chủ",
+    "@home_page_title": {},
+    "task_page_title": "Nhiệm vụ",
+    "@task_page_title": {}
 }

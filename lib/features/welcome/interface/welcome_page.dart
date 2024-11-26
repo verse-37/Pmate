@@ -68,8 +68,8 @@ class _WelcomePageState extends State<WelcomePage> {
                   (i) {
                     return Column(
                       children: [
-                        Text(WelcomeProvider.script[i].a),
-                        Text(WelcomeProvider.script[i].b),
+                        Text(WelcomeProvider.script[i].first),
+                        Text(WelcomeProvider.script[i].second),
                       ],
                     );
                   },
