@@ -52,6 +52,7 @@ dependencies:
   awesome_snackbar_content: ^0.1.4
   form_field_validator: ^1.1.0
   toastification: ^2.3.0
+  flutter_spinkit: ^5.2.1
 
 dev_dependencies:
   flutter_test:
