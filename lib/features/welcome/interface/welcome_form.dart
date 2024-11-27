@@ -41,7 +41,7 @@ class _WelcomeFormPageState extends State<WelcomeFormPage> {
               children: [
                 Text(
                   local.intro_hello,
-                  style: theme.textTheme.headlineSmall,
+                  style: theme.textTheme.displayMedium,
                 ),
                 Text(
                   local.intro_name_field,
@@ -60,7 +60,7 @@ class _WelcomeFormPageState extends State<WelcomeFormPage> {
                     children: [
                       Text(
                         local.proceed,
-                        style: theme.textTheme.headlineSmall,
+                        style: theme.textTheme.labelLarge,
                       ),
                       const Icon(Icons.keyboard_arrow_right)
                     ],

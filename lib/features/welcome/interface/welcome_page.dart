@@ -25,6 +25,7 @@ class _WelcomePageState extends State<WelcomePage> {
   Widget build(BuildContext context) {
     WelcomeProvider.init(context);
     final local = AppLocalizations.of(context);
+    final theme = Theme.of(context);
     final n = WelcomeProvider.script.length;
 
     Future<void> prevPage() async {
@@ -67,9 +68,19 @@ class _WelcomePageState extends State<WelcomePage> {
                   n,
                   (i) {
                     return Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text(WelcomeProvider.script[i].first),
-                        Text(WelcomeProvider.script[i].second),
+                        Text(
+                          WelcomeProvider.script[i].first,
+                          style: theme.textTheme.displayMedium,
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: 15),
+                        Text(
+                          WelcomeProvider.script[i].second,
+                          style: theme.textTheme.bodyMedium,
+                          textAlign: TextAlign.center,
+                        ),
                       ],
                     );
                   },

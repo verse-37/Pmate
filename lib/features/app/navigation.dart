@@ -54,7 +54,10 @@ class _NavigationCenterState extends State<NavigationCenter> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(pages[_selectedPageIndex].first),
+        title: Text(
+          pages[_selectedPageIndex].first,
+          style: theme.textTheme.displaySmall,
+        ),
         backgroundColor: theme.colorScheme.primaryContainer,
       ),
       drawer: Drawer(
@@ -81,7 +84,7 @@ class _NavigationCenterState extends State<NavigationCenter> {
                         Text(
                           'User Name',
                           //TODO: Get user name from database
-                          style: theme.textTheme.labelLarge,
+                          style: theme.textTheme.bodyMedium,
                         ),
                         Text(
                           'user@example.com',

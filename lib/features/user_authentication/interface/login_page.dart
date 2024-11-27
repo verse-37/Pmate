@@ -58,14 +58,11 @@ class SignupLink extends StatelessWidget {
       child: RichText(
         textAlign: TextAlign.center,
         text: TextSpan(
+          style: theme.textTheme.bodyMedium,
           children: [
             TextSpan(
-                text: local.login_new_user,
-                style: TextStyle(
-                  color: theme.colorScheme.secondary,
-                  fontWeight: FontWeight.normal,
-                  fontSize: theme.textTheme.bodyMedium?.fontSize ?? 16,
-                )),
+              text: local.login_new_user,
+            ),
             TextSpan(
               text: local.login_create_account,
               style: theme.textTheme.bodyMedium?.copyWith(
@@ -133,7 +130,7 @@ class _LoginFormState extends State<LoginForm> {
           ),
           Text(
             local.login_title,
-            style: theme.textTheme.headlineMedium,
+            style: theme.textTheme.displayMedium,
           ),
           const SizedBox(
             height: 50,
@@ -156,6 +153,8 @@ class _LoginFormState extends State<LoginForm> {
                     color: theme.colorScheme.primary,
                   ),
                   recognizer: TapGestureRecognizer()..onTap = onPasswordReset,
+                  //?See the EXPLANATION in the bottom of the file.
+                  //?recognizer property only works with TextSpan
                 ),
               ),
               const SizedBox(
@@ -178,11 +177,7 @@ class _LoginFormState extends State<LoginForm> {
               children: [
                 TextSpan(
                   text: local.login_contact_1,
-                  style: TextStyle(
-                    color: theme.colorScheme.secondary,
-                    fontWeight: FontWeight.normal,
-                    fontSize: theme.textTheme.bodyMedium?.fontSize ?? 16,
-                  ),
+                  style: theme.textTheme.bodyMedium,
                 ),
                 TextSpan(
                   text: local.contact_v37,
@@ -190,7 +185,7 @@ class _LoginFormState extends State<LoginForm> {
                     color: theme.colorScheme.primary,
                   ),
                   recognizer: TapGestureRecognizer()..onTap = onVerse37Contact,
-                  //?Chain method works somehow...
+                  //?See the EXPLANATION in the bottom of the file.
                 )
               ],
             ),
@@ -212,6 +207,7 @@ class LoginEmailField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final local = AppLocalizations.of(context);
+    final theme = Theme.of(context);
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -232,6 +228,7 @@ class LoginEmailField extends StatelessWidget {
           decoration: InputDecoration(
             filled: true,
             hintText: local.email_example,
+            hintStyle: theme.textTheme.bodyMedium,
             border: OutlineInputBorder(
               borderSide: BorderSide.none,
               borderRadius: BorderRadius.circular(15.0),
@@ -305,3 +302,34 @@ class _LoginPasswordFieldState extends State<LoginPasswordField> {
     );
   }
 }
+
+/*
+The `..` operator in Dart is called the "cascade notation" operator. It allows you to perform multiple operations on the same object without having to repeat the reference to that object. Here's the difference:
+
+With single dot `.`:
+```dart
+final recognizer = TapGestureRecognizer();
+recognizer.onTap = onSignup;
+```
+
+With cascade notation `..`:
+```dart
+TapGestureRecognizer()..onTap = onSignup
+```
+
+The key differences are:
+1. The cascade notation returns the original object (the `TapGestureRecognizer` instance), not the result of the operation after the `..`
+2. This allows you to chain multiple operations and still use the original object in a single expression
+3. It's particularly useful when you want to initialize an object and set some properties in a single line
+
+For example, you could even do multiple operations:
+```dart
+TapGestureRecognizer()
+  ..onTap = onSignup
+  ..onTapDown = onTapDown
+  ..onTapCancel = onTapCancel;
+```
+
+In your specific case, the cascade notation is used because you need to return the `TapGestureRecognizer` instance for the `recognizer` property, but you also want to set its `onTap` callback. Using `.` would return `void` (the return type of the assignment), while `..` returns the recognizer itself.
+
+*/

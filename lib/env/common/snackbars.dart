@@ -58,9 +58,13 @@ class InAppNotifierGenerator {
       type: ToastificationType.error,
       style: ToastificationStyle.flat,
       autoCloseDuration: Duration(seconds: duration),
-      title: Text(title),
-      description: RichText(
-        text: TextSpan(text: message),
+      title: Text(
+        title,
+        style: Theme.of(context).textTheme.displaySmall,
+      ),
+      description: Text(
+        message,
+        style: Theme.of(context).textTheme.bodyMedium,
       ),
     );
   }

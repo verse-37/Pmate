@@ -26,6 +26,8 @@
     "@email_example": {},
     "password": "Mật khẩu",
     "@password": {},
+    "settings": "Cài đặt",
+    "@settings": {},
     "intro_hello": "Xin chào,",
     "@intro_hello": {},
     "intro_name_field": "Hãy cho chúng tôi biết tên của bạn",
@@ -119,5 +121,9 @@
     "home_page_title": "Trang chủ",
     "@home_page_title": {},
     "task_page_title": "Nhiệm vụ",
-    "@task_page_title": {}
+    "@task_page_title": {},
+    "settings_app": "Cài đặt chung",
+    "@settings_app": {},
+    "settings_appearance": "Hiển thị",
+    "@settings_appearance": {}
 }

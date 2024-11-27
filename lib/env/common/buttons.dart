@@ -26,10 +26,7 @@ class LargeButton extends StatelessWidget {
       onPressed: action,
       child: Text(
         text,
-        style: theme.textTheme.labelLarge?.copyWith(
-          color: theme.colorScheme.onSecondary,
-          fontSize: 20,
-        ),
+        style: theme.textTheme.labelLarge,
       ),
     );
   }

@@ -26,6 +26,8 @@
     "@email_example": {},
     "password": "Password",
     "@password": {},
+    "settings": "Settings",
+    "@settings": {},
     "intro_hello": "Hello,",
     "@intro_hello": {},
     "intro_name_field": "Can we have your first name?",
@@ -119,5 +121,9 @@
     "home_page_title": "Home",
     "@home_page_title": {},
     "task_page_title": "Tasks",
-    "@task_page_title": {}
+    "@task_page_title": {},
+    "settings_app": "App Settings",
+    "@settings_app": {},
+    "settings_appearance": "Appearance",
+    "@settings_appearance": {}
 }

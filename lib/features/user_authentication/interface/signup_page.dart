@@ -63,12 +63,9 @@ class LoginLink extends StatelessWidget {
         text: TextSpan(
           children: [
             TextSpan(
-                text: local.sign_up_account_already,
-                style: TextStyle(
-                  color: theme.colorScheme.secondary,
-                  fontWeight: FontWeight.normal,
-                  fontSize: theme.textTheme.bodyMedium?.fontSize ?? 16,
-                )),
+              text: local.sign_up_account_already,
+              style: theme.textTheme.bodyMedium,
+            ),
             TextSpan(
               text: local.log_in,
               style: theme.textTheme.bodyMedium?.copyWith(
@@ -149,7 +146,7 @@ class _SignupFormState extends State<SignupForm> {
           ),
           Text(
             local.sign_up_title,
-            style: theme.textTheme.headlineMedium,
+            style: theme.textTheme.displayMedium,
           ),
           const SizedBox(
             height: 50,
@@ -186,11 +183,7 @@ class _SignupFormState extends State<SignupForm> {
               children: [
                 TextSpan(
                   text: local.sign_up_contact_1,
-                  style: TextStyle(
-                    color: theme.colorScheme.secondary,
-                    fontWeight: FontWeight.normal,
-                    fontSize: theme.textTheme.bodyMedium?.fontSize ?? 16,
-                  ),
+                  style: theme.textTheme.bodyMedium,
                 ),
                 TextSpan(
                   text: local.contact_v37,
@@ -227,6 +220,7 @@ class _SignupEmailFieldState extends State<SignupEmailField> {
   @override
   Widget build(BuildContext context) {
     final local = AppLocalizations.of(context);
+    final theme = Theme.of(context);
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -248,6 +242,7 @@ class _SignupEmailFieldState extends State<SignupEmailField> {
           decoration: InputDecoration(
             filled: true,
             hintText: local.email_example,
+            hintStyle: theme.textTheme.bodyMedium,
             errorText: (isFieldEmpty ? local.auth_email_missing : null),
             border: OutlineInputBorder(
               borderSide: BorderSide.none,
