@@ -33,3 +33,6 @@ Styles for Text widgets are defined in `theme.dart` file.
 - For button text, use `labelLarge` style.
 - For caption-like text, use `labelSmall` style.
 - Ask the designer / head developer for the correct style for new text widgets.
+
+## Icons
+- Browse on https://fonts.google.com/icons.

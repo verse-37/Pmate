@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:pmate/env/common/appbar.dart';
 import 'package:pmate/env/common/primitives.dart';
 import 'package:pmate/features/home/interface/home_page.dart';
 import 'package:pmate/features/notifications/interface/notification_page.dart';
 import 'package:pmate/features/settings/interface/settings_page.dart';
+import 'package:pmate/features/support/interface/support_page.dart';
 import 'package:pmate/features/task_management/interface/task_page.dart';
 import 'package:pmate/features/user_authentication/business/auth_service.dart';
 
@@ -32,6 +34,11 @@ class _NavigationCenterState extends State<NavigationCenter> {
         const TaskPage(),
         Icons.task,
       ),
+      Triple(
+        l10n.support_page_title,
+        const SupportPage(),
+        Icons.help,
+      ),
     ];
 
     void onNotificationPressed() {
@@ -53,12 +60,8 @@ class _NavigationCenterState extends State<NavigationCenter> {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          pages[_selectedPageIndex].first,
-          style: theme.textTheme.displaySmall,
-        ),
-        backgroundColor: theme.colorScheme.primaryContainer,
+      appBar: PmateAppBar(
+        title: pages[_selectedPageIndex].first,
       ),
       drawer: Drawer(
         child: SafeArea(

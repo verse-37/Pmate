@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:pmate/env/common/appbar.dart';
 import 'package:pmate/env/common/primitives.dart';
 import 'package:pmate/features/settings/interface/app_settings/appearance_settings.dart';
 
@@ -9,20 +10,24 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final local = AppLocalizations.of(context);
-    final theme = Theme.of(context);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          local.settings,
-          style: theme.textTheme.displaySmall,
-        ),
-        backgroundColor: theme.colorScheme.primaryContainer,
-      ),
+      appBar: PmateAppBar(title: local.settings),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
-            children: [AppSettings()],
+            children: [
+              AppSettings(
+                name: local.settings_app,
+                subpagesList: [
+                  Triple(
+                    local.settings_appearance,
+                    Icons.color_lens,
+                    AppearanceSettings(),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),
@@ -31,18 +36,63 @@ class SettingsPage extends StatelessWidget {
 }
 
 class AppSettings extends StatelessWidget {
-  const AppSettings({super.key});
+  const AppSettings({
+    super.key,
+    required this.name,
+    required this.subpagesList,
+  });
+
+  final String name;
+  final List<Triple<String, IconData, Widget>> subpagesList;
 
   @override
   Widget build(BuildContext context) {
-    final local = AppLocalizations.of(context);
-
-    final name = local.settings_app;
-    final Pair<String, Widget> appearance =
-        Pair(local.settings_appearance, AppearanceSettings());
-
     return Column(
-      children: [],
+      children: [
+        Text(name),
+        ...subpagesList.map(
+          (e) => SettingsSubpageDisplay(
+            name: e.first,
+            icon: e.second,
+            subpage: e.third,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class SettingsSubpageDisplay extends StatelessWidget {
+  const SettingsSubpageDisplay({
+    super.key,
+    required this.name,
+    required this.icon,
+    required this.subpage,
+  });
+
+  final String name;
+  final IconData icon;
+  final Widget subpage;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return GestureDetector(
+      onTap: () => Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => subpage,
+        ),
+      ),
+      child: Container(
+        color: theme.colorScheme.surface,
+        child: Row(
+          children: [
+            Icon(icon),
+            Text(name),
+          ],
+        ),
+      ),
     );
   }
 }

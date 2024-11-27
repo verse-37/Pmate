@@ -6,8 +6,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:logger/logger.dart';
 import 'package:pmate/env/common/buttons.dart';
 import 'package:pmate/env/common/snackbars.dart';
-import 'package:pmate/features/contact_service/interface/error_complaint_page.dart';
-import 'package:pmate/features/contact_service/models/pmate_areas.dart';
+import 'package:pmate/features/support/interface/subpages/bugs_and_fixes_page.dart';
 import 'package:pmate/features/user_authentication/business/auth_service.dart';
 import 'package:pmate/features/user_authentication/business/auth_validators.dart';
 import 'package:pmate/features/user_authentication/interface/login_page.dart';
@@ -129,9 +128,7 @@ class _SignupFormState extends State<SignupForm> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => ErrorComplaintPage(
-            erroredFeature: PmateFeatures.Authentication_Sign_Up,
-          ),
+          builder: (context) => BugsAndFixesPage(),
         ),
       );
     }

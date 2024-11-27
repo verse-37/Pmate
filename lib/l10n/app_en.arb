@@ -125,5 +125,11 @@
     "settings_app": "App Settings",
     "@settings_app": {},
     "settings_appearance": "Appearance",
-    "@settings_appearance": {}
+    "@settings_appearance": {},
+    "support_page_title": "Support",
+    "@support_page_title": {},
+    "bugs_and_fixes_page_title": "Bugs and Fixes",
+    "@bugs_and_fixes_page_title": {},
+    "notification_page_title": "Notifications",
+    "@notification_page_title": {}
 }
