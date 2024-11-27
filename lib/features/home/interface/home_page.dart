@@ -9,6 +9,10 @@ class HomePage extends StatelessWidget {
     final l10n = AppLocalizations.of(context);
     final theme = Theme.of(context);
 
+    //TODO: Add home page content
+    //TODO: Implement fonts
+    //TODO: Implement theme with proper text styles
+
     return Scaffold();
   }
 }

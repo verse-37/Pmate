@@ -3,8 +3,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pmate/env/common/primitives.dart';
 import 'package:pmate/features/home/interface/home_page.dart';
 import 'package:pmate/features/notifications/interface/notification_page.dart';
-import 'package:pmate/features/settings/interface/settings.page.dart';
+import 'package:pmate/features/settings/interface/settings_page.dart';
 import 'package:pmate/features/task_management/interface/task_page.dart';
+import 'package:pmate/features/user_authentication/business/auth_service.dart';
 
 class NavigationCenter extends StatefulWidget {
   const NavigationCenter({super.key});
@@ -45,6 +46,10 @@ class _NavigationCenterState extends State<NavigationCenter> {
         context,
         MaterialPageRoute(builder: (context) => const SettingsPage()),
       );
+    }
+
+    void onSignOutPressed() {
+      AuthService().signOut(context: context);
     }
 
     return Scaffold(
@@ -100,8 +105,9 @@ class _NavigationCenterState extends State<NavigationCenter> {
                   ],
                 ),
               ),
-              for (int i = 0; i < pages.length; i++)
-                ListTile(
+              ...List.generate(
+                pages.length,
+                (i) => ListTile(
                   selected: i == _selectedPageIndex,
                   title: Text(pages[i].first),
                   leading: Icon(pages[i].third),
@@ -114,6 +120,12 @@ class _NavigationCenterState extends State<NavigationCenter> {
                     }
                   },
                 ),
+              ),
+              ListTile(
+                title: Text(l10n.sign_out),
+                leading: const Icon(Icons.logout),
+                onTap: onSignOutPressed,
+              ),
             ],
           ),
         ),
