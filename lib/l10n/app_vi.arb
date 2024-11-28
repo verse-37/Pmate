@@ -143,5 +143,15 @@
     "task_today_page_title": "Hôm nay",
     "@task_today_page_title": {},
     "task_all_page_title": "Tất cả",
-    "@task_all_page_title": {}
+    "@task_all_page_title": {},
+    "task_creation_page_title": "Nhiệm vụ mới",
+    "@task_creation_page_title": {},
+    "task_action_button_tooltip": "Nhiệm vụ mới",
+    "@task_action_button_tooltip": {},
+    "task_focus_section": "Đang xử lý",
+    "@task_focus_section": {},
+    "task_all_section": "Tất cả nhiệm vụ",
+    "@task_all_section": {},
+    "task_completed_section": "Đã hoàn thành",
+    "@task_completed_section": {}
 }

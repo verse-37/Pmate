@@ -33,6 +33,23 @@ class TaskProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void toggleTaskInProgress(int index, bool isInProgress) {
+    taskList[index].isInProgress = isInProgress;
+    taskBox.put(TaskBox.tasksKey, taskList);
+    notifyListeners();
+  }
+
+  void moveTask(int oldIndex, int newIndex) {
+    if (oldIndex < newIndex) {
+      newIndex--;
+      //? If the task is moved to a higher index, decrement the new index
+    }
+    final task = taskList.removeAt(oldIndex);
+    taskList.insert(newIndex, task);
+    taskBox.put(TaskBox.tasksKey, taskList);
+    notifyListeners();
+  }
+
   void deleteTask(Task task) {
     taskList.remove(task);
     taskBox.put(TaskBox.tasksKey, taskList);

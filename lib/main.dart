@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:pmate/env/common/globals.dart';
 import 'package:pmate/features/app/app.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:pmate/features/settings/business/settings_provider.dart';
+import 'package:pmate/features/settings/models/themes_settings_bundle.dart';
 import 'package:pmate/features/task_management/models/task.dart';
 import 'env/config/firebase_options.dart';
 

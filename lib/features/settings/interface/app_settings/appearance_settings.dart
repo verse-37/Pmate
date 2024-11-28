@@ -48,9 +48,7 @@ class _AppearanceSettingsThemeState extends State<AppearanceSettingsTheme> {
     final local = AppLocalizations.of(context);
     final settingsProvider = context.watch<SettingsProvider>();
 
-    settingsProvider.init();
     selectedThemeIndex = settingsProvider.themeProvider.themeMode;
-    //? themeMode.index is used to get the index of the themeMode in the ThemeMode enum
 
     return Column(
       children: [
@@ -101,14 +99,7 @@ class _AppearanceSettingsThemeState extends State<AppearanceSettingsTheme> {
                 onTabChange: (value) {
                   if (value != selectedThemeIndex) {
                     selectedThemeIndex = value;
-                    switch (value) {
-                      case 0:
-                        settingsProvider.changeTheme(0);
-                      case 1:
-                        settingsProvider.changeTheme(1);
-                      case 2:
-                        settingsProvider.changeTheme(2);
-                    }
+                    settingsProvider.changeTheme(value);
                   }
                 },
               ),

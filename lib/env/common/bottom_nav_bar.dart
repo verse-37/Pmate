@@ -6,9 +6,11 @@ class PmateBottomNavBar extends StatefulWidget {
   const PmateBottomNavBar({
     super.key,
     required this.subpages,
+    required this.onTabChange,
   });
 
   final List<Pair<IconData, String>> subpages;
+  final Function(int) onTabChange;
 
   @override
   State<PmateBottomNavBar> createState() => _PmateBottomNavBarState();
@@ -42,13 +44,7 @@ class _PmateBottomNavBarState extends State<PmateBottomNavBar> {
         tabBackgroundColor: Colors.grey[800]!,
         tabMargin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
         selectedIndex: selectedIndex,
-        onTabChange: (value) {
-          if (value != selectedIndex) {
-            setState(() {
-              selectedIndex = value;
-            });
-          }
-        },
+        onTabChange: widget.onTabChange,
         tabs: List.generate(
           widget.subpages.length,
           (index) {
@@ -80,11 +76,8 @@ class _PmateBottomNavBarState extends State<PmateBottomNavBar> {
         ),
         selectedIndex: selectedIndex,
         onTabChange: (value) {
-          if (value != selectedIndex) {
-            setState(() {
-              selectedIndex = value;
-            });
-          }
+          selectedIndex = value;
+          widget.onTabChange(value);
         },
       );
     }

@@ -143,5 +143,15 @@
     "task_today_page_title": "Today",
     "@task_today_page_title": {},
     "task_all_page_title": "All",
-    "@task_all_page_title": {}
+    "@task_all_page_title": {},
+    "task_creation_page_title": "New Task",
+    "@task_creation_page_title": {},
+    "task_action_button_tooltip": "Add Task",
+    "@task_action_button_tooltip": {},
+    "task_focus_section": "In Progress",
+    "@task_focus_section": {},
+    "task_all_section": "All Tasks",
+    "@task_all_section": {},
+    "task_completed_section": "Tasks Done",
+    "@task_completed_section": {}
 }

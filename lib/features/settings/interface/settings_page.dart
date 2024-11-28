@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+// ignore: unused_import
 import 'package:logger/logger.dart';
 import 'package:pmate/env/common/appbar.dart';
 import 'package:pmate/env/common/primitives.dart';

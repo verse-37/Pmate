@@ -3,7 +3,7 @@ import 'package:hive/hive.dart';
 import 'package:pmate/features/settings/models/themes_settings_bundle.dart';
 
 class SettingsProvider extends ChangeNotifier {
-  final themesBox = Hive.box<ThemeSettingsBundle>(SettingsBox.themeModeKey);
+  final themesBox = Hive.box<ThemeSettingsBundle>(SettingsBox.themesBoxName);
   late ThemeSettingsBundle themeProvider;
 
   void init() {

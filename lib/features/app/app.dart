@@ -46,16 +46,22 @@ class PmateRoot extends StatelessWidget {
               homePage = const WelcomeFormPage();
             }
 
-            return MaterialApp(
-              debugShowCheckedModeBanner: false,
-              title: Globals.appInfo.appName,
-              theme: PmateThemes.light,
-              darkTheme: PmateThemes.dark,
-              themeMode: ThemeMode.system,
-              localizationsDelegates: AppLocalizations.localizationsDelegates,
-              supportedLocales: AppLocalizations.supportedLocales,
-              home: homePage,
-            );
+            return Builder(builder: (context) {
+              final settingsProvider = context.watch<SettingsProvider>()
+                ..init();
+              //? Initialize the settings provider. This is done here to ensure that the theme mode is set before the app is built. The cascade operator (..) is used to call the init method on the settings provider after it is created.
+
+              return MaterialApp(
+                debugShowCheckedModeBanner: false,
+                title: Globals.appInfo.appName,
+                theme: PmateThemes.light,
+                darkTheme: PmateThemes.dark,
+                themeMode: settingsProvider.themeProvider.getThemeMode,
+                localizationsDelegates: AppLocalizations.localizationsDelegates,
+                supportedLocales: AppLocalizations.supportedLocales,
+                home: homePage,
+              );
+            });
           },
         ),
       ),
