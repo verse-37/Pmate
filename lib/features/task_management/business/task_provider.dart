@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:pmate/features/task_management/models/task.dart';
+import 'package:pmate/features/task_management/models/task_communicator.dart';
 
 class TaskProvider extends ChangeNotifier {
   final taskBox = Hive.box<List>(TaskBox.name);
@@ -11,32 +12,40 @@ class TaskProvider extends ChangeNotifier {
     if (!taskBox.containsKey(TaskBox.tasksKey)) {
       taskBox.put(TaskBox.tasksKey, []);
     } else {
-      taskList = taskBox.get(TaskBox.tasksKey)!.cast<Task>();
+      taskList = taskBox
+          .get(TaskBox.tasksKey)!
+          .cast<TaskCommunicator>()
+          .map((e) => Task.fromCommunicator(e))
+          .toList();
     }
+  }
+
+  void update() {
+    taskBox.put(
+      TaskBox.tasksKey,
+      taskList.map((e) => e.toCommunicator()).toList(),
+    );
+    notifyListeners();
   }
 
   void addTask(Task task) {
     taskList.add(task);
-    taskBox.put(TaskBox.tasksKey, taskList);
-    notifyListeners();
+    update();
   }
 
   void toggleTask(int index, bool isCompleted) {
     taskList[index].isCompleted = isCompleted;
-    taskBox.put(TaskBox.tasksKey, taskList);
-    notifyListeners();
+    update();
   }
 
   void updateTask(Task task, int index) {
     taskList[index] = task;
-    taskBox.put(TaskBox.tasksKey, taskList);
-    notifyListeners();
+    update();
   }
 
   void toggleTaskInProgress(int index, bool isInProgress) {
     taskList[index].isInProgress = isInProgress;
-    taskBox.put(TaskBox.tasksKey, taskList);
-    notifyListeners();
+    update();
   }
 
   void moveTask(int oldIndex, int newIndex) {
@@ -46,26 +55,22 @@ class TaskProvider extends ChangeNotifier {
     }
     final task = taskList.removeAt(oldIndex);
     taskList.insert(newIndex, task);
-    taskBox.put(TaskBox.tasksKey, taskList);
-    notifyListeners();
+    update();
   }
 
   void deleteTask(Task task) {
     taskList.remove(task);
-    taskBox.put(TaskBox.tasksKey, taskList);
-    notifyListeners();
+    update();
   }
 
   void deleteTaskAt(int index) {
     taskList.removeAt(index);
-    taskBox.put(TaskBox.tasksKey, taskList);
-    notifyListeners();
+    update();
   }
 
   void clearTasks() {
     taskList.clear();
-    taskBox.put(TaskBox.tasksKey, taskList);
-    notifyListeners();
+    update();
   }
 
   @override

@@ -6,6 +6,7 @@ import 'package:pmate/features/app/app.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:pmate/features/settings/models/themes_settings_bundle.dart';
 import 'package:pmate/features/task_management/models/task.dart';
+import 'package:pmate/features/task_management/models/task_communicator.dart';
 import 'env/config/firebase_options.dart';
 
 Future<void> main() async {
@@ -14,7 +15,7 @@ Future<void> main() async {
   Globals.appInfo = await PackageInfo.fromPlatform();
 
   await Hive.initFlutter();
-  Hive.registerAdapter(TaskAdapter());
+  Hive.registerAdapter(TaskCommunicatorAdapter());
   Hive.registerAdapter(ThemeSettingsBundleAdapter());
   await Hive.openBox<List>(TaskBox.name);
   await Hive.openBox<ThemeSettingsBundle>(SettingsBox.themesBoxName);
