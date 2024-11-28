@@ -126,10 +126,22 @@
     "@settings_app": {},
     "settings_appearance": "Appearance",
     "@settings_appearance": {},
+    "settings_appearance_theme": "Theme",
+    "@settings_appearance_theme": {},
+    "settings_appearance_theme_light": "Light",
+    "@settings_appearance_theme_light": {},
+    "settings_appearance_theme_dark": "Dark",
+    "@settings_appearance_theme_dark": {},
+    "settings_appearance_theme_system": "System",
+    "@settings_appearance_theme_system": {},
     "support_page_title": "Support",
     "@support_page_title": {},
     "bugs_and_fixes_page_title": "Bugs and Fixes",
     "@bugs_and_fixes_page_title": {},
     "notification_page_title": "Notifications",
-    "@notification_page_title": {}
+    "@notification_page_title": {},
+    "task_today_page_title": "Today",
+    "@task_today_page_title": {},
+    "task_all_page_title": "All",
+    "@task_all_page_title": {}
 }

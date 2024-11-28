@@ -126,10 +126,22 @@
     "@settings_app": {},
     "settings_appearance": "Hiển thị",
     "@settings_appearance": {},
+    "settings_appearance_theme": "Chủ đề",
+    "@settings_appearance_theme": {},
+    "settings_appearance_theme_light": "Sáng",
+    "@settings_appearance_theme_light": {},
+    "settings_appearance_theme_dark": "Tối",
+    "@settings_appearance_theme_dark": {},
+    "settings_appearance_theme_system": "Hệ thống",
+    "@settings_appearance_theme_system": {},
     "support_page_title": "Hỗ trợ",
     "@support_page_title": {},
     "bugs_and_fixes_page_title": "Báo cáo lỗi ứng dụng",
     "@bugs_and_fixes_page_title": {},
     "notification_page_title": "Thông báo",
-    "@notification_page_title": {}
+    "@notification_page_title": {},
+    "task_today_page_title": "Hôm nay",
+    "@task_today_page_title": {},
+    "task_all_page_title": "Tất cả",
+    "@task_all_page_title": {}
 }

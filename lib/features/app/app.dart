@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pmate/env/common/globals.dart';
 import 'package:pmate/env/config/themes.dart';
 import 'package:pmate/features/app/navigation.dart';
+import 'package:pmate/features/settings/business/settings_provider.dart';
 import 'package:pmate/features/task_management/business/task_provider.dart';
 import 'package:pmate/features/welcome/interface/welcome_form.dart';
 import 'package:provider/provider.dart';
@@ -21,6 +22,9 @@ class PmateRoot extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => TaskProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => SettingsProvider(),
         ),
       ],
       child: ToastificationWrapper(
@@ -48,7 +52,6 @@ class PmateRoot extends StatelessWidget {
               theme: PmateThemes.light,
               darkTheme: PmateThemes.dark,
               themeMode: ThemeMode.system,
-              //TODO: Implement theme switching / light-dark config.
               localizationsDelegates: AppLocalizations.localizationsDelegates,
               supportedLocales: AppLocalizations.supportedLocales,
               home: homePage,

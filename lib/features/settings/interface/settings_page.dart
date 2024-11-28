@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:logger/logger.dart';
 import 'package:pmate/env/common/appbar.dart';
 import 'package:pmate/env/common/primitives.dart';
 import 'package:pmate/features/settings/interface/app_settings/appearance_settings.dart';
@@ -14,10 +15,11 @@ class SettingsPage extends StatelessWidget {
     return Scaffold(
       appBar: PmateAppBar(title: local.settings),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+          child: ListView(
             children: [
-              AppSettings(
+              SettingsCategoryDisplay(
                 name: local.settings_app,
                 subpagesList: [
                   Triple(
@@ -35,8 +37,8 @@ class SettingsPage extends StatelessWidget {
   }
 }
 
-class AppSettings extends StatelessWidget {
-  const AppSettings({
+class SettingsCategoryDisplay extends StatelessWidget {
+  const SettingsCategoryDisplay({
     super.key,
     required this.name,
     required this.subpagesList,
@@ -47,14 +49,28 @@ class AppSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Column(
       children: [
-        Text(name),
-        ...subpagesList.map(
-          (e) => SettingsSubpageDisplay(
-            name: e.first,
-            icon: e.second,
-            subpage: e.third,
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Text(name),
+        ),
+        const SizedBox(height: 10),
+        Container(
+          decoration: BoxDecoration(
+            color: theme.colorScheme.surfaceContainerHigh,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Column(
+            children: subpagesList
+                .map((e) => SettingsSubpageDisplay(
+                      name: e.first,
+                      icon: e.second,
+                      subpage: e.third,
+                    ))
+                .toList(),
           ),
         ),
       ],
@@ -76,19 +92,25 @@ class SettingsSubpageDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
     return GestureDetector(
-      onTap: () => Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => subpage,
+      behavior: HitTestBehavior.opaque,
+      //? The issue (of not being able to tap on the blank space) occurs because by default, GestureDetector only detects gestures in areas where its child widget draws something (is hit-testable). Using either of these solutions will make the entire area respond to taps.
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => subpage,
+          ),
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          vertical: 10,
+          horizontal: 15,
         ),
-      ),
-      child: Container(
-        color: theme.colorScheme.surface,
         child: Row(
           children: [
             Icon(icon),
+            const SizedBox(width: 15),
             Text(name),
           ],
         ),
