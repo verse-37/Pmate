@@ -10,21 +10,26 @@ enum Difficulty {
   veryHard,
 }
 
+enum TaskStatus {
+  incomplete,
+  inProgress,
+  completed,
+}
+
 class Task extends HiveObject {
+  int? index;
   String title;
   String description;
-  bool isCompleted;
+  TaskStatus status;
   DateTime createdAt;
-  bool isInProgress;
   late List<Pair<String, bool>> checkList;
   Difficulty difficulty;
 
   Task({
     required this.title,
     required this.description,
-    required this.isCompleted,
+    this.status = TaskStatus.incomplete,
     required this.createdAt,
-    this.isInProgress = false,
     this.checkList = const [],
     this.difficulty = Difficulty.easy,
   });
@@ -33,9 +38,8 @@ class Task extends HiveObject {
     return TaskCommunicator(
       title: title,
       description: description,
-      isCompleted: isCompleted,
+      status: status.index,
       createdAt: createdAt.toIso8601String(),
-      isInProgress: isInProgress,
       checkListNames: checkList.map((e) => e.first).toList(),
       checkListCompletion: checkList.map((e) => e.second).toList(),
       difficulty: difficulty.index,
@@ -45,9 +49,8 @@ class Task extends HiveObject {
   Task.fromCommunicator(TaskCommunicator communicator)
       : title = communicator.title,
         description = communicator.description,
-        isCompleted = communicator.isCompleted,
+        status = TaskStatus.values[communicator.status],
         createdAt = DateTime.parse(communicator.createdAt),
-        isInProgress = communicator.isInProgress,
         checkList = List.generate(
           communicator.checkListNames.length,
           (index) => Pair(
@@ -63,7 +66,7 @@ class TaskBox {
   static const tasksKey = 'tasks';
 }
 
-//?Command to generate the g.dart file: flutter pub run build_runner build. Since the command is deprecated, we need to use the following command instead: flutter pub run build_runner build --delete-conflicting-outputs
+//?Command to generate the g.dart file: flutter (packages) pub run build_runner build. Since the command is deprecated, we need to use the following command instead: flutter pub run build_runner build --delete-conflicting-outputs
 
 //? If file is not generated, run the following command: flutter pub run build_runner clean.
 

@@ -134,6 +134,8 @@
     "@settings_appearance_theme_dark": {},
     "settings_appearance_theme_system": "System",
     "@settings_appearance_theme_system": {},
+    "settings_feature": "App Features",
+    "@settings_feature": {},
     "support_page_title": "Support",
     "@support_page_title": {},
     "bugs_and_fixes_page_title": "Bugs and Fixes",
@@ -153,5 +155,9 @@
     "task_all_section": "All Tasks",
     "@task_all_section": {},
     "task_completed_section": "Tasks Done",
-    "@task_completed_section": {}
+    "@task_completed_section": {},
+    "task_title_field": "Title",
+    "@task_title_field": {},
+    "task_notes_field": "Add Notes...",
+    "@task_notes_field": {}
 }

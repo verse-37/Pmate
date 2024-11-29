@@ -10,14 +10,11 @@ class TaskCommunicator extends HiveObject {
   @HiveField(1)
   String description;
 
-  @HiveField(2)
-  bool isCompleted;
-
   @HiveField(3)
   String createdAt;
 
   @HiveField(4)
-  bool isInProgress;
+  int status;
 
   @HiveField(5)
   List<String> checkListNames;
@@ -31,9 +28,8 @@ class TaskCommunicator extends HiveObject {
   TaskCommunicator({
     required this.title,
     required this.description,
-    required this.isCompleted,
+    required this.status,
     required this.createdAt,
-    required this.isInProgress,
     required this.checkListNames,
     required this.checkListCompletion,
     required this.difficulty,

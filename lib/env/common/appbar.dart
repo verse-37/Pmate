@@ -7,9 +7,11 @@ class PmateAppBar extends StatelessWidget implements PreferredSizeWidget {
   const PmateAppBar({
     super.key,
     required this.title,
+    this.actions = const [],
   });
 
   final String title;
+  final List<Widget> actions;
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
@@ -24,6 +26,7 @@ class PmateAppBar extends StatelessWidget implements PreferredSizeWidget {
         style: theme.textTheme.displaySmall,
       ),
       backgroundColor: theme.colorScheme.primaryContainer,
+      actions: actions,
     );
   }
 }

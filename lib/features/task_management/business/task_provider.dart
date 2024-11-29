@@ -33,18 +33,13 @@ class TaskProvider extends ChangeNotifier {
     update();
   }
 
-  void toggleTask(int index, bool isCompleted) {
-    taskList[index].isCompleted = isCompleted;
+  void toggleTask(int index, TaskStatus status) {
+    taskList[index].status = status;
     update();
   }
 
   void updateTask(Task task, int index) {
     taskList[index] = task;
-    update();
-  }
-
-  void toggleTaskInProgress(int index, bool isInProgress) {
-    taskList[index].isInProgress = isInProgress;
     update();
   }
 

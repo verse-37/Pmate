@@ -5,6 +5,7 @@ import 'package:logger/logger.dart';
 import 'package:pmate/env/common/appbar.dart';
 import 'package:pmate/env/common/primitives.dart';
 import 'package:pmate/features/settings/interface/app_settings/appearance_settings.dart';
+import 'package:pmate/features/settings/interface/app_settings/feature_settings.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -26,7 +27,12 @@ class SettingsPage extends StatelessWidget {
                   Triple(
                     local.settings_appearance,
                     Icons.color_lens,
-                    AppearanceSettings(),
+                    const AppearanceSettings(),
+                  ),
+                  Triple(
+                    local.settings_feature,
+                    Icons.widgets,
+                    const FeatureSettings(),
                   ),
                 ],
               ),

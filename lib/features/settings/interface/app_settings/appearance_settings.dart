@@ -17,9 +17,9 @@ class AppearanceSettings extends StatelessWidget {
 
     return Scaffold(
       appBar: PmateAppBar(title: local.settings_appearance),
-      body: SafeArea(
+      body: const SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(15),
+          padding: EdgeInsets.all(15),
           child: Column(
             children: [
               AppearanceSettingsTheme(),

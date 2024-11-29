@@ -134,6 +134,8 @@
     "@settings_appearance_theme_dark": {},
     "settings_appearance_theme_system": "Hệ thống",
     "@settings_appearance_theme_system": {},
+    "settings_feature": "Cài đặt tính năng",
+    "@settings_feature": {},
     "support_page_title": "Hỗ trợ",
     "@support_page_title": {},
     "bugs_and_fixes_page_title": "Báo cáo lỗi ứng dụng",
@@ -153,5 +155,9 @@
     "task_all_section": "Tất cả nhiệm vụ",
     "@task_all_section": {},
     "task_completed_section": "Đã hoàn thành",
-    "@task_completed_section": {}
+    "@task_completed_section": {},
+    "task_title_field": "Tiêu đề",
+    "@task_title_field": {},
+    "task_notes_field": "Thêm ghi chú...",
+    "@task_notes_field": {}
 }
