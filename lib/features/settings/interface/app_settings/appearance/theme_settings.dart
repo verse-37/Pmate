@@ -1,35 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:pmate/env/common/appbar.dart';
-import 'package:pmate/features/settings/business/settings_provider.dart';
+import 'package:pmate/features/settings/business/appearance_settings_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:logger/logger.dart';
-
-class AppearanceSettings extends StatelessWidget {
-  const AppearanceSettings({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final local = AppLocalizations.of(context);
-
-    Logger().d(local.settings_appearance);
-
-    return Scaffold(
-      appBar: PmateAppBar(title: local.settings_appearance),
-      body: const SafeArea(
-        child: Padding(
-          padding: EdgeInsets.all(15),
-          child: Column(
-            children: [
-              AppearanceSettingsTheme(),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
 
 class AppearanceSettingsTheme extends StatefulWidget {
   const AppearanceSettingsTheme({super.key});
@@ -46,9 +19,9 @@ class _AppearanceSettingsThemeState extends State<AppearanceSettingsTheme> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final local = AppLocalizations.of(context);
-    final settingsProvider = context.watch<SettingsProvider>();
+    final settingsProvider = context.watch<AppearanceSettingsProvider>();
 
-    selectedThemeIndex = settingsProvider.themeProvider.themeMode;
+    selectedThemeIndex = settingsProvider.bundle.themeMode;
 
     return Column(
       children: [

@@ -4,8 +4,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:logger/logger.dart';
 import 'package:pmate/env/common/appbar.dart';
 import 'package:pmate/env/common/primitives.dart';
-import 'package:pmate/features/settings/interface/app_settings/appearance_settings.dart';
-import 'package:pmate/features/settings/interface/app_settings/feature_settings.dart';
+import 'package:pmate/features/settings/interface/app_settings/appearance/appearance_settings.dart';
+import 'package:pmate/features/settings/interface/feature_settings/task/task_settings.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -29,10 +29,16 @@ class SettingsPage extends StatelessWidget {
                     Icons.color_lens,
                     const AppearanceSettings(),
                   ),
+                ],
+              ),
+              const SizedBox(height: 10),
+              SettingsCategoryDisplay(
+                name: local.settings_feature,
+                subpagesList: [
                   Triple(
-                    local.settings_feature,
-                    Icons.widgets,
-                    const FeatureSettings(),
+                    local.settings_task_switches,
+                    Icons.add_task,
+                    const TaskSettings(),
                   ),
                 ],
               ),

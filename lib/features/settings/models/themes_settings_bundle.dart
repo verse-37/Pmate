@@ -21,8 +21,3 @@ class ThemeSettingsBundle {
 
   ThemeSettingsBundle({required this.themeMode});
 }
-
-class SettingsBox {
-  static const String themesBoxName = "themes";
-  static const String themeModeKey = "themeMode";
-}

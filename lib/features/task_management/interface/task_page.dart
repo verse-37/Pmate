@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:pmate/env/common/bottom_nav_bar.dart';
 import 'package:pmate/env/common/primitives.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:pmate/features/task_management/interface/subpages/task_all_page.dart';
-import 'package:pmate/features/task_management/interface/subpages/task_today_page.dart';
+import 'package:pmate/features/task_management/interface/task_all_page.dart';
+import 'package:pmate/features/task_management/interface/task_today_page.dart';
 
 class TaskPage extends StatefulWidget {
   const TaskPage({super.key});

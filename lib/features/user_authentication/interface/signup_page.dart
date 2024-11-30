@@ -18,12 +18,12 @@ class SignupPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      bottomNavigationBar: LoginLink(),
+      bottomNavigationBar: const LoginLink(),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      body: SafeArea(
+      body: const SafeArea(
         child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.symmetric(
@@ -50,7 +50,7 @@ class LoginLink extends StatelessWidget {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => LoginPage(),
+          builder: (context) => const LoginPage(),
         ),
       );
     }
@@ -128,7 +128,7 @@ class _SignupFormState extends State<SignupForm> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => BugsAndFixesPage(),
+          builder: (context) => const BugsAndFixesPage(),
         ),
       );
     }

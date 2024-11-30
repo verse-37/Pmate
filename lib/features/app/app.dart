@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:pmate/env/common/globals.dart';
 import 'package:pmate/env/config/themes.dart';
 import 'package:pmate/features/app/navigation.dart';
-import 'package:pmate/features/settings/business/settings_provider.dart';
+import 'package:pmate/features/settings/business/appearance_settings_provider.dart';
+import 'package:pmate/features/settings/business/task_settings_provider.dart';
 import 'package:pmate/features/task_management/business/task_provider.dart';
 import 'package:pmate/features/welcome/interface/welcome_form.dart';
 import 'package:provider/provider.dart';
@@ -24,7 +25,10 @@ class PmateRoot extends StatelessWidget {
           create: (context) => TaskProvider(),
         ),
         ChangeNotifierProvider(
-          create: (context) => SettingsProvider(),
+          create: (context) => AppearanceSettingsProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => TaskSettingsProvider(),
         ),
       ],
       child: ToastificationWrapper(
@@ -47,19 +51,19 @@ class PmateRoot extends StatelessWidget {
             }
 
             return Builder(builder: (context) {
-              final settingsProvider = context.watch<SettingsProvider>()
-                ..init();
-              //? Initialize the settings provider. This is done here to ensure that the theme mode is set before the app is built. The cascade operator (..) is used to call the init method on the settings provider after it is created.
+              final settingsProvider =
+                  context.watch<AppearanceSettingsProvider>()..init();
+              context.watch<TaskSettingsProvider>().init();
 
               return MaterialApp(
                 debugShowCheckedModeBanner: false,
                 title: Globals.appInfo.appName,
                 theme: PmateThemes.light,
                 darkTheme: PmateThemes.dark,
-                themeMode: settingsProvider.themeProvider.getThemeMode,
+                themeMode: settingsProvider.bundle.getThemeMode,
                 localizationsDelegates: AppLocalizations.localizationsDelegates,
                 supportedLocales: AppLocalizations.supportedLocales,
-                home: homePage,
+                home: const NavigationCenter(),
               );
             });
           },

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:pmate/features/settings/business/task_settings_provider.dart';
 import 'package:pmate/features/task_management/models/task.dart';
 import 'package:provider/provider.dart';
 import 'package:pmate/features/task_management/business/task_provider.dart';
@@ -12,6 +13,7 @@ class TaskItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final settingsProvider = context.watch<TaskSettingsProvider>();
     final taskProvider = context.watch<TaskProvider>();
     final task = taskProvider.taskList[index];
     final percentCompleted =
@@ -48,8 +50,12 @@ class TaskItem extends StatelessWidget {
     //TODO: New setting for switch the two action panes.
 
     return Slidable(
-      startActionPane: doneActionPane,
-      endActionPane: deleteActionPane,
+      startActionPane: settingsProvider.bundle.doneTaskOnLeftSwipe
+          ? doneActionPane
+          : deleteActionPane,
+      endActionPane: settingsProvider.bundle.doneTaskOnLeftSwipe
+          ? deleteActionPane
+          : doneActionPane,
       child: Card(
         child: Row(
           children: [

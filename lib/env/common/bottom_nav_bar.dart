@@ -61,10 +61,11 @@ class _PmateBottomNavBarState extends State<PmateBottomNavBar> {
         color: Colors.grey[600]!,
         activeColor: Colors.black,
         iconSize: 24,
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+        padding: const EdgeInsets.all(10),
         duration: const Duration(milliseconds: 400),
         tabBackgroundColor: Colors.grey[100]!,
         backgroundColor: theme.colorScheme.surface,
+        textStyle: theme.textTheme.bodyMedium,
         tabs: List.generate(
           widget.subpages.length,
           (index) {
