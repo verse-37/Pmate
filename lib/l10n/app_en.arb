@@ -22,6 +22,10 @@
     "@error": {},
     "gestures": "Gestures",
     "@gestures": {},
+    "save": "Save",
+    "@save": {},
+    "cancel": "Cancel",
+    "@cancel": {},
     "email": "Email",
     "@email": {},
     "email_address": "Email Address",
@@ -171,5 +175,15 @@
     "task_title_field": "Title",
     "@task_title_field": {},
     "task_notes_field": "Add Notes...",
-    "@task_notes_field": {}
+    "@task_notes_field": {},
+    "task_creation_success_message_title": "Task created successfully!",
+    "@task_creation_success_message_title": {},
+    "task_creation_success_message_content": "Don''t forget to do the work!",
+    "@task_creation_success_message_content": {},
+    "task_creation_title_missing": "Title is required",
+    "@task_creation_title_missing": {},
+    "task_all_no_task_title": "No tasks yet. Woohoo!",
+    "@task_all_no_task_title": {},
+    "task_all_no_task_message": "Add your first task now! ...Or just sit back and relax :)",
+    "@task_all_no_task_message": {}
 }

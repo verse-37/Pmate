@@ -104,13 +104,13 @@ class _SignupFormState extends State<SignupForm> {
 
     void onSignupAttempt() async {
       if (!_signupFormKey.currentState!.validate()) {
-        InAppNotifierGenerator(
+        PmateSnackbars(
           title: local.auth_failed,
           message: local.sign_up_fields_incomplete,
           contentType: ContentType.failure,
         ).showSnackbar(context);
       } else if (_password.text != _passwordRetype.text) {
-        InAppNotifierGenerator(
+        PmateSnackbars(
           title: local.auth_failed,
           message: local.auth_passwords_do_not_match,
           contentType: ContentType.failure,
@@ -235,7 +235,7 @@ class _SignupEmailFieldState extends State<SignupEmailField> {
           keyboardType: TextInputType.emailAddress,
           autocorrect: false,
           enableSuggestions: false,
-          validator: AuthValidator().emailValidator(context: context).call,
+          validator: PmateValidators().emailValidator(context: context).call,
           decoration: InputDecoration(
             filled: true,
             hintText: local.email_example,
@@ -297,7 +297,7 @@ class _SignupPasswordFieldState extends State<SignupPasswordField> {
           autocorrect: false,
           enableSuggestions: false,
           obscureText: !passwordVisibility,
-          validator: AuthValidator()
+          validator: PmateValidators()
               .passwordValidator(
                 context: context,
                 missingMessage: widget.errorText,

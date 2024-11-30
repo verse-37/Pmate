@@ -13,6 +13,7 @@ class TaskAllPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final local = AppLocalizations.of(context);
+    final theme = Theme.of(context);
     final taskProvider = context.watch<TaskProvider>();
     final n = taskProvider.taskList.length;
     List<Task> inProgressTasks = [];
@@ -50,53 +51,76 @@ class TaskAllPage extends StatelessWidget {
         child: const Icon(Icons.add),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            DividerWithText(text: local.task_focus_section),
-            ReorderableListView(
-              shrinkWrap: true,
-              //? If the scroll view does not shrink wrap, then the scroll view will expand to the maximum allowed size in the [scrollDirection]. If the scroll view has unbounded constraints in the [scrollDirection], then [shrinkWrap] must be true.
-              physics: const NeverScrollableScrollPhysics(),
-              onReorder: onTaskReorder,
-              children: inProgressTasks
-                  .map(
-                    (task) => TaskItem(
-                      key: ValueKey(task),
-                      index: task.index!,
-                    ),
-                  )
-                  .toList(),
-            ),
-            DividerWithText(text: local.task_all_section),
-            ReorderableListView(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              onReorder: onTaskReorder,
-              children: inCompletedTasks
-                  .map(
-                    (task) => TaskItem(
-                      key: ValueKey(task),
-                      index: task.index!,
-                    ),
-                  )
-                  .toList(),
-            ),
-            DividerWithText(text: local.task_completed_section),
-            ReorderableListView(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              onReorder: onTaskReorder,
-              children: completedTasks
-                  .map(
-                    (task) => TaskItem(
-                      key: ValueKey(task),
-                      index: task.index!,
-                    ),
-                  )
-                  .toList(),
-            ),
-          ],
-        ),
+        child: Builder(builder: (context) {
+          if (inProgressTasks.isEmpty &&
+              inCompletedTasks.isEmpty &&
+              completedTasks.isEmpty) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    local.task_all_no_task_title,
+                    style: theme.textTheme.displaySmall,
+                  ),
+                  const SizedBox(height: 15),
+                  Text(
+                    local.task_all_no_task_message,
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            );
+          }
+          return Column(
+            children: [
+              DividerWithText(text: local.task_focus_section),
+              ReorderableListView(
+                shrinkWrap: true,
+                //? If the scroll view does not shrink wrap, then the scroll view will expand to the maximum allowed size in the [scrollDirection]. If the scroll view has unbounded constraints in the [scrollDirection], then [shrinkWrap] must be true.
+                physics: const NeverScrollableScrollPhysics(),
+                onReorder: onTaskReorder,
+                children: inProgressTasks
+                    .map(
+                      (task) => TaskItem(
+                        key: ValueKey(task),
+                        index: task.index!,
+                      ),
+                    )
+                    .toList(),
+              ),
+              DividerWithText(text: local.task_all_section),
+              ReorderableListView(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                onReorder: onTaskReorder,
+                children: inCompletedTasks
+                    .map(
+                      (task) => TaskItem(
+                        key: ValueKey(task),
+                        index: task.index!,
+                      ),
+                    )
+                    .toList(),
+              ),
+              DividerWithText(text: local.task_completed_section),
+              ReorderableListView(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                onReorder: onTaskReorder,
+                children: completedTasks
+                    .map(
+                      (task) => TaskItem(
+                        key: ValueKey(task),
+                        index: task.index!,
+                      ),
+                    )
+                    .toList(),
+              ),
+            ],
+          );
+        }),
       ),
     );
   }

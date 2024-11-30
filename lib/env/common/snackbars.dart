@@ -2,12 +2,12 @@ import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:toastification/toastification.dart';
 
-class InAppNotifierGenerator {
+class PmateSnackbars {
   String title;
   String message;
   ContentType? contentType;
 
-  InAppNotifierGenerator({
+  PmateSnackbars({
     required this.title,
     required this.message,
     this.contentType,

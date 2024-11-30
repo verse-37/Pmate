@@ -24,7 +24,7 @@ class AuthService {
       await Future.delayed(const Duration(seconds: 1));
 
       if (context.mounted) {
-        InAppNotifierGenerator(
+        PmateSnackbars(
           title: local.sign_up_success,
           message: local.sign_up_success_2,
           contentType: ContentType.success,
@@ -52,7 +52,7 @@ class AuthService {
       }
       if (context.mounted) {
         //If the parent widget still exists...
-        InAppNotifierGenerator(
+        PmateSnackbars(
           title: local.auth_failed,
           message: message,
           contentType: ContentType.failure,
@@ -61,7 +61,7 @@ class AuthService {
     } catch (e) {
       Logger().e(e);
       if (context.mounted) {
-        InAppNotifierGenerator(
+        PmateSnackbars(
           title: local.error,
           message: e.toString(),
         ).showErrorToast(context: context);
@@ -85,7 +85,7 @@ class AuthService {
       await Future.delayed(const Duration(seconds: 1));
 
       if (context.mounted) {
-        InAppNotifierGenerator(
+        PmateSnackbars(
           title: local.login_success,
           message: local.login_success_2,
           contentType: ContentType.success,
@@ -108,7 +108,7 @@ class AuthService {
           break;
       }
       if (context.mounted) {
-        InAppNotifierGenerator(
+        PmateSnackbars(
           title: local.auth_failed,
           message: message,
           contentType: ContentType.failure,
@@ -117,7 +117,7 @@ class AuthService {
     } catch (e) {
       Logger().e(e);
       if (context.mounted) {
-        InAppNotifierGenerator(
+        PmateSnackbars(
           title: local.error,
           message: e.toString(),
         ).showErrorToast(context: context);
@@ -135,7 +135,7 @@ class AuthService {
     await Future.delayed(const Duration(seconds: 1));
 
     if (context.mounted) {
-      InAppNotifierGenerator(
+      PmateSnackbars(
         title: local.sign_out_success,
         message: local.sign_out_message,
         contentType: ContentType.success,

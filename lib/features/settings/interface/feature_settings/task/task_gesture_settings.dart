@@ -36,7 +36,8 @@ class _TaskGestureSettingsState extends State<TaskGestureSettings> {
           spacing: MediaQuery.of(context).size.width - 120,
           style: ToggleStyle(
             borderColor: Colors.transparent,
-            backgroundColor: theme.colorScheme.surfaceContainerHigh,
+            backgroundColor: theme.colorScheme.primaryContainer,
+            indicatorColor: theme.colorScheme.primary,
             boxShadow: [
               BoxShadow(
                 color: theme.colorScheme.surfaceContainerLow,
@@ -51,6 +52,7 @@ class _TaskGestureSettingsState extends State<TaskGestureSettings> {
           },
           iconBuilder: (value) => Icon(
             value ? Icons.arrow_forward : Icons.arrow_back,
+            color: theme.colorScheme.onPrimary,
           ),
           textBuilder: (value) => Text(
             value ? local.settings_left_to_right : local.settings_right_to_left,

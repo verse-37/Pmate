@@ -15,6 +15,9 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 class PmateRoot extends StatelessWidget {
   const PmateRoot({super.key});
 
+  //TODO: Add a splash screen
+  //TODO: Implement app routing
+
   @override
   Widget build(BuildContext context) {
     late Widget homePage;
@@ -63,7 +66,7 @@ class PmateRoot extends StatelessWidget {
                 themeMode: settingsProvider.bundle.getThemeMode,
                 localizationsDelegates: AppLocalizations.localizationsDelegates,
                 supportedLocales: AppLocalizations.supportedLocales,
-                home: const NavigationCenter(),
+                home: homePage,
               );
             });
           },

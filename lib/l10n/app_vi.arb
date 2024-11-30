@@ -22,6 +22,10 @@
     "@error": {},
     "email": "Email",
     "@email": {},
+    "save": "Lưu",
+    "@save": {},
+    "cancel": "Hủy",
+    "@cancel": {},
     "gestures": "Thao tác",
     "@gestures": {},
     "email_address": "Địa chỉ Email",
@@ -171,5 +175,15 @@
     "task_title_field": "Tiêu đề",
     "@task_title_field": {},
     "task_notes_field": "Thêm ghi chú...",
-    "@task_notes_field": {}
+    "@task_notes_field": {},
+    "task_creation_success_message_title": "Nhiệm vụ mới!",
+    "@task_creation_success_message_title": {},
+    "task_creation_success_message_content": "Chẳng gì làm khó được bạn, đúng không?",
+    "@task_creation_success_message_content": {},
+    "task_creation_title_missing": "Tiêu đề là bắt buộc",
+    "@task_creation_title_missing": {},
+    "task_all_no_task_title": "Chưa có nhiệm vụ nào",
+    "@task_all_no_task_title": {},
+    "task_all_no_task_message": "Thêm nhiệm vụ mới ngay thôi! ...Hoặc chỉ cần ngồi yên và thư giãn, vì hôm nay là ngày của bạn :)",
+    "@task_all_no_task_message": {}
 }

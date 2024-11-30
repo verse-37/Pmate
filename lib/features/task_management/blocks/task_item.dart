@@ -16,9 +16,11 @@ class TaskItem extends StatelessWidget {
     final settingsProvider = context.watch<TaskSettingsProvider>();
     final taskProvider = context.watch<TaskProvider>();
     final task = taskProvider.taskList[index];
+    final theme = Theme.of(context);
     final percentCompleted =
         task.checkList.where((e) => e.second).length.toDouble() /
             task.checkList.length;
+    late final Widget rightGadget;
 
     final doneActionPane = ActionPane(
       motion: const ScrollMotion(),
@@ -28,7 +30,8 @@ class TaskItem extends StatelessWidget {
             taskProvider.toggleTask(index, TaskStatus.completed);
           },
           icon: Icons.check,
-          backgroundColor: Theme.of(context).colorScheme.primary,
+          backgroundColor: theme.colorScheme.primary,
+          borderRadius: BorderRadius.circular(10),
         ),
       ],
     );
@@ -41,9 +44,14 @@ class TaskItem extends StatelessWidget {
             taskProvider.deleteTaskAt(index);
           },
           icon: Icons.delete,
+          backgroundColor: theme.colorScheme.error,
+          borderRadius: BorderRadius.circular(10),
         ),
       ],
     );
+
+    if 
+
     //TODO: Add a window "Task Detail" when clicking on the task item.
     //TODO: Add a window "Task Completion" when clicking on the circular percent indicator.
     //TODO: Add slidable action, complete for swipe right, delete for swipe left.
@@ -57,26 +65,40 @@ class TaskItem extends StatelessWidget {
           ? deleteActionPane
           : doneActionPane,
       child: Card(
-        child: Row(
-          children: [
-            Column(
-              children: [
-                Text(task.title),
-              ],
-            ),
-            CircularPercentIndicator(
-              radius: 100,
-              lineWidth: 10,
-              animation: true,
-              animationDuration: 500,
-              percent: percentCompleted,
-              center: Text(
-                percentCompleted.toStringAsFixed(2),
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Row(
+            children: [
+              Expanded(
+                child: Column(
+                  children: [
+                    Text(task.title),
+                  ],
+                ),
               ),
-              progressColor: Theme.of(context).colorScheme.primary,
-              circularStrokeCap: CircularStrokeCap.round,
-            ),
-          ],
+              if (task.checkList.isNotEmpty)
+                CircularPercentIndicator(
+                  radius: 40,
+                lineWidth: 10,
+                animation: true,
+                animationDuration: 500,
+                percent: percentCompleted,
+                center: Text(
+                  percentCompleted.toStringAsFixed(2),
+                ),
+                progressColor: theme.colorScheme.primary,
+                //TODO: the color of the indicator should be the color of the task's category.
+                circularStrokeCap: CircularStrokeCap.round,
+              ),
+              if (task.checkList.isEmpty)
+                Checkbox(
+                  value: task.status == TaskStatus.completed,
+                  onChanged: (value) {
+                    taskProvider.toggleTask(index, TaskStatus.completed);
+                  },
+                ),
+            ],
+          ),
         ),
       ),
     );

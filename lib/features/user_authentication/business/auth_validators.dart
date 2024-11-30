@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class AuthValidator {
+class PmateValidators {
   MultiValidator passwordValidator({
     required BuildContext context,
     required String missingMessage,
