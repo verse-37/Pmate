@@ -24,13 +24,15 @@ class TaskCommunicatorAdapter extends TypeAdapter<TaskCommunicator> {
       checkListNames: (fields[5] as List).cast<String>(),
       checkListCompletion: (fields[6] as List).cast<bool>(),
       difficulty: fields[7] as int,
+      tags: (fields[8] as List?)?.cast<String>(),
+      category: fields[9] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, TaskCommunicator obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(9)
       ..writeByte(0)
       ..write(obj.title)
       ..writeByte(1)
@@ -44,7 +46,11 @@ class TaskCommunicatorAdapter extends TypeAdapter<TaskCommunicator> {
       ..writeByte(6)
       ..write(obj.checkListCompletion)
       ..writeByte(7)
-      ..write(obj.difficulty);
+      ..write(obj.difficulty)
+      ..writeByte(8)
+      ..write(obj.tags)
+      ..writeByte(9)
+      ..write(obj.category);
   }
 
   @override

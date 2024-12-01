@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:pmate/env/common/primitives.dart';
 import 'package:pmate/features/settings/business/task_settings_provider.dart';
 import 'package:pmate/features/task_management/models/task.dart';
 import 'package:provider/provider.dart';
@@ -17,9 +18,10 @@ class TaskItem extends StatelessWidget {
     final taskProvider = context.watch<TaskProvider>();
     final task = taskProvider.taskList[index];
     final theme = Theme.of(context);
-    final percentCompleted =
-        task.checkList.where((e) => e.second).length.toDouble() /
-            task.checkList.length;
+    final Pair<int, int> completedAndTotal = Pair(
+      task.checkList.where((e) => e.second).length,
+      task.checkList.length,
+    );
     late final Widget rightGadget;
 
     final doneActionPane = ActionPane(
@@ -50,7 +52,31 @@ class TaskItem extends StatelessWidget {
       ],
     );
 
-    if 
+    if (task.checkList.isEmpty) {
+      rightGadget = Checkbox(
+        value: task.status == TaskStatus.completed,
+        onChanged: (value) {
+          taskProvider.toggleTask(
+            index,
+            value! ? TaskStatus.completed : TaskStatus.incomplete,
+          );
+        },
+      );
+    } else {
+      rightGadget = CircularPercentIndicator(
+        radius: 40,
+        lineWidth: 10,
+        animation: true,
+        animationDuration: 500,
+        percent: completedAndTotal.first.toDouble() / completedAndTotal.second,
+        center: Text(
+          "${completedAndTotal.first} / ${completedAndTotal.second}",
+        ),
+        progressColor: theme.colorScheme.primary,
+        //TODO: the color of the indicator should be the color of the task's category.
+        circularStrokeCap: CircularStrokeCap.round,
+      );
+    }
 
     //TODO: Add a window "Task Detail" when clicking on the task item.
     //TODO: Add a window "Task Completion" when clicking on the circular percent indicator.
@@ -76,27 +102,7 @@ class TaskItem extends StatelessWidget {
                   ],
                 ),
               ),
-              if (task.checkList.isNotEmpty)
-                CircularPercentIndicator(
-                  radius: 40,
-                lineWidth: 10,
-                animation: true,
-                animationDuration: 500,
-                percent: percentCompleted,
-                center: Text(
-                  percentCompleted.toStringAsFixed(2),
-                ),
-                progressColor: theme.colorScheme.primary,
-                //TODO: the color of the indicator should be the color of the task's category.
-                circularStrokeCap: CircularStrokeCap.round,
-              ),
-              if (task.checkList.isEmpty)
-                Checkbox(
-                  value: task.status == TaskStatus.completed,
-                  onChanged: (value) {
-                    taskProvider.toggleTask(index, TaskStatus.completed);
-                  },
-                ),
+              rightGadget,
             ],
           ),
         ),

@@ -24,12 +24,12 @@ class _TaskCreationPageState extends State<TaskCreationPage> {
     final local = AppLocalizations.of(context);
     final theme = Theme.of(context);
     final taskProvider = context.watch<TaskProvider>();
-
-    void onCancelPressed() {
-      Navigator.pop(context);
-    }
+    final formKey = GlobalKey<FormState>();
 
     void onSavePressed() {
+      if (!formKey.currentState!.validate()) {
+        return;
+      }
       taskProvider.addTask(
         Task(
           title: _taskName.text.trim(),
@@ -66,6 +66,7 @@ class _TaskCreationPageState extends State<TaskCreationPage> {
           child: TaskCreationForm(
             taskName: _taskName,
             taskDescription: _taskDescription,
+            formKey: formKey,
           ),
         ),
       ),
@@ -78,24 +79,23 @@ class TaskCreationForm extends StatefulWidget {
     super.key,
     required this.taskName,
     required this.taskDescription,
+    required this.formKey,
   });
 
   final TextEditingController taskName;
   final TextEditingController taskDescription;
-
+  final GlobalKey<FormState> formKey;
   @override
   State<TaskCreationForm> createState() => _TaskCreationFormState();
 }
 
 class _TaskCreationFormState extends State<TaskCreationForm> {
-  final _formKey = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     final local = AppLocalizations.of(context);
     final theme = Theme.of(context);
     return Form(
-      key: _formKey,
+      key: widget.formKey,
       child: Column(
         children: [
           Container(
@@ -103,6 +103,9 @@ class _TaskCreationFormState extends State<TaskCreationForm> {
               color: theme.colorScheme.primaryContainer,
             ),
             child: TextFormField(
+              validator: RequiredValidator(
+                errorText: local.task_creation_title_missing,
+              ).call,
               controller: widget.taskName,
               style: theme.textTheme.bodyLarge!.copyWith(fontSize: 24),
               minLines: 1,
@@ -128,9 +131,6 @@ class _TaskCreationFormState extends State<TaskCreationForm> {
             child: Column(
               children: [
                 TextFormField(
-                  validator: RequiredValidator(
-                    errorText: local.task_creation_title_missing,
-                  ).call,
                   controller: widget.taskDescription,
                   decoration: InputDecoration(
                     hintText: local.task_notes_field,

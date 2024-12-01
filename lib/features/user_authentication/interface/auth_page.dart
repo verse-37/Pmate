@@ -15,7 +15,7 @@ class AuthenticationPage extends StatelessWidget {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => LoginPage(),
+          builder: (context) => const LoginPage(),
         ),
       );
     }
@@ -24,7 +24,7 @@ class AuthenticationPage extends StatelessWidget {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => SignupPage(),
+          builder: (context) => const SignupPage(),
         ),
       );
     }
@@ -42,7 +42,7 @@ class AuthenticationPage extends StatelessWidget {
                   action: onLogin,
                   primaryColorText: true,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15.0,
                 ),
                 RoundedLargeButton(

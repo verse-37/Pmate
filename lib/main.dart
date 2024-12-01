@@ -10,7 +10,7 @@ import 'package:pmate/features/settings/models/tasks_settings_bundle.dart';
 import 'package:pmate/features/settings/models/themes_settings_bundle.dart';
 import 'package:pmate/features/task_management/models/task.dart';
 import 'package:pmate/features/task_management/models/task_communicator.dart';
-import 'env/config/firebase_options.dart';
+import 'env/config/apis/firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

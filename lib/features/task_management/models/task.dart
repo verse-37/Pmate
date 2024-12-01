@@ -14,6 +14,8 @@ enum TaskStatus {
   incomplete,
   inProgress,
   completed,
+  //TODO: Completed tasks will be deleted after a certain period of time.
+  //TODO: This can be changed in the settings.
 }
 
 class Task extends HiveObject {
@@ -24,6 +26,8 @@ class Task extends HiveObject {
   DateTime createdAt;
   late List<Pair<String, bool>> checkList;
   Difficulty difficulty;
+  List<String>? tags;
+  String? category;
 
   Task({
     required this.title,
@@ -32,6 +36,8 @@ class Task extends HiveObject {
     required this.createdAt,
     this.checkList = const [],
     this.difficulty = Difficulty.easy,
+    this.tags = const [],
+    this.category,
   });
 
   TaskCommunicator toCommunicator() {
@@ -43,6 +49,8 @@ class Task extends HiveObject {
       checkListNames: checkList.map((e) => e.first).toList(),
       checkListCompletion: checkList.map((e) => e.second).toList(),
       difficulty: difficulty.index,
+      tags: tags,
+      category: category,
     );
   }
 
@@ -58,7 +66,9 @@ class Task extends HiveObject {
             communicator.checkListCompletion[index],
           ),
         ),
-        difficulty = Difficulty.values[communicator.difficulty];
+        difficulty = Difficulty.values[communicator.difficulty],
+        tags = communicator.tags,
+        category = communicator.category;
 }
 
 class TaskBox {

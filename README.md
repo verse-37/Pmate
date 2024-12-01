@@ -36,3 +36,14 @@ Styles for Text widgets are defined in `theme.dart` file.
 
 ## Icons
 - Browse on https://fonts.google.com/icons.
+
+## Git Commit Messages
+- Use the present tense ("Add feature" not "Added feature").
+- Limit the first line to 50 characters or less.
+- Reference issues and pull requests liberally after the first line.
+- When only changing documentation, include `[ci skip]` in the commit title.
+### PREFIX
+- [version_code]: Watch `[git log]` to get the latest version code.
+- [author]: The author of the commit.
+- [style]: stable (Deployable code), incomplete (Code that is not deployable), refactor (Code that improves the code structure), test (Code that adds or modifies tests).
+- Example: v1.1.2+1Q stable. ...

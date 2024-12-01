@@ -25,6 +25,12 @@ class TaskCommunicator extends HiveObject {
   @HiveField(7)
   int difficulty;
 
+  @HiveField(8)
+  List<String>? tags;
+
+  @HiveField(9)
+  String? category;
+
   TaskCommunicator({
     required this.title,
     required this.description,
@@ -33,5 +39,7 @@ class TaskCommunicator extends HiveObject {
     required this.checkListNames,
     required this.checkListCompletion,
     required this.difficulty,
+    required this.tags,
+    required this.category,
   });
 }
