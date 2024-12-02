@@ -1,12 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pmate/env/config/globals.dart';
+import 'package:pmate/env/config/routes.dart';
 import 'package:pmate/env/config/themes.dart';
-import 'package:pmate/features/app/navigation.dart';
 import 'package:pmate/features/settings/business/appearance_settings_provider.dart';
 import 'package:pmate/features/settings/business/task_settings_provider.dart';
 import 'package:pmate/features/task_management/business/task_provider.dart';
-import 'package:pmate/features/welcome/interface/welcome_form.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:toastification/toastification.dart';
@@ -16,12 +15,9 @@ class PmateRoot extends StatelessWidget {
   const PmateRoot({super.key});
 
   //TODO: Add a splash screen
-  //TODO: Implement app routing
 
   @override
   Widget build(BuildContext context) {
-    late Widget homePage;
-
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
@@ -48,9 +44,9 @@ class PmateRoot extends StatelessWidget {
             }
 
             if (snapshot.hasData) {
-              homePage = const NavigationCenter();
+              router.go('/nav/home');
             } else {
-              homePage = const WelcomeFormPage();
+              router.go('/');
             }
 
             return Builder(builder: (context) {
@@ -58,7 +54,7 @@ class PmateRoot extends StatelessWidget {
                   context.watch<AppearanceSettingsProvider>()..init();
               context.watch<TaskSettingsProvider>().init();
 
-              return MaterialApp(
+              return MaterialApp.router(
                 debugShowCheckedModeBanner: false,
                 title: Globals.appInfo.appName,
                 theme: PmateThemes.light,
@@ -66,7 +62,7 @@ class PmateRoot extends StatelessWidget {
                 themeMode: settingsProvider.bundle.getThemeMode,
                 localizationsDelegates: AppLocalizations.localizationsDelegates,
                 supportedLocales: AppLocalizations.supportedLocales,
-                home: homePage,
+                routerConfig: router,
               );
             });
           },

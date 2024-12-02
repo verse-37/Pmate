@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pmate/env/widgets/buttons.dart';
-import 'package:pmate/features/user_authentication/interface/login_page.dart';
-import 'package:pmate/features/user_authentication/interface/signup_page.dart';
 
 class AuthenticationPage extends StatelessWidget {
   const AuthenticationPage({super.key});
@@ -12,21 +11,11 @@ class AuthenticationPage extends StatelessWidget {
     final local = AppLocalizations.of(context);
 
     void onLogin() {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const LoginPage(),
-        ),
-      );
+      context.push('/auth/login');
     }
 
     void onSignup() {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const SignupPage(),
-        ),
-      );
+      context.push('/auth/signup');
     }
 
     return Scaffold(

@@ -1,23 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pmate/env/widgets/appbar.dart';
 import 'package:pmate/env/models/primitives.dart';
 import 'package:pmate/features/home/interface/home_page.dart';
-import 'package:pmate/features/notifications/interface/notification_page.dart';
-import 'package:pmate/features/settings/interface/settings_page.dart';
 import 'package:pmate/features/support/interface/support_page.dart';
 import 'package:pmate/features/task_management/interface/task_page.dart';
 import 'package:pmate/features/user_authentication/business/auth_service.dart';
 
 class NavigationCenter extends StatefulWidget {
-  const NavigationCenter({super.key});
+  const NavigationCenter({super.key, this.initialPageIndex = 0});
+
+  final int initialPageIndex;
 
   @override
   State<NavigationCenter> createState() => _NavigationCenterState();
 }
 
 class _NavigationCenterState extends State<NavigationCenter> {
-  int _selectedPageIndex = 0;
+  late int _selectedPageIndex;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedPageIndex = widget.initialPageIndex;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,17 +49,11 @@ class _NavigationCenterState extends State<NavigationCenter> {
     ];
 
     void onNotificationPressed() {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const NotificationPage()),
-      );
+      context.push('/notifications');
     }
 
     void onSettingsPressed() {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const SettingsPage()),
-      );
+      context.push('/settings');
     }
 
     void onSignOutPressed() {
@@ -122,7 +123,7 @@ class _NavigationCenterState extends State<NavigationCenter> {
                       setState(() {
                         _selectedPageIndex = i;
                       });
-                      Navigator.pop(context);
+                      context.pop();
                     }
                   },
                 ),

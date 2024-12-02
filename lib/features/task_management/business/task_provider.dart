@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:pmate/env/models/object_package.dart';
 import 'package:pmate/features/task_management/models/task.dart';
-import 'package:pmate/features/task_management/models/task_communicator.dart';
 
 class TaskProvider extends ChangeNotifier {
   final taskBox = Hive.box<List>(TaskBox.name);
@@ -14,8 +14,8 @@ class TaskProvider extends ChangeNotifier {
     } else {
       taskList = taskBox
           .get(TaskBox.tasksKey)!
-          .cast<TaskCommunicator>()
-          .map((e) => Task.fromCommunicator(e))
+          .cast<ObjectPackage>()
+          .map((e) => Task.fromObjectPackage(e))
           .toList();
     }
   }
@@ -23,7 +23,7 @@ class TaskProvider extends ChangeNotifier {
   void update() {
     taskBox.put(
       TaskBox.tasksKey,
-      taskList.map((e) => e.toCommunicator()).toList(),
+      taskList.map((e) => e.toObjectPackage()).toList(),
     );
     notifyListeners();
   }

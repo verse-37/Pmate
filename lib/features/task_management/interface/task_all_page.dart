@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pmate/env/widgets/dividers.dart';
 import 'package:pmate/features/task_management/business/task_provider.dart';
 import 'package:pmate/features/task_management/blocks/task_item.dart';
-import 'package:pmate/features/task_management/interface/task_creation_page.dart';
 import 'package:pmate/features/task_management/models/task.dart';
 import 'package:provider/provider.dart';
 
@@ -32,12 +32,7 @@ class TaskAllPage extends StatelessWidget {
     }
 
     void onAddTaskPressed() {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const TaskCreationPage(),
-        ),
-      );
+      context.push('/task/create');
     }
 
     void onTaskReorder(int oldIndex, int newIndex) {

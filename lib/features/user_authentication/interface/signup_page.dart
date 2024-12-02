@@ -2,14 +2,13 @@ import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 // ignore: unused_import
 import 'package:logger/logger.dart';
 import 'package:pmate/env/widgets/buttons.dart';
 import 'package:pmate/env/widgets/snackbars.dart';
-import 'package:pmate/features/support/interface/subpages/bugs_and_fixes_page.dart';
 import 'package:pmate/features/user_authentication/business/auth_service.dart';
 import 'package:pmate/features/user_authentication/business/auth_validators.dart';
-import 'package:pmate/features/user_authentication/interface/login_page.dart';
 
 class SignupPage extends StatelessWidget {
   const SignupPage({super.key});
@@ -47,12 +46,7 @@ class LoginLink extends StatelessWidget {
     final theme = Theme.of(context);
 
     void onSignup() {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const LoginPage(),
-        ),
-      );
+      context.push('/auth/login');
     }
 
     return Padding(
@@ -125,12 +119,7 @@ class _SignupFormState extends State<SignupForm> {
     }
 
     void onVerse37Contact() {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const BugsAndFixesPage(),
-        ),
-      );
+      context.push('/support/bugsandfixes');
     }
 
     return Form(

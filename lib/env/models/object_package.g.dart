@@ -1,22 +1,22 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'communicator.dart';
+part of 'object_package.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class CommunicatorAdapter extends TypeAdapter<Communicator> {
+class ObjectPackageAdapter extends TypeAdapter<ObjectPackage> {
   @override
-  final int typeId = 3;
+  final int typeId = 1;
 
   @override
-  Communicator read(BinaryReader reader) {
+  ObjectPackage read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Communicator(
+    return ObjectPackage(
       intProperties: (fields[0] as Map).cast<String, int>(),
       listIntProperties: (fields[1] as Map).map((dynamic k, dynamic v) =>
           MapEntry(k as String, (v as List).cast<int>())),
@@ -33,7 +33,7 @@ class CommunicatorAdapter extends TypeAdapter<Communicator> {
   }
 
   @override
-  void write(BinaryWriter writer, Communicator obj) {
+  void write(BinaryWriter writer, ObjectPackage obj) {
     writer
       ..writeByte(8)
       ..writeByte(0)
@@ -60,7 +60,7 @@ class CommunicatorAdapter extends TypeAdapter<Communicator> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is CommunicatorAdapter &&
+      other is ObjectPackageAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

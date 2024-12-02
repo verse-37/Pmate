@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
+import 'package:pmate/env/models/object_package.dart';
+import 'package:pmate/env/models/pmate_model.dart';
 
-part 'themes_settings_bundle.g.dart';
-
-@HiveType(typeId: 1)
-class ThemeSettingsBundle {
-  @HiveField(0)
+class ThemeSettingsBundle extends PmateModel {
   int themeMode;
 
   ThemeMode get getThemeMode {
@@ -19,5 +16,15 @@ class ThemeSettingsBundle {
     }
   }
 
-  ThemeSettingsBundle({required this.themeMode});
+  ThemeSettingsBundle.fromObjectPackage(ObjectPackage package)
+      : themeMode = package.intProperties['themeMode'] ?? 0;
+
+  @override
+  ObjectPackage toObjectPackage() {
+    return ObjectPackage(
+      intProperties: {
+        'themeMode': themeMode,
+      },
+    );
+  }
 }

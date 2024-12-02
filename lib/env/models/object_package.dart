@@ -1,9 +1,9 @@
 import 'package:hive/hive.dart';
 
-part 'communicator.g.dart';
+part 'object_package.g.dart';
 
-@HiveType(typeId: 3)
-class Communicator extends HiveObject {
+@HiveType(typeId: 1)
+class ObjectPackage extends HiveObject {
   @HiveField(0)
   Map<String, int> intProperties;
   @HiveField(1)
@@ -21,14 +21,14 @@ class Communicator extends HiveObject {
   @HiveField(7)
   Map<String, List<double>> listDoubleProperties;
 
-  Communicator({
-    required this.intProperties,
-    required this.listIntProperties,
-    required this.stringProperties,
-    required this.listStringProperties,
-    required this.boolProperties,
-    required this.listBoolProperties,
-    required this.doubleProperties,
-    required this.listDoubleProperties,
+  ObjectPackage({
+    this.intProperties = const {},
+    this.listIntProperties = const {},
+    this.stringProperties = const {},
+    this.listStringProperties = const {},
+    this.boolProperties = const {},
+    this.listBoolProperties = const {},
+    this.doubleProperties = const {},
+    this.listDoubleProperties = const {},
   });
 }

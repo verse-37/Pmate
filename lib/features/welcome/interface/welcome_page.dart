@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pmate/env/widgets/buttons.dart';
-import 'package:pmate/features/user_authentication/interface/auth_page.dart';
 import 'package:pmate/features/welcome/business/welcome_provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -30,25 +30,20 @@ class _WelcomePageState extends State<WelcomePage> {
 
     Future<void> prevPage() async {
       _pageController.previousPage(
-        duration: Duration(milliseconds: 500),
+        duration: const Duration(milliseconds: 500),
         curve: Curves.easeIn,
       );
     }
 
     Future<void> nextPage() async {
       _pageController.nextPage(
-        duration: Duration(milliseconds: 500),
+        duration: const Duration(milliseconds: 500),
         curve: Curves.easeIn,
       );
     }
 
     void openAuthPage() {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => AuthenticationPage(),
-        ),
-      );
+      context.push('/auth');
     }
 
     return Scaffold(
@@ -87,13 +82,13 @@ class _WelcomePageState extends State<WelcomePage> {
                 ),
               ),
               Container(
-                alignment: Alignment(0, 0.75),
+                alignment: const Alignment(0, 0.75),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     IconButton(
                       onPressed: prevPage,
-                      icon: Icon(Icons.arrow_back_ios_new_rounded),
+                      icon: const Icon(Icons.arrow_back_ios_new_rounded),
                     ),
                     SmoothPageIndicator(
                       controller: _pageController,
@@ -101,14 +96,14 @@ class _WelcomePageState extends State<WelcomePage> {
                     ),
                     IconButton(
                       onPressed: nextPage,
-                      icon: Icon(Icons.arrow_forward_ios_rounded),
+                      icon: const Icon(Icons.arrow_forward_ios_rounded),
                     ),
                   ],
                 ),
               ),
               if (onLastPage)
                 Container(
-                  alignment: Alignment(0, 0.95),
+                  alignment: const Alignment(0, 0.95),
                   child: LargeButton(
                     text: local.intro_button,
                     action: openAuthPage,

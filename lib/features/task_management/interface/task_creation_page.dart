@@ -2,6 +2,7 @@ import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pmate/env/widgets/appbar.dart';
 import 'package:pmate/env/widgets/snackbars.dart';
 import 'package:pmate/features/task_management/business/task_provider.dart';
@@ -44,7 +45,7 @@ class _TaskCreationPageState extends State<TaskCreationPage> {
         contentType: ContentType.success,
       ).showSnackbar(context);
 
-      Navigator.pop(context);
+      context.pop();
     }
 
     return Scaffold(

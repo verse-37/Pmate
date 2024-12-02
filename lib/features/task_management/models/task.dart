@@ -1,6 +1,6 @@
-import 'package:hive/hive.dart';
-import 'package:pmate/env/common/primitives.dart';
-import 'package:pmate/features/task_management/models/task_communicator.dart';
+import 'package:pmate/env/models/object_package.dart';
+import 'package:pmate/env/models/pmate_model.dart';
+import 'package:pmate/env/models/primitives.dart';
 
 enum Difficulty {
   veryEasy,
@@ -18,7 +18,8 @@ enum TaskStatus {
   //TODO: This can be changed in the settings.
 }
 
-class Task extends HiveObject {
+class Task extends PmateModel {
+  //? Different from Java, here abstract classes can be implemented by classes.
   int? index;
   String title;
   String description;
@@ -26,7 +27,7 @@ class Task extends HiveObject {
   DateTime createdAt;
   late List<Pair<String, bool>> checkList;
   Difficulty difficulty;
-  List<String>? tags;
+  List<String> tags;
   String? category;
 
   Task({
@@ -40,40 +41,53 @@ class Task extends HiveObject {
     this.category,
   });
 
-  TaskCommunicator toCommunicator() {
-    return TaskCommunicator(
-      title: title,
-      description: description,
-      status: status.index,
-      createdAt: createdAt.toIso8601String(),
-      checkListNames: checkList.map((e) => e.first).toList(),
-      checkListCompletion: checkList.map((e) => e.second).toList(),
-      difficulty: difficulty.index,
-      tags: tags,
-      category: category,
+  @override
+  ObjectPackage toObjectPackage() {
+    return ObjectPackage(
+      intProperties: {
+        'status': status.index,
+        'difficulty': difficulty.index,
+      },
+      stringProperties: {
+        'title': title,
+        'description': description,
+        'category': category ?? "",
+        'createdAt': createdAt.toIso8601String(),
+      },
+      listStringProperties: {
+        'checkListNames': checkList.map((e) => e.first).toList(),
+        'tags': tags,
+      },
+      listBoolProperties: {
+        'checkListCompletion': checkList.map((e) => e.second).toList(),
+      },
     );
   }
 
-  Task.fromCommunicator(TaskCommunicator communicator)
-      : title = communicator.title,
-        description = communicator.description,
-        status = TaskStatus.values[communicator.status],
-        createdAt = DateTime.parse(communicator.createdAt),
+  Task.fromObjectPackage(ObjectPackage package)
+      : title = package.stringProperties['title'] ?? "",
+        description = package.stringProperties['description'] ?? "",
+        status = TaskStatus.values[package.intProperties['status'] ?? 0],
+        createdAt = DateTime.parse(
+          package.stringProperties['createdAt'] ??
+              DateTime.now().toIso8601String(),
+        ),
         checkList = List.generate(
-          communicator.checkListNames.length,
+          package.listStringProperties['checkListNames']?.length ?? 0,
           (index) => Pair(
-            communicator.checkListNames[index],
-            communicator.checkListCompletion[index],
+            package.listStringProperties['checkListNames']![index],
+            package.listBoolProperties['checkListCompletion']![index],
           ),
         ),
-        difficulty = Difficulty.values[communicator.difficulty],
-        tags = communicator.tags,
-        category = communicator.category;
+        difficulty =
+            Difficulty.values[package.intProperties['difficulty'] ?? 0],
+        tags = package.listStringProperties['tags'] ?? [],
+        category = package.stringProperties['category'];
 }
 
 class TaskBox {
-  static const name = 'taskBox';
-  static const tasksKey = 'tasks';
+  static const name = 'tasksStorageBox';
+  static const tasksKey = 'tasksList';
 }
 
 //?Command to generate the g.dart file: flutter (packages) pub run build_runner build. Since the command is deprecated, we need to use the following command instead: flutter pub run build_runner build --delete-conflicting-outputs

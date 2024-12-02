@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pmate/features/welcome/business/welcome_provider.dart';
-import 'package:pmate/features/welcome/interface/welcome_page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class WelcomeFormPage extends StatefulWidget {
@@ -21,12 +21,7 @@ class _WelcomeFormPageState extends State<WelcomeFormPage> {
     void onProceed() {
       WelcomeProvider.userName = _controller.text.trim();
       if (WelcomeProvider.userName.isNotEmpty) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => WelcomePage(),
-          ),
-        );
+        context.push('/welcome');
       }
     }
 

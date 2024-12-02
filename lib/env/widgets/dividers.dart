@@ -9,9 +9,9 @@ class DividerWithText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Expanded(child: Divider()),
+        const Expanded(child: Divider()),
         Text(text),
-        Expanded(child: Divider()),
+        const Expanded(child: Divider()),
       ],
     );
   }

@@ -1,11 +1,10 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pmate/env/widgets/snackbars.dart';
-import 'package:pmate/features/app/navigation.dart';
-import 'package:pmate/features/user_authentication/interface/auth_page.dart';
 
 class AuthService {
   Future<void> signUp({
@@ -30,10 +29,7 @@ class AuthService {
           contentType: ContentType.success,
         ).showSnackbar(context);
 
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const NavigationCenter()),
-        );
+        context.pushReplacement('/nav/home');
         //?Push to NavigationCenter and pop all other pages
       }
     } on FirebaseAuthException catch (e) {
@@ -91,10 +87,7 @@ class AuthService {
           contentType: ContentType.success,
         ).showSnackbar(context);
 
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const NavigationCenter()),
-        );
+        context.pushReplacement('/nav/home');
       }
     } on FirebaseAuthException catch (e) {
       Logger().e(e.code);
@@ -141,10 +134,7 @@ class AuthService {
         contentType: ContentType.success,
       ).showSnackbar(context);
 
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const AuthenticationPage()),
-      );
+      context.pushReplacement('/auth');
     }
   }
 }

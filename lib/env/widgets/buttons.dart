@@ -21,7 +21,7 @@ class LargeButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(15),
         ),
         elevation: 0,
-        minimumSize: Size(double.infinity, 60),
+        minimumSize: const Size(double.infinity, 60),
       ),
       onPressed: action,
       child: Text(
@@ -56,7 +56,7 @@ class RoundedLargeButton extends StatelessWidget {
             ? theme.colorScheme.onSecondary
             : theme.colorScheme.secondary,
         elevation: 0,
-        minimumSize: Size(double.infinity, 60),
+        minimumSize: const Size(double.infinity, 60),
       ),
       onPressed: action,
       child: Text(

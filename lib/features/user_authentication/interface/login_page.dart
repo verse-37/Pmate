@@ -1,12 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 // ignore: unused_import
 import 'package:logger/logger.dart';
 import 'package:pmate/env/widgets/buttons.dart';
-import 'package:pmate/features/support/interface/subpages/bugs_and_fixes_page.dart';
 import 'package:pmate/features/user_authentication/business/auth_service.dart';
-import 'package:pmate/features/user_authentication/interface/signup_page.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -44,12 +43,7 @@ class SignupLink extends StatelessWidget {
     final theme = Theme.of(context);
 
     void onSignup() {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => SignupPage(),
-        ),
-      );
+      context.push('/auth/signup');
     }
 
     return Padding(
@@ -109,12 +103,7 @@ class _LoginFormState extends State<LoginForm> {
     }
 
     void onVerse37Contact() {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const BugsAndFixesPage(),
-        ),
-      );
+      context.push('/support/bugsandfixes');
     }
 
     return Form(
