@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:pmate/env/models/primitives.dart';
+import 'package:pmate/env/widgets/snackbars.dart';
 import 'package:pmate/features/settings/business/task_settings_provider.dart';
 import 'package:pmate/features/task_management/models/task.dart';
 import 'package:provider/provider.dart';
 import 'package:pmate/features/task_management/business/task_provider.dart';
+import 'package:toastification/toastification.dart';
 
 class TaskItem extends StatelessWidget {
   const TaskItem({super.key, required this.index});
@@ -17,6 +20,7 @@ class TaskItem extends StatelessWidget {
     final settingsProvider = context.watch<TaskSettingsProvider>();
     final taskProvider = context.watch<TaskProvider>();
     final task = taskProvider.taskList[index];
+    final local = AppLocalizations.of(context);
     final theme = Theme.of(context);
     final Pair<int, int> completedAndTotal = Pair(
       task.checkList.where((e) => e.second).length,
@@ -24,13 +28,26 @@ class TaskItem extends StatelessWidget {
     );
     late final Widget rightGadget;
 
+    void onDoneDragged(BuildContext context) {
+      taskProvider.toggleTask(index, TaskStatus.completed);
+      Slidable.of(context)?.close();
+      //? This is a workaround to close the slidable after the task is toggled.
+      PmateSnackbars(
+        title: local.task_completed_congrats_title,
+        message: local.task_completed_congrats_message,
+      ).showToast(context: context, type: ToastificationType.success);
+    }
+
+    void onDeleteDragged(BuildContext context) {
+      taskProvider.deleteTaskAt(index);
+      Slidable.of(context)?.close();
+    }
+
     final doneActionPane = ActionPane(
       motion: const ScrollMotion(),
       children: [
         SlidableAction(
-          onPressed: (context) {
-            taskProvider.toggleTask(index, TaskStatus.completed);
-          },
+          onPressed: onDoneDragged,
           icon: Icons.check,
           backgroundColor: theme.colorScheme.primary,
           borderRadius: BorderRadius.circular(10),
@@ -42,9 +59,7 @@ class TaskItem extends StatelessWidget {
       motion: const ScrollMotion(),
       children: [
         SlidableAction(
-          onPressed: (context) {
-            taskProvider.deleteTaskAt(index);
-          },
+          onPressed: onDeleteDragged,
           icon: Icons.delete,
           backgroundColor: theme.colorScheme.error,
           borderRadius: BorderRadius.circular(10),

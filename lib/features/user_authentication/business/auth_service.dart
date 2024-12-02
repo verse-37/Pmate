@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pmate/env/widgets/snackbars.dart';
+import 'package:toastification/toastification.dart';
 
 class AuthService {
   Future<void> signUp({
@@ -26,8 +27,7 @@ class AuthService {
         PmateSnackbars(
           title: local.sign_up_success,
           message: local.sign_up_success_2,
-          contentType: ContentType.success,
-        ).showSnackbar(context);
+        ).showSnackbar(context, ContentType.success);
 
         context.pushReplacement('/nav/home');
         //?Push to NavigationCenter and pop all other pages
@@ -51,8 +51,7 @@ class AuthService {
         PmateSnackbars(
           title: local.auth_failed,
           message: message,
-          contentType: ContentType.failure,
-        ).showSnackbar(context);
+        ).showSnackbar(context, ContentType.failure);
       }
     } catch (e) {
       Logger().e(e);
@@ -60,7 +59,7 @@ class AuthService {
         PmateSnackbars(
           title: local.error,
           message: e.toString(),
-        ).showErrorToast(context: context);
+        ).showToast(context: context, type: ToastificationType.error);
       }
     }
   }
@@ -84,8 +83,7 @@ class AuthService {
         PmateSnackbars(
           title: local.login_success,
           message: local.login_success_2,
-          contentType: ContentType.success,
-        ).showSnackbar(context);
+        ).showSnackbar(context, ContentType.success);
 
         context.pushReplacement('/nav/home');
       }
@@ -104,8 +102,7 @@ class AuthService {
         PmateSnackbars(
           title: local.auth_failed,
           message: message,
-          contentType: ContentType.failure,
-        ).showSnackbar(context);
+        ).showSnackbar(context, ContentType.failure);
       }
     } catch (e) {
       Logger().e(e);
@@ -113,7 +110,7 @@ class AuthService {
         PmateSnackbars(
           title: local.error,
           message: e.toString(),
-        ).showErrorToast(context: context);
+        ).showToast(context: context, type: ToastificationType.error);
       }
     }
   }
@@ -131,8 +128,7 @@ class AuthService {
       PmateSnackbars(
         title: local.sign_out_success,
         message: local.sign_out_message,
-        contentType: ContentType.success,
-      ).showSnackbar(context);
+      ).showSnackbar(context, ContentType.success);
 
       context.pushReplacement('/auth');
     }

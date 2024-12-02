@@ -32,7 +32,7 @@ class TaskAllPage extends StatelessWidget {
     }
 
     void onAddTaskPressed() {
-      context.push('/task/create');
+      context.push('/nav/task/create');
     }
 
     void onTaskReorder(int oldIndex, int newIndex) {

@@ -101,14 +101,12 @@ class _SignupFormState extends State<SignupForm> {
         PmateSnackbars(
           title: local.auth_failed,
           message: local.sign_up_fields_incomplete,
-          contentType: ContentType.failure,
-        ).showSnackbar(context);
+        ).showSnackbar(context, ContentType.failure);
       } else if (_password.text != _passwordRetype.text) {
         PmateSnackbars(
           title: local.auth_failed,
           message: local.auth_passwords_do_not_match,
-          contentType: ContentType.failure,
-        ).showSnackbar(context);
+        ).showSnackbar(context, ContentType.failure);
       } else {
         await AuthService().signUp(
           context: context,

@@ -5,15 +5,13 @@ import 'package:toastification/toastification.dart';
 class PmateSnackbars {
   String title;
   String message;
-  ContentType? contentType;
 
   PmateSnackbars({
     required this.title,
     required this.message,
-    this.contentType,
   });
 
-  void showSnackbar(BuildContext context) {
+  void showSnackbar(BuildContext context, ContentType contentType) {
     final SnackBar snackBar = SnackBar(
       elevation: 0,
       behavior: SnackBarBehavior.floating,
@@ -21,7 +19,7 @@ class PmateSnackbars {
       content: AwesomeSnackbarContent(
         title: title,
         message: message,
-        contentType: contentType!,
+        contentType: contentType,
       ),
     );
 
@@ -30,7 +28,7 @@ class PmateSnackbars {
       ..showSnackBar(snackBar);
   }
 
-  void showMaterialBanner(BuildContext context) {
+  void showMaterialBanner(BuildContext context, ContentType contentType) {
     final MaterialBanner materialBanner = MaterialBanner(
       elevation: 0,
       backgroundColor: Colors.transparent,
@@ -38,7 +36,7 @@ class PmateSnackbars {
       content: AwesomeSnackbarContent(
         title: title,
         message: message,
-        contentType: contentType!,
+        contentType: contentType,
         inMaterialBanner: true,
       ),
       actions: const [SizedBox.shrink()],
@@ -49,13 +47,14 @@ class PmateSnackbars {
       ..showMaterialBanner(materialBanner);
   }
 
-  void showErrorToast({
+  void showToast({
     required BuildContext context,
     int duration = 5,
+    required ToastificationType type,
   }) {
     toastification.show(
       context: context,
-      type: ToastificationType.error,
+      type: type,
       style: ToastificationStyle.flat,
       autoCloseDuration: Duration(seconds: duration),
       title: Text(

@@ -185,5 +185,9 @@
     "task_all_no_task_title": "Chưa có nhiệm vụ nào",
     "@task_all_no_task_title": {},
     "task_all_no_task_message": "Thêm nhiệm vụ mới ngay thôi! ...Hoặc chỉ cần ngồi yên và thư giãn, vì hôm nay là ngày của bạn :)",
-    "@task_all_no_task_message": {}
+    "@task_all_no_task_message": {},
+    "task_completed_congrats_title": "Nhiệm vụ hoàn thành!",
+    "@task_completed_congrats_title": {},
+    "task_completed_congrats_message": "Bạn đã làm được! Bạn đã đánh bại bản thân ngày hôm qua!",
+    "@task_completed_congrats_message": {}
 }

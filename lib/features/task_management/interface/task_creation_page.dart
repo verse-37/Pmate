@@ -42,8 +42,7 @@ class _TaskCreationPageState extends State<TaskCreationPage> {
       PmateSnackbars(
         title: local.task_creation_success_message_title,
         message: local.task_creation_success_message_content,
-        contentType: ContentType.success,
-      ).showSnackbar(context);
+      ).showSnackbar(context, ContentType.success);
 
       context.pop();
     }
