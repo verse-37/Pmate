@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pmate/env/common/buttons.dart';
+import 'package:pmate/env/widgets/buttons.dart';
 import 'package:pmate/features/user_authentication/interface/auth_page.dart';
 import 'package:pmate/features/welcome/business/welcome_provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:pmate/env/common/primitives.dart';
+import 'package:pmate/env/models/primitives.dart';
 import 'package:pmate/features/settings/business/task_settings_provider.dart';
 import 'package:pmate/features/task_management/models/task.dart';
 import 'package:provider/provider.dart';

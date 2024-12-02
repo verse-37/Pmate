@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 // ignore: unused_import
 import 'package:logger/logger.dart';
-import 'package:pmate/env/common/buttons.dart';
+import 'package:pmate/env/widgets/buttons.dart';
 import 'package:pmate/features/support/interface/subpages/bugs_and_fixes_page.dart';
 import 'package:pmate/features/user_authentication/business/auth_service.dart';
 import 'package:pmate/features/user_authentication/interface/signup_page.dart';

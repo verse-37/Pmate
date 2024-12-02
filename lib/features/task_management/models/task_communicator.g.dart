@@ -17,8 +17,9 @@ class TaskCommunicatorAdapter extends TypeAdapter<TaskCommunicator> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return TaskCommunicator(
-      title: fields[0] as String,
-      description: fields[1] as String,
+      taskProperties: (fields[0] as Map).cast<String, dynamic>(),
+      title: fields[1] as String,
+      description: fields[2] as String,
       status: fields[4] as int,
       createdAt: fields[3] as String,
       checkListNames: (fields[5] as List).cast<String>(),
@@ -32,10 +33,12 @@ class TaskCommunicatorAdapter extends TypeAdapter<TaskCommunicator> {
   @override
   void write(BinaryWriter writer, TaskCommunicator obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(10)
       ..writeByte(0)
-      ..write(obj.title)
+      ..write(obj.taskProperties)
       ..writeByte(1)
+      ..write(obj.title)
+      ..writeByte(2)
       ..write(obj.description)
       ..writeByte(3)
       ..write(obj.createdAt)

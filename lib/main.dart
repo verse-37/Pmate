@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:pmate/env/common/globals.dart';
+import 'package:pmate/env/config/globals.dart';
 import 'package:pmate/features/app/app.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:pmate/features/settings/business/appearance_settings_provider.dart';

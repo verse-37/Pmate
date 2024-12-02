@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:pmate/env/common/appbar.dart';
+import 'package:pmate/env/widgets/appbar.dart';
 import 'package:pmate/features/settings/interface/feature_settings/task/task_gesture_settings.dart';
 
 class TaskSettings extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:pmate/env/common/buttons.dart';
+import 'package:pmate/env/widgets/buttons.dart';
 import 'package:pmate/features/user_authentication/interface/login_page.dart';
 import 'package:pmate/features/user_authentication/interface/signup_page.dart';
 

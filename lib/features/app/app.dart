@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:pmate/env/common/globals.dart';
+import 'package:pmate/env/config/globals.dart';
 import 'package:pmate/env/config/themes.dart';
 import 'package:pmate/features/app/navigation.dart';
 import 'package:pmate/features/settings/business/appearance_settings_provider.dart';

@@ -5,9 +5,12 @@ part 'task_communicator.g.dart';
 @HiveType(typeId: 0)
 class TaskCommunicator extends HiveObject {
   @HiveField(0)
-  String title;
+  Map<String, dynamic> taskProperties;
 
   @HiveField(1)
+  String title;
+
+  @HiveField(2)
   String description;
 
   @HiveField(3)
@@ -32,6 +35,7 @@ class TaskCommunicator extends HiveObject {
   String? category;
 
   TaskCommunicator({
+    required this.taskProperties,
     required this.title,
     required this.description,
     required this.status,

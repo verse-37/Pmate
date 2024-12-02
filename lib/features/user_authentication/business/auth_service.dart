@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:pmate/env/common/snackbars.dart';
+import 'package:pmate/env/widgets/snackbars.dart';
 import 'package:pmate/features/app/navigation.dart';
 import 'package:pmate/features/user_authentication/interface/auth_page.dart';
 

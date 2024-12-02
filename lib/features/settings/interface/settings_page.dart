@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 // ignore: unused_import
 import 'package:logger/logger.dart';
-import 'package:pmate/env/common/appbar.dart';
-import 'package:pmate/env/common/primitives.dart';
+import 'package:pmate/env/widgets/appbar.dart';
+import 'package:pmate/env/models/primitives.dart';
 import 'package:pmate/features/settings/interface/app_settings/appearance/appearance_settings.dart';
 import 'package:pmate/features/settings/interface/feature_settings/task/task_settings.dart';
 

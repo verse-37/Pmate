@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:pmate/env/common/appbar.dart';
+import 'package:pmate/env/widgets/appbar.dart';
 
 class BugsAndFixesPage extends StatelessWidget {
   const BugsAndFixesPage({super.key});

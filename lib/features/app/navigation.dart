@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:pmate/env/common/appbar.dart';
-import 'package:pmate/env/common/primitives.dart';
+import 'package:pmate/env/widgets/appbar.dart';
+import 'package:pmate/env/models/primitives.dart';
 import 'package:pmate/features/home/interface/home_page.dart';
 import 'package:pmate/features/notifications/interface/notification_page.dart';
 import 'package:pmate/features/settings/interface/settings_page.dart';
