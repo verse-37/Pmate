@@ -5,6 +5,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class NotificationPage extends StatelessWidget {
   const NotificationPage({super.key});
 
+  static const routeName = '/notifications';
+  static const routePath = '/notifications';
+
   @override
   Widget build(BuildContext context) {
     final local = AppLocalizations.of(context);

@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pmate/features/welcome/business/welcome_provider.dart';
+import 'package:pmate/features/welcome/interface/welcome_page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class WelcomeFormPage extends StatefulWidget {
   const WelcomeFormPage({super.key});
+
+  static const routeName = '/';
+  static const routePath = '/';
 
   @override
   State<WelcomeFormPage> createState() => _WelcomeFormPageState();
@@ -21,7 +25,7 @@ class _WelcomeFormPageState extends State<WelcomeFormPage> {
     void onProceed() {
       WelcomeProvider.userName = _controller.text.trim();
       if (WelcomeProvider.userName.isNotEmpty) {
-        context.push('/welcome');
+        context.push(WelcomePage.routePath);
       }
     }
 

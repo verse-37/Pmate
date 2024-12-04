@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:pmate/env/config/globals.dart';
 import 'package:pmate/env/config/routes.dart';
 import 'package:pmate/env/config/themes.dart';
+import 'package:pmate/features/home/interface/home_page.dart';
 import 'package:pmate/features/settings/business/appearance_settings_provider.dart';
 import 'package:pmate/features/settings/business/task_settings_provider.dart';
 import 'package:pmate/features/support/business/device_info.dart';
 import 'package:pmate/features/task_management/business/task_provider.dart';
+import 'package:pmate/features/user_authentication/interface/auth_page.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:toastification/toastification.dart';
@@ -45,9 +47,9 @@ class PmateRoot extends StatelessWidget {
             }
 
             if (snapshot.hasData) {
-              router.go('/nav/home');
+              router.go(HomePage.routePath);
             } else {
-              router.go('/');
+              router.go(AuthenticationPage.routePath);
             }
 
             return Builder(builder: (context) {

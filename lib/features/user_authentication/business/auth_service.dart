@@ -5,6 +5,8 @@ import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pmate/env/widgets/snackbars.dart';
+import 'package:pmate/features/home/interface/home_page.dart';
+import 'package:pmate/features/user_authentication/interface/auth_page.dart';
 import 'package:toastification/toastification.dart';
 
 class AuthService {
@@ -29,7 +31,7 @@ class AuthService {
           message: local.sign_up_success_2,
         ).showSnackbar(context, ContentType.success);
 
-        context.pushReplacement('/nav/home');
+        context.pushReplacement(HomePage.routePath);
         //?Push to NavigationCenter and pop all other pages
       }
     } on FirebaseAuthException catch (e) {
@@ -85,7 +87,7 @@ class AuthService {
           message: local.login_success_2,
         ).showSnackbar(context, ContentType.success);
 
-        context.pushReplacement('/nav/home');
+        context.pushReplacement(HomePage.routePath);
       }
     } on FirebaseAuthException catch (e) {
       Logger().e(e.code);
@@ -130,7 +132,7 @@ class AuthService {
         message: local.sign_out_message,
       ).showSnackbar(context, ContentType.success);
 
-      context.pushReplacement('/auth');
+      context.pushReplacement(AuthenticationPage.routePath);
     }
   }
 }

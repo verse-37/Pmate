@@ -4,6 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:pmate/env/widgets/appbar.dart';
 import 'package:pmate/env/models/primitives.dart';
 import 'package:pmate/features/home/interface/home_page.dart';
+import 'package:pmate/features/notifications/interface/notification_page.dart';
+import 'package:pmate/features/settings/interface/settings_page.dart';
 import 'package:pmate/features/support/interface/support_page.dart';
 import 'package:pmate/features/task_management/interface/task_page.dart';
 import 'package:pmate/features/user_authentication/business/auth_service.dart';
@@ -11,6 +13,8 @@ import 'package:pmate/features/user_authentication/business/auth_service.dart';
 class NavigationCenter extends StatefulWidget {
   const NavigationCenter({super.key, this.initialPageIndex = 0});
 
+  static const routeName = '/nav';
+  static const routePath = '/nav';
   final int initialPageIndex;
 
   @override
@@ -49,11 +53,11 @@ class _NavigationCenterState extends State<NavigationCenter> {
     ];
 
     void onNotificationPressed() {
-      context.push('/notifications');
+      context.push(NotificationPage.routePath);
     }
 
     void onSettingsPressed() {
-      context.push('/settings');
+      context.push(SettingsPage.routePath);
     }
 
     void onSignOutPressed() {

@@ -7,11 +7,16 @@ import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
 import 'package:pmate/env/widgets/buttons.dart';
 import 'package:pmate/env/widgets/snackbars.dart';
+import 'package:pmate/features/support/interface/subpages/bugs_and_fixes_page.dart';
 import 'package:pmate/features/user_authentication/business/auth_service.dart';
 import 'package:pmate/features/user_authentication/business/auth_validators.dart';
+import 'package:pmate/features/user_authentication/interface/login_page.dart';
 
 class SignupPage extends StatelessWidget {
   const SignupPage({super.key});
+
+  static const routeName = 'signup';
+  static const routePath = '/auth/signup';
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +51,7 @@ class LoginLink extends StatelessWidget {
     final theme = Theme.of(context);
 
     void onSignup() {
-      context.push('/auth/login');
+      context.push(LoginPage.routePath);
     }
 
     return Padding(
@@ -117,7 +122,7 @@ class _SignupFormState extends State<SignupForm> {
     }
 
     void onVerse37Contact() {
-      context.push('/support/bugsandfixes');
+      context.push(BugsAndFixesPage.routePath);
     }
 
     return Form(

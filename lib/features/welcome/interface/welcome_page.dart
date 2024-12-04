@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pmate/env/widgets/buttons.dart';
+import 'package:pmate/features/user_authentication/interface/auth_page.dart';
 import 'package:pmate/features/welcome/business/welcome_provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
+
+  static const routeName = '/welcome';
+  static const routePath = '/welcome';
 
   @override
   State<WelcomePage> createState() => _WelcomePageState();
@@ -43,7 +47,7 @@ class _WelcomePageState extends State<WelcomePage> {
     }
 
     void openAuthPage() {
-      context.push('/auth');
+      context.push(AuthenticationPage.routePath);
     }
 
     return Scaffold(

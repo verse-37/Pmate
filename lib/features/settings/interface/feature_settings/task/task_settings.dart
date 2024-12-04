@@ -6,6 +6,9 @@ import 'package:pmate/features/settings/interface/feature_settings/task/task_ges
 class TaskSettings extends StatelessWidget {
   const TaskSettings({super.key});
 
+  static const routeName = 'task';
+  static const routePath = 'settings/task';
+
   @override
   Widget build(BuildContext context) {
     final local = AppLocalizations.of(context);

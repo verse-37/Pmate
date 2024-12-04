@@ -6,6 +6,9 @@ import 'package:pmate/features/task_management/interface/task_all_page.dart';
 import 'package:pmate/features/task_management/interface/task_today_page.dart';
 
 class TaskPage extends StatefulWidget {
+  static const routeName = '/task';
+  static const routePath = '/task';
+
   const TaskPage({super.key});
 
   @override

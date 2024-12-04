@@ -192,16 +192,16 @@
     "@task_completed_congrats_message": {},
     "bug_and_fixes_title": "Hỗ trợ",
     "@bug_and_fixes_title": {},
-    "bug_and_fixes_message": "Gửi email cho chúng tôi và chúng tôi sẽ liên lạc với bạn sớm nhất có thể.",
-    "@bug_and_fixes_message": {},
-    "bug_and_fixes_notes": "Lưu ý: Email của bạn sẽ được gửi đến {email}.",
-    "@bug_and_fixes_notes": {
+    "bug_and_fixes_message": "Gửi email cho {email} và chúng tôi sẽ liên lạc với bạn sớm nhất có thể.",
+    "@bug_and_fixes_message": {
         "placeholders": {
             "email": {
                 "type": "String"
             }
         }
     },
+    "bug_and_fixes_notes": "Lưu ý: Bạn sẽ được chuyển hướng đến nhà cung cấp dịch vụ email của bạn.",
+    "@bug_and_fixes_notes": {},
     "bug_and_fixes_button": "Gửi báo cáo lỗi",
     "@bug_and_fixes_button": {},
     "bug_and_fixes_email_subject": "App {appName} - Có lỗi ở ...",
@@ -215,5 +215,11 @@
     "bug_and_fixes_email_body": "Hãy mô tả lỗi hoặc vấn đề bạn gặp phải ở cuối email này 👇",
     "@bug_and_fixes_email_body": {},
     "bug_and_fixes_email_device_info": "Thông tin thiết bị:",
-    "@bug_and_fixes_email_device_info": {}
+    "@bug_and_fixes_email_device_info": {},
+    "support_page_contact_us": "Liên hệ hỗ trợ",
+    "@support_page_contact_us": {},
+    "support_page_contact_us_message": "Có gì đó sai sai? Hãy tìm hiểu cách xử lý hoặc liên hệ chúng tôi để được hỗ trợ.",
+    "@support_page_contact_us_message": {},
+    "bug_and_fixes_issue_description": "Mô tả vấn đề:",
+    "@bug_and_fixes_issue_description": {}
 }

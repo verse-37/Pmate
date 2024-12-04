@@ -5,6 +5,9 @@ import 'package:pmate/features/settings/interface/app_settings/appearance/theme_
 import 'package:logger/logger.dart';
 
 class AppearanceSettings extends StatelessWidget {
+  static const routeName = 'appearance';
+  static const routePath = 'settings/appearance';
+
   const AppearanceSettings({super.key});
 
   @override

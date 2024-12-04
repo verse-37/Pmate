@@ -10,6 +10,9 @@ import 'package:pmate/features/task_management/models/task.dart';
 import 'package:provider/provider.dart';
 
 class TaskCreationPage extends StatefulWidget {
+  static const routeName = 'create';
+  static const routePath = '/task/create';
+
   const TaskCreationPage({super.key});
 
   @override

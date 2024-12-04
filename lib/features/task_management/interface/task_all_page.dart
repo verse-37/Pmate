@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:pmate/env/widgets/dividers.dart';
 import 'package:pmate/features/task_management/business/task_provider.dart';
 import 'package:pmate/features/task_management/blocks/task_item.dart';
+import 'package:pmate/features/task_management/interface/task_creation_page.dart';
 import 'package:pmate/features/task_management/models/task.dart';
 import 'package:provider/provider.dart';
 
@@ -32,7 +33,7 @@ class TaskAllPage extends StatelessWidget {
     }
 
     void onAddTaskPressed() {
-      context.push('/nav/task/create');
+      context.push(TaskCreationPage.routePath);
     }
 
     void onTaskReorder(int oldIndex, int newIndex) {
