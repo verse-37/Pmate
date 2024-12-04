@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:logger/logger.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pmate/env/config/globals.dart';
@@ -38,7 +41,11 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(const PmateRoot());
+  runZonedGuarded(() {
+    runApp(const PmateRoot());
+  }, (error, stack) {
+    // TODO: Handle error, maybe send to firebase crashlytics.
+  });
 }
 
 //? The .fromPlatform() function is not optimized for the web. See https://docs.flutter.dev/platform-integration/web/initialization#initializing-the-engine

@@ -5,6 +5,7 @@ import 'package:pmate/env/config/routes.dart';
 import 'package:pmate/env/config/themes.dart';
 import 'package:pmate/features/settings/business/appearance_settings_provider.dart';
 import 'package:pmate/features/settings/business/task_settings_provider.dart';
+import 'package:pmate/features/support/business/device_info.dart';
 import 'package:pmate/features/task_management/business/task_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -53,6 +54,7 @@ class PmateRoot extends StatelessWidget {
               final settingsProvider =
                   context.watch<AppearanceSettingsProvider>()..init();
               context.watch<TaskSettingsProvider>().init();
+              DeviceInfo.initPlatform();
 
               return MaterialApp.router(
                 debugShowCheckedModeBanner: false,
