@@ -83,6 +83,27 @@ class Task extends PmateModel {
             Difficulty.values[package.intProperties['difficulty'] ?? 0],
         tags = package.listStringProperties['tags'] ?? [],
         category = package.stringProperties['category'];
+
+  Task copyWith({
+    String? title,
+    String? description,
+    TaskStatus? status,
+    DateTime? createdAt,
+    List<Pair<String, bool>>? checkList,
+    Difficulty? difficulty,
+    List<String>? tags,
+    String? category,
+  }) =>
+      Task(
+        title: title ?? this.title,
+        description: description ?? this.description,
+        status: status ?? this.status,
+        createdAt: createdAt ?? this.createdAt,
+        checkList: checkList ?? this.checkList,
+        difficulty: difficulty ?? this.difficulty,
+        tags: tags ?? this.tags,
+        category: category ?? this.category,
+      );
 }
 
 class TaskBox {

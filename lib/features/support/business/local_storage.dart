@@ -9,14 +9,19 @@ class LocalStorage {
     return directory.path;
   }
 
-  Future<File> localFile(String filename) async {
-    final path = await localPath;
+  Future<String> get cachePath async {
+    final directory = await getTemporaryDirectory();
+    return directory.path;
+  }
+
+  Future<File> localFile(String filename, {required bool isPermanent}) async {
+    final path = isPermanent ? await localPath : await cachePath;
     return File('$path/$filename');
   }
 
-  Future<String> readFile(String filename) async {
+  Future<String> readFile(String filename, {required bool isPermanent}) async {
     try {
-      final file = await localFile(filename);
+      final file = await localFile(filename, isPermanent: isPermanent);
       return await file.readAsString();
     } catch (e) {
       Logger().e("Error reading file $filename: $e");
@@ -24,8 +29,9 @@ class LocalStorage {
     }
   }
 
-  Future<File> writeFile(String filename, String content) async {
-    final file = await localFile(filename);
+  Future<File> writeFile(String filename, String content,
+      {required bool isPermanent}) async {
+    final file = await localFile(filename, isPermanent: isPermanent);
     return await file.writeAsString(content);
   }
 }

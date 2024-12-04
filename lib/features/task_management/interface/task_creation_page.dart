@@ -1,3 +1,4 @@
+import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -22,6 +23,11 @@ class TaskCreationPage extends StatefulWidget {
 class _TaskCreationPageState extends State<TaskCreationPage> {
   final TextEditingController _taskName = TextEditingController();
   final TextEditingController _taskDescription = TextEditingController();
+  final Task _task = Task(
+    title: "",
+    description: "",
+    createdAt: DateTime.now(),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -34,13 +40,11 @@ class _TaskCreationPageState extends State<TaskCreationPage> {
       if (!formKey.currentState!.validate()) {
         return;
       }
-      taskProvider.addTask(
-        Task(
-          title: _taskName.text.trim(),
-          description: _taskDescription.text.trim(),
-          createdAt: DateTime.now(),
-        ),
-      );
+      taskProvider.addTask(_task.copyWith(
+        title: _taskName.text.trim(),
+        description: _taskDescription.text.trim(),
+        createdAt: DateTime.now(),
+      ));
 
       PmateSnackbars(
         title: local.task_creation_success_message_title,
@@ -70,6 +74,7 @@ class _TaskCreationPageState extends State<TaskCreationPage> {
             taskName: _taskName,
             taskDescription: _taskDescription,
             formKey: formKey,
+            task: _task,
           ),
         ),
       ),
@@ -83,11 +88,14 @@ class TaskCreationForm extends StatefulWidget {
     required this.taskName,
     required this.taskDescription,
     required this.formKey,
+    required this.task,
   });
 
   final TextEditingController taskName;
   final TextEditingController taskDescription;
   final GlobalKey<FormState> formKey;
+  final Task task;
+
   @override
   State<TaskCreationForm> createState() => _TaskCreationFormState();
 }
@@ -144,6 +152,29 @@ class _TaskCreationFormState extends State<TaskCreationForm> {
                       TextInputType.multiline, // Show multiline keyboard
                   textInputAction:
                       TextInputAction.newline, // Enter key creates new line
+                ),
+                AnimatedToggleSwitch<int>.size(
+                  height: 40,
+                  borderWidth: 0,
+                  current: widget.task.difficulty.index,
+                  values: [0, 1, 2, 3, 4],
+                  onChanged: (value) {
+                    setState(() {
+                      widget.task.difficulty = Difficulty.values[value];
+                    });
+                  },
+                  style: ToggleStyle(
+                    backgroundGradient: LinearGradient(
+                      colors: [
+                        Colors.green.shade300, // Very Easy
+                        Colors.lightGreen, // Easy
+                        Colors.yellow, // Medium
+                        Colors.orange, // Hard
+                        Colors.red, // Very Hard
+                      ],
+                    ),
+                    indicatorColor: theme.colorScheme.onPrimaryContainer,
+                  ),
                 ),
               ],
             ),

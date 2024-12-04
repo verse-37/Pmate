@@ -212,7 +212,7 @@
             }
         }
     },
-    "bug_and_fixes_email_body": "Hãy mô tả lỗi hoặc vấn đề bạn gặp phải ở cuối email này 👇",
+    "bug_and_fixes_email_body": "Hãy mô tả lỗi hoặc vấn đề bạn gặp phải dưới đây 👇",
     "@bug_and_fixes_email_body": {},
     "bug_and_fixes_email_device_info": "Thông tin thiết bị:",
     "@bug_and_fixes_email_device_info": {},

@@ -95,8 +95,6 @@ class TaskItem extends StatelessWidget {
 
     //TODO: Add a window "Task Detail" when clicking on the task item.
     //TODO: Add a window "Task Completion" when clicking on the circular percent indicator.
-    //TODO: Add slidable action, complete for swipe right, delete for swipe left.
-    //TODO: New setting for switch the two action panes.
 
     return Slidable(
       startActionPane: settingsProvider.bundle.doneTaskOnLeftSwipe

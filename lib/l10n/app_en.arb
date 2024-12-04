@@ -212,7 +212,7 @@
             }
         }
     },
-    "bug_and_fixes_email_body": "Please describe the bug or error you encountered at the bottom of this email 👇",
+    "bug_and_fixes_email_body": "Please describe the bug or error you encountered below 👇",
     "@bug_and_fixes_email_body": {},
     "bug_and_fixes_email_device_info": "Device Information:",
     "@bug_and_fixes_email_device_info": {},

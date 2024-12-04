@@ -19,14 +19,17 @@ class EmailSender {
     final LocalStorage localStorage = LocalStorage();
     final String filename =
         "device_info_report_${DateTime.now().toIso8601String()}.txt";
-    await localStorage.writeFile(filename, deviceInfoString);
+    await localStorage.writeFile(filename, deviceInfoString,
+        isPermanent: false);
+    //Save the file to the cache directory.
 
     final Email email = Email(
       subject: local.bug_and_fixes_email_subject(Globals.appInfo.appName),
-      body:
-          "${local.bug_and_fixes_email_body}\n\n${local.bug_and_fixes_email_device_info}\n$deviceInfoString\n\n${local.bug_and_fixes_issue_description}",
+      body: local.bug_and_fixes_email_body,
       recipients: [Globals.emailSupportAddress],
-      attachmentPaths: [(await localStorage.localFile(filename)).path],
+      attachmentPaths: [
+        (await localStorage.localFile(filename, isPermanent: false)).path
+      ],
     );
 
     await FlutterEmailSender.send(email);

@@ -13,8 +13,6 @@ class HomePage extends StatelessWidget {
     final theme = Theme.of(context);
 
     //TODO: Add home page content
-    //TODO: Implement fonts
-    //TODO: Implement theme with proper text styles
 
     return Scaffold();
   }
