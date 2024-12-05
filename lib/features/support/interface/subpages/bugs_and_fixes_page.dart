@@ -2,17 +2,31 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pmate/env/config/globals.dart';
+import 'package:pmate/env/models/pmate_page.dart';
 import 'package:pmate/env/widgets/appbar.dart';
+import 'package:pmate/features/app/business/page_info_provider.dart';
 import 'package:pmate/features/support/business/email_sender.dart';
+import 'package:provider/provider.dart';
 
-class BugsAndFixesPage extends StatelessWidget {
+class BugsAndFixesPage extends StatelessWidget implements PmatePage {
   const BugsAndFixesPage({super.key});
 
-  static const routeName = 'bugsandfixes';
-  static const routePath = '/support/bugsandfixes';
+  @override
+  String get routeName => 'bugsandfixes';
+  @override
+  String get routePath => '/support/bugsandfixes';
+
+  @override
+  void init(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    context.read<PageInfoProvider>().setTitle(l10n.bug_and_fixes_title);
+    context.read<PageInfoProvider>().setActions([]);
+  }
 
   @override
   Widget build(BuildContext context) {
+    init(context);
+
     final local = AppLocalizations.of(context);
     final theme = Theme.of(context);
 

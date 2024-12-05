@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pmate/env/widgets/appbar.dart';
 import 'package:pmate/env/models/primitives.dart';
+import 'package:pmate/env/widgets/appbar.dart';
+import 'package:pmate/features/app/business/page_info_provider.dart';
 import 'package:pmate/features/home/interface/home_page.dart';
 import 'package:pmate/features/notifications/interface/notification_page.dart';
 import 'package:pmate/features/settings/interface/settings_page.dart';
 import 'package:pmate/features/support/interface/support_page.dart';
 import 'package:pmate/features/task_management/interface/task_page.dart';
 import 'package:pmate/features/user_authentication/business/auth_service.dart';
+import 'package:provider/provider.dart';
 
 class NavigationCenter extends StatefulWidget {
   const NavigationCenter({super.key, this.initialPageIndex = 0});
@@ -34,6 +36,7 @@ class _NavigationCenterState extends State<NavigationCenter> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context);
+    final pageInfoProvider = context.watch<PageInfoProvider>();
     final pages = <Triple<String, Widget, IconData>>[
       Triple(
         l10n.home_page_title,
@@ -53,11 +56,11 @@ class _NavigationCenterState extends State<NavigationCenter> {
     ];
 
     void onNotificationPressed() {
-      context.push(NotificationPage.routePath);
+      context.push(const NotificationPage().routePath);
     }
 
     void onSettingsPressed() {
-      context.push(SettingsPage.routePath);
+      context.push(const SettingsPage().routePath);
     }
 
     void onSignOutPressed() {
@@ -66,7 +69,8 @@ class _NavigationCenterState extends State<NavigationCenter> {
 
     return Scaffold(
       appBar: PmateAppBar(
-        title: pages[_selectedPageIndex].first,
+        title: pageInfoProvider.title,
+        actions: pageInfoProvider.actions,
       ),
       drawer: Drawer(
         child: SafeArea(

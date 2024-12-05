@@ -108,7 +108,7 @@ class _LoginFormState extends State<LoginForm> {
     }
 
     void onVerse37Contact() {
-      context.push(BugsAndFixesPage.routePath);
+      context.push(const BugsAndFixesPage().routePath);
     }
 
     return Form(

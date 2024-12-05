@@ -1,18 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:pmate/env/models/pmate_page.dart';
 import 'package:pmate/env/widgets/bottom_nav_bar.dart';
 import 'package:pmate/env/models/primitives.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pmate/features/task_management/interface/task_all_page.dart';
 import 'package:pmate/features/task_management/interface/task_today_page.dart';
 
-class TaskPage extends StatefulWidget {
-  static const routeName = '/task';
-  static const routePath = '/task';
+class TaskPage extends StatefulWidget implements PmatePage {
+  @override
+  String get routeName => '/task';
+
+  @override
+  String get routePath => '/task';
 
   const TaskPage({super.key});
 
   @override
   State<TaskPage> createState() => _TaskPageState();
+
+  @override
+  void init(BuildContext context) {}
 }
 
 class _TaskPageState extends State<TaskPage> {
@@ -30,7 +37,7 @@ class _TaskPageState extends State<TaskPage> {
       ),
       Triple(
         Icons.list,
-        local.task_all_page_title,
+        local.task_all_page_tooltip,
         const TaskAllPage(),
       ),
     ];

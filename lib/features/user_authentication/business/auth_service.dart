@@ -31,7 +31,7 @@ class AuthService {
           message: local.sign_up_success_2,
         ).showSnackbar(context, ContentType.success);
 
-        context.pushReplacement(HomePage.routePath);
+        context.pushReplacement(const HomePage().routePath);
         //?Push to NavigationCenter and pop all other pages
       }
     } on FirebaseAuthException catch (e) {
@@ -87,7 +87,7 @@ class AuthService {
           message: local.login_success_2,
         ).showSnackbar(context, ContentType.success);
 
-        context.pushReplacement(HomePage.routePath);
+        context.pushReplacement(const HomePage().routePath);
       }
     } on FirebaseAuthException catch (e) {
       Logger().e(e.code);

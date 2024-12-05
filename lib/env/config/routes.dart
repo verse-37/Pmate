@@ -5,10 +5,11 @@ import 'package:pmate/features/settings/interface/app_settings/appearance/appear
 import 'package:pmate/features/settings/interface/feature_settings/task/task_settings.dart';
 import 'package:pmate/features/support/interface/subpages/bugs_and_fixes_page.dart';
 import 'package:pmate/features/support/interface/support_page.dart';
-import 'package:pmate/features/task_management/interface/task_creation_page.dart';
+import 'package:pmate/features/task_management/interface/task_detail_page.dart';
 import 'package:pmate/features/settings/interface/settings_page.dart';
 import 'package:pmate/features/notifications/interface/notification_page.dart';
 import 'package:pmate/features/task_management/interface/task_page.dart';
+import 'package:pmate/features/task_management/models/task.dart';
 import 'package:pmate/features/welcome/interface/welcome_form.dart';
 import 'package:pmate/features/welcome/interface/welcome_page.dart';
 import 'package:pmate/features/user_authentication/interface/auth_page.dart';
@@ -45,51 +46,58 @@ final router = GoRouter(
       routes: [],
     ),
     GoRoute(
-      path: HomePage.routeName,
+      path: const HomePage().routeName,
       builder: (context, state) => const NavigationCenter(
         initialPageIndex: 0,
       ),
     ),
     GoRoute(
-      path: TaskPage.routeName,
+      path: const TaskPage().routeName,
       builder: (context, state) => const NavigationCenter(
         initialPageIndex: 1,
       ),
       routes: [
         GoRoute(
-          path: TaskCreationPage.routeName,
-          builder: (context, state) => const TaskCreationPage(),
+          path: TaskDetailPage.routeName,
+          builder: (context, state) {
+            final Map<String, Object>? extra =
+                state.extra as Map<String, Object>?;
+            final Task? task = extra?['task'] as Task?;
+            final int? index = extra?['index'] as int?;
+            return TaskDetailPage(task: task, index: index);
+            //? THIS IS THE WAY TO PASS ARGUMENTS TO THE PAGE.
+          },
         ),
       ],
     ),
     GoRoute(
-      path: SupportPage.routeName,
+      path: const SupportPage().routeName,
       builder: (context, state) => const NavigationCenter(
         initialPageIndex: 2,
       ),
       routes: [
         GoRoute(
-          path: BugsAndFixesPage.routeName,
+          path: const BugsAndFixesPage().routeName,
           builder: (context, state) => const BugsAndFixesPage(),
         ),
       ],
     ),
     GoRoute(
-      path: SettingsPage.routeName,
+      path: const SettingsPage().routeName,
       builder: (context, state) => const SettingsPage(),
       routes: [
         GoRoute(
-          path: AppearanceSettings.routeName,
+          path: const AppearanceSettings().routeName,
           builder: (context, state) => const AppearanceSettings(),
         ),
         GoRoute(
-          path: TaskSettings.routeName,
+          path: const TaskSettings().routeName,
           builder: (context, state) => const TaskSettings(),
         ),
       ],
     ),
     GoRoute(
-      path: NotificationPage.routeName,
+      path: const NotificationPage().routeName,
       builder: (context, state) => const NotificationPage(),
     ),
   ],

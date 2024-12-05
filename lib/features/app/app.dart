@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pmate/env/config/globals.dart';
 import 'package:pmate/env/config/routes.dart';
 import 'package:pmate/env/config/themes.dart';
+import 'package:pmate/features/app/business/page_info_provider.dart';
 import 'package:pmate/features/home/interface/home_page.dart';
 import 'package:pmate/features/settings/business/appearance_settings_provider.dart';
 import 'package:pmate/features/settings/business/task_settings_provider.dart';
@@ -23,6 +24,9 @@ class PmateRoot extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(
+          create: (context) => PageInfoProvider(),
+        ),
         ChangeNotifierProvider(
           create: (context) => TaskProvider(),
         ),
@@ -47,7 +51,7 @@ class PmateRoot extends StatelessWidget {
             }
 
             if (snapshot.hasData) {
-              router.go(HomePage.routePath);
+              router.go(const HomePage().routePath);
             } else {
               router.go(AuthenticationPage.routePath);
             }
@@ -57,6 +61,7 @@ class PmateRoot extends StatelessWidget {
                   context.watch<AppearanceSettingsProvider>()..init();
               context.watch<TaskSettingsProvider>().init();
               DeviceInfo.initPlatform();
+              context.read<TaskProvider>().init();
 
               return MaterialApp.router(
                 debugShowCheckedModeBanner: false,

@@ -2,17 +2,48 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pmate/env/widgets/dividers.dart';
+import 'package:pmate/features/app/business/page_info_provider.dart';
 import 'package:pmate/features/task_management/business/task_provider.dart';
-import 'package:pmate/features/task_management/blocks/task_item.dart';
-import 'package:pmate/features/task_management/interface/task_creation_page.dart';
+import 'package:pmate/features/task_management/commons/task_item.dart';
+import 'package:pmate/features/task_management/interface/task_detail_page.dart';
 import 'package:pmate/features/task_management/models/task.dart';
 import 'package:provider/provider.dart';
 
-class TaskAllPage extends StatelessWidget {
+class TaskAllPage extends StatefulWidget {
   const TaskAllPage({super.key});
 
   @override
+  State<TaskAllPage> createState() => _TaskAllPageState();
+}
+
+class _TaskAllPageState extends State<TaskAllPage> {
+  bool editModeOn = false;
+
+  void toggleEditMode(int listLength) {
+    if (listLength < 2) {
+      return;
+    }
+    setState(() {
+      editModeOn = !editModeOn;
+    });
+  }
+
+  void init(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final taskProvider = context.watch<TaskProvider>();
+    context.read<PageInfoProvider>().setTitle(l10n.task_all_page_title);
+    context.read<PageInfoProvider>().setActions([
+      IconButton(
+        onPressed: () => toggleEditMode(taskProvider.taskList.length),
+        icon: editModeOn ? const Icon(Icons.check) : const Icon(Icons.edit),
+      ),
+    ]);
+  }
+
+  @override
   Widget build(BuildContext context) {
+    init(context);
+
     final local = AppLocalizations.of(context);
     final theme = Theme.of(context);
     final taskProvider = context.watch<TaskProvider>();
@@ -33,7 +64,7 @@ class TaskAllPage extends StatelessWidget {
     }
 
     void onAddTaskPressed() {
-      context.push(TaskCreationPage.routePath);
+      context.push(TaskDetailPage.routePath);
     }
 
     void onTaskReorder(int oldIndex, int newIndex) {
@@ -73,6 +104,7 @@ class TaskAllPage extends StatelessWidget {
             children: [
               DividerWithText(text: local.task_focus_section),
               ReorderableListView(
+                buildDefaultDragHandles: false,
                 shrinkWrap: true,
                 //? If the scroll view does not shrink wrap, then the scroll view will expand to the maximum allowed size in the [scrollDirection]. If the scroll view has unbounded constraints in the [scrollDirection], then [shrinkWrap] must be true.
                 physics: const NeverScrollableScrollPhysics(),
@@ -82,12 +114,14 @@ class TaskAllPage extends StatelessWidget {
                       (task) => TaskItem(
                         key: ValueKey(task),
                         index: task.index!,
+                        editModeOn: editModeOn,
                       ),
                     )
                     .toList(),
               ),
               DividerWithText(text: local.task_all_section),
               ReorderableListView(
+                buildDefaultDragHandles: false,
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 onReorder: onTaskReorder,
@@ -96,12 +130,14 @@ class TaskAllPage extends StatelessWidget {
                       (task) => TaskItem(
                         key: ValueKey(task),
                         index: task.index!,
+                        editModeOn: editModeOn,
                       ),
                     )
                     .toList(),
               ),
               DividerWithText(text: local.task_completed_section),
               ReorderableListView(
+                buildDefaultDragHandles: false,
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 onReorder: onTaskReorder,
@@ -110,6 +146,7 @@ class TaskAllPage extends StatelessWidget {
                       (task) => TaskItem(
                         key: ValueKey(task),
                         index: task.index!,
+                        editModeOn: editModeOn,
                       ),
                     )
                     .toList(),

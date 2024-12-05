@@ -7,27 +7,40 @@ import 'package:go_router/go_router.dart';
 import 'package:pmate/env/widgets/appbar.dart';
 import 'package:pmate/env/widgets/snackbars.dart';
 import 'package:pmate/features/task_management/business/task_provider.dart';
+import 'package:pmate/features/task_management/commons/difficulty_colors.dart';
 import 'package:pmate/features/task_management/models/task.dart';
 import 'package:provider/provider.dart';
 
-class TaskCreationPage extends StatefulWidget {
-  static const routeName = 'create';
-  static const routePath = '/task/create';
+class TaskDetailPage extends StatefulWidget {
+  static const routeName = 'detail';
+  static const routePath = '/task/detail';
 
-  const TaskCreationPage({super.key});
+  const TaskDetailPage({super.key, this.task, this.index});
+
+  final Task? task;
+  final int? index;
 
   @override
-  State<TaskCreationPage> createState() => _TaskCreationPageState();
+  State<TaskDetailPage> createState() => _TaskDetailPageState();
 }
 
-class _TaskCreationPageState extends State<TaskCreationPage> {
+class _TaskDetailPageState extends State<TaskDetailPage> {
   final TextEditingController _taskName = TextEditingController();
   final TextEditingController _taskDescription = TextEditingController();
-  final Task _task = Task(
-    title: "",
-    description: "",
-    createdAt: DateTime.now(),
-  );
+  late final Task _task;
+
+  @override
+  void initState() {
+    super.initState();
+    _taskName.text = widget.task?.title ?? "";
+    _taskDescription.text = widget.task?.description ?? "";
+    _task = widget.task ??
+        Task(
+          title: "",
+          description: "",
+          createdAt: DateTime.now(),
+        );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,16 +53,20 @@ class _TaskCreationPageState extends State<TaskCreationPage> {
       if (!formKey.currentState!.validate()) {
         return;
       }
-      taskProvider.addTask(_task.copyWith(
-        title: _taskName.text.trim(),
-        description: _taskDescription.text.trim(),
-        createdAt: DateTime.now(),
-      ));
 
-      PmateSnackbars(
-        title: local.task_creation_success_message_title,
-        message: local.task_creation_success_message_content,
-      ).showSnackbar(context, ContentType.success);
+      _task.title = _taskName.text.trim();
+      _task.description = _taskDescription.text.trim();
+
+      if (widget.task == null) {
+        taskProvider.addTask(_task);
+
+        PmateSnackbars(
+          title: local.task_creation_success_message_title,
+          message: local.task_creation_success_message_content,
+        ).showSnackbar(context, ContentType.success);
+      } else {
+        taskProvider.updateTask(_task, widget.index!);
+      }
 
       context.pop();
     }
@@ -70,7 +87,7 @@ class _TaskCreationPageState extends State<TaskCreationPage> {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          child: TaskCreationForm(
+          child: TaskDetailFields(
             taskName: _taskName,
             taskDescription: _taskDescription,
             formKey: formKey,
@@ -82,8 +99,8 @@ class _TaskCreationPageState extends State<TaskCreationPage> {
   }
 }
 
-class TaskCreationForm extends StatefulWidget {
-  const TaskCreationForm({
+class TaskDetailFields extends StatefulWidget {
+  const TaskDetailFields({
     super.key,
     required this.taskName,
     required this.taskDescription,
@@ -97,10 +114,10 @@ class TaskCreationForm extends StatefulWidget {
   final Task task;
 
   @override
-  State<TaskCreationForm> createState() => _TaskCreationFormState();
+  State<TaskDetailFields> createState() => _TaskDetailFieldsState();
 }
 
-class _TaskCreationFormState extends State<TaskCreationForm> {
+class _TaskDetailFieldsState extends State<TaskDetailFields> {
   @override
   Widget build(BuildContext context) {
     final local = AppLocalizations.of(context);
@@ -153,28 +170,41 @@ class _TaskCreationFormState extends State<TaskCreationForm> {
                   textInputAction:
                       TextInputAction.newline, // Enter key creates new line
                 ),
-                AnimatedToggleSwitch<int>.size(
-                  height: 40,
-                  borderWidth: 0,
-                  current: widget.task.difficulty.index,
-                  values: [0, 1, 2, 3, 4],
-                  onChanged: (value) {
-                    setState(() {
-                      widget.task.difficulty = Difficulty.values[value];
-                    });
-                  },
-                  style: ToggleStyle(
-                    backgroundGradient: LinearGradient(
-                      colors: [
-                        Colors.green.shade300, // Very Easy
-                        Colors.lightGreen, // Easy
-                        Colors.yellow, // Medium
-                        Colors.orange, // Hard
-                        Colors.red, // Very Hard
-                      ],
-                    ),
-                    indicatorColor: theme.colorScheme.onPrimaryContainer,
+                const SizedBox(height: 15),
+                Text(
+                  local.task_difficulty_section,
+                  style: theme.textTheme.bodyLarge,
+                ),
+                const SizedBox(height: 10),
+                SizedBox(
+                  width: double.infinity,
+                  //? The SizedBox is used to make the toggle switch take the full width of the screen.
+                  child: AnimatedToggleSwitch<int>.size(
+                    height: 40,
+                    borderWidth: 0,
+                    current: widget.task.difficulty.index,
+                    values: [0, 1, 2, 3, 4],
+                    onChanged: (value) {
+                      setState(() {
+                        widget.task.difficulty = Difficulty.values[value];
+                      });
+                    },
+                    styleBuilder: (value) {
+                      return ToggleStyle(
+                        backgroundColor:
+                            DifficultyColors.difficultyColors[value],
+                        indicatorColor: theme.colorScheme.onPrimaryContainer,
+                      );
+                    },
                   ),
+                ),
+                const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(local.task_difficulty_very_easy),
+                    Text(local.task_difficulty_very_hard),
+                  ],
                 ),
               ],
             ),
