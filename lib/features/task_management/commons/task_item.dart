@@ -16,18 +16,20 @@ import 'package:toastification/toastification.dart';
 class TaskItem extends StatelessWidget {
   const TaskItem({
     super.key,
-    required this.index,
+    required this.sectionIndex,
+    required this.listIndex,
     required this.editModeOn,
   });
 
-  final int index;
+  final int sectionIndex;
+  final int listIndex;
   final bool editModeOn;
 
   @override
   Widget build(BuildContext context) {
     final settingsProvider = context.watch<TaskSettingsProvider>();
     final taskProvider = context.watch<TaskProvider>();
-    final task = taskProvider.taskList[index];
+    final task = taskProvider.taskList[listIndex];
     final local = AppLocalizations.of(context);
     final theme = Theme.of(context);
     final Pair<int, int> completedAndTotal = Pair(
@@ -37,7 +39,7 @@ class TaskItem extends StatelessWidget {
     late final Widget rightGadget;
 
     void onDoneDragged(BuildContext context) {
-      taskProvider.toggleTask(index, TaskStatus.completed);
+      taskProvider.toggleTask(listIndex, TaskStatus.completed);
       Slidable.of(context)?.close();
       //? This is a workaround to close the slidable after the task is toggled.
       PmateSnackbars(
@@ -47,7 +49,7 @@ class TaskItem extends StatelessWidget {
     }
 
     void onDeleteDragged(BuildContext context) {
-      taskProvider.deleteTaskAt(index);
+      taskProvider.deleteTaskAt(listIndex);
       Slidable.of(context)?.close();
     }
 
@@ -86,7 +88,7 @@ class TaskItem extends StatelessWidget {
         value: task.status == TaskStatus.completed,
         onChanged: (value) {
           taskProvider.toggleTask(
-            index,
+            listIndex,
             value! ? TaskStatus.completed : TaskStatus.incomplete,
           );
         },
@@ -107,7 +109,6 @@ class TaskItem extends StatelessWidget {
       );
     }
 
-    //TODO: Add a window "Task Detail" when clicking on the task item.
     //TODO: Add a window "Task Completion" when clicking on the circular percent indicator.
 
     return Slidable(
@@ -132,9 +133,9 @@ class TaskItem extends StatelessWidget {
               Expanded(
                 child: GestureDetector(
                   onTap: () {
-                    context.go(TaskDetailPage.routePath, extra: {
+                    context.push(TaskDetailPage.routePath, extra: {
                       'task': task,
-                      'index': index,
+                      'index': listIndex,
                     });
                   },
                   behavior: HitTestBehavior.opaque,
@@ -149,7 +150,7 @@ class TaskItem extends StatelessWidget {
               Visibility(
                 visible: editModeOn,
                 child: ReorderableDragStartListener(
-                  index: index,
+                  index: sectionIndex,
                   enabled: editModeOn,
                   child: const Icon(Icons.drag_handle),
                 ),

@@ -48,18 +48,15 @@ class _TaskAllPageState extends State<TaskAllPage> {
     final theme = Theme.of(context);
     final taskProvider = context.watch<TaskProvider>();
     final n = taskProvider.taskList.length;
-    List<Task> inProgressTasks = [];
     List<Task> inCompletedTasks = [];
     List<Task> completedTasks = [];
 
     for (int i = 0; i < n; i++) {
       final task = taskProvider.taskList[i]..index = i;
-      if (task.status == TaskStatus.inProgress) {
-        inProgressTasks.add(task);
-      } else if (task.status == TaskStatus.completed) {
-        completedTasks.add(task);
+      if (task.status == TaskStatus.completed) {
+        completedTasks.add(task..sectionIndex = completedTasks.length);
       } else {
-        inCompletedTasks.add(task);
+        inCompletedTasks.add(task..sectionIndex = inCompletedTasks.length);
       }
     }
 
@@ -79,9 +76,7 @@ class _TaskAllPageState extends State<TaskAllPage> {
       ),
       body: SingleChildScrollView(
         child: Builder(builder: (context) {
-          if (inProgressTasks.isEmpty &&
-              inCompletedTasks.isEmpty &&
-              completedTasks.isEmpty) {
+          if (inCompletedTasks.isEmpty && completedTasks.isEmpty) {
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -102,34 +97,19 @@ class _TaskAllPageState extends State<TaskAllPage> {
           }
           return Column(
             children: [
-              DividerWithText(text: local.task_focus_section),
+              DividerWithText(text: local.task_all_section),
               ReorderableListView(
                 buildDefaultDragHandles: false,
                 shrinkWrap: true,
                 //? If the scroll view does not shrink wrap, then the scroll view will expand to the maximum allowed size in the [scrollDirection]. If the scroll view has unbounded constraints in the [scrollDirection], then [shrinkWrap] must be true.
                 physics: const NeverScrollableScrollPhysics(),
                 onReorder: onTaskReorder,
-                children: inProgressTasks
-                    .map(
-                      (task) => TaskItem(
-                        key: ValueKey(task),
-                        index: task.index!,
-                        editModeOn: editModeOn,
-                      ),
-                    )
-                    .toList(),
-              ),
-              DividerWithText(text: local.task_all_section),
-              ReorderableListView(
-                buildDefaultDragHandles: false,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                onReorder: onTaskReorder,
                 children: inCompletedTasks
                     .map(
                       (task) => TaskItem(
                         key: ValueKey(task),
-                        index: task.index!,
+                        listIndex: task.index!,
+                        sectionIndex: task.sectionIndex!,
                         editModeOn: editModeOn,
                       ),
                     )
@@ -145,7 +125,8 @@ class _TaskAllPageState extends State<TaskAllPage> {
                     .map(
                       (task) => TaskItem(
                         key: ValueKey(task),
-                        index: task.index!,
+                        listIndex: task.index!,
+                        sectionIndex: task.sectionIndex!,
                         editModeOn: editModeOn,
                       ),
                     )

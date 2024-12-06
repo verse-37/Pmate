@@ -198,6 +198,22 @@
     "@task_difficulty_very_hard": {},
     "task_all_page_title": "Tất cả nhiệm vụ",
     "@task_all_page_title": {},
+    "task_today_section": "Nhiệm vụ hôm nay",
+    "@task_today_section": {},
+    "task_detail_section": "Thông tin chi tiết",
+    "@task_detail_section": {},
+    "task_detail_created_at": "Thời điểm tạo",
+    "@task_detail_created_at": {},
+    "task_detail_status": "Trạng thái",
+    "@task_detail_status": {},
+    "task_status_name": "sel{status, select, 0{Chưa hoàn thành} 1{Đã hoàn thành} 2{Đang xử lý} other{Không xác định}}",
+    "@task_status_name": {
+        "placeholders": {
+            "status": {
+                "type": "String"
+            }
+        }
+    },
     "bug_and_fixes_title": "Hỗ trợ",
     "@bug_and_fixes_title": {},
     "bug_and_fixes_message": "Gửi email cho {email} và chúng tôi sẽ liên lạc với bạn sớm nhất có thể.",

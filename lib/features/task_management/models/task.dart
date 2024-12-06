@@ -21,6 +21,7 @@ enum TaskStatus {
 class Task extends PmateModel {
   //? Different from Java, here abstract classes can be implemented by classes.
   int? index;
+  int? sectionIndex;
   String title;
   String description;
   TaskStatus status;
