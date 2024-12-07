@@ -214,6 +214,10 @@
             }
         }
     },
+    "task_checklist_section": "Những việc cần làm",
+    "@task_checklist_section": {},
+    "task_checklist_item_placeholder": "Thêm một mục...",
+    "@task_checklist_item_placeholder": {},
     "bug_and_fixes_title": "Hỗ trợ",
     "@bug_and_fixes_title": {},
     "bug_and_fixes_message": "Gửi email cho {email} và chúng tôi sẽ liên lạc với bạn sớm nhất có thể.",

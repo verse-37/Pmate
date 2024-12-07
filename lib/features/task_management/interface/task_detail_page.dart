@@ -2,10 +2,14 @@ import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:form_field_validator/form_field_validator.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pmate/env/models/primitives.dart';
 import 'package:pmate/env/widgets/appbar.dart';
 import 'package:pmate/env/widgets/snackbars.dart';
+import 'package:pmate/features/task_management/blocks/task_detail_checklist.dart';
+import 'package:pmate/features/task_management/blocks/task_detail_difficulty_toggle_switch.dart';
+import 'package:pmate/features/task_management/blocks/task_detail_expandable.dart';
+import 'package:pmate/features/task_management/blocks/task_detail_title_description_field.dart';
 import 'package:pmate/features/task_management/business/task_provider.dart';
 import 'package:pmate/features/task_management/commons/difficulty_colors.dart';
 import 'package:pmate/features/task_management/models/task.dart';
@@ -95,7 +99,7 @@ class _TaskDetailPageState extends State<TaskDetailPage> {
                 formKey: formKey,
                 task: _task,
               ),
-              TaskDetailExpandableSection(task: _task),
+              if (widget.task != null) TaskDetailExpandableSection(task: _task),
             ],
           ),
         ),
@@ -127,34 +131,12 @@ class _TaskDetailFieldsState extends State<TaskDetailFields> {
   Widget build(BuildContext context) {
     final local = AppLocalizations.of(context);
     final theme = Theme.of(context);
+
     return Form(
       key: widget.formKey,
       child: Column(
         children: [
-          Container(
-            decoration: BoxDecoration(
-              color: theme.colorScheme.primaryContainer,
-            ),
-            child: TextFormField(
-              validator: RequiredValidator(
-                errorText: local.task_creation_title_missing,
-              ).call,
-              controller: widget.taskName,
-              style: theme.textTheme.bodyLarge!.copyWith(fontSize: 24),
-              minLines: 1,
-              maxLines: 5,
-              decoration: InputDecoration(
-                hintText: local.title,
-                border: OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                  borderRadius: BorderRadius.circular(15.0),
-                ),
-              ),
-              keyboardType: TextInputType.text,
-              textInputAction: TextInputAction.done,
-              //Text input action is set to done to prevent the user from adding a new line. Text input action configure the action button on the keyboard.
-            ),
-          ),
+          TaskDetailTitleField(controller: widget.taskName),
           Padding(
             padding: const EdgeInsets.only(
               left: 15.0,
@@ -163,17 +145,8 @@ class _TaskDetailFieldsState extends State<TaskDetailFields> {
             ),
             child: Column(
               children: [
-                TextFormField(
+                TaskDetailDescriptionField(
                   controller: widget.taskDescription,
-                  decoration: InputDecoration(
-                    hintText: local.task_notes_field,
-                    hintStyle: theme.textTheme.bodyMedium,
-                  ),
-                  maxLines: null, // Allow multiple lines
-                  keyboardType:
-                      TextInputType.multiline, // Show multiline keyboard
-                  textInputAction:
-                      TextInputAction.newline, // Enter key creates new line
                 ),
                 const SizedBox(height: 15),
                 Text(
@@ -181,28 +154,7 @@ class _TaskDetailFieldsState extends State<TaskDetailFields> {
                   style: theme.textTheme.bodyLarge,
                 ),
                 const SizedBox(height: 10),
-                SizedBox(
-                  width: double.infinity,
-                  //? The SizedBox is used to make the toggle switch take the full width of the screen.
-                  child: AnimatedToggleSwitch<int>.size(
-                    height: 40,
-                    borderWidth: 0,
-                    current: widget.task.difficulty.index,
-                    values: [0, 1, 2, 3, 4],
-                    onChanged: (value) {
-                      setState(() {
-                        widget.task.difficulty = Difficulty.values[value];
-                      });
-                    },
-                    styleBuilder: (value) {
-                      return ToggleStyle(
-                        backgroundColor:
-                            DifficultyColors.difficultyColors[value],
-                        indicatorColor: theme.colorScheme.onPrimaryContainer,
-                      );
-                    },
-                  ),
-                ),
+                TaskDetailDifficultyToggleSwitch(task: widget.task),
                 const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -211,63 +163,16 @@ class _TaskDetailFieldsState extends State<TaskDetailFields> {
                     Text(local.task_difficulty_very_hard),
                   ],
                 ),
+                const SizedBox(height: 15),
+                Text(local.task_checklist_section),
+                const SizedBox(height: 10),
+                TaskDetailChecklistSection(task: widget.task),
+                TaskDetailChecklistField(task: widget.task),
               ],
             ),
           ),
         ],
       ),
-    );
-  }
-}
-
-class TaskDetailExpandableSection extends StatefulWidget {
-  const TaskDetailExpandableSection({super.key, required this.task});
-
-  final Task task;
-
-  @override
-  State<TaskDetailExpandableSection> createState() =>
-      _TaskDetailExpandableSectionState();
-}
-
-class _TaskDetailExpandableSectionState
-    extends State<TaskDetailExpandableSection> {
-  bool isExpanded = false;
-
-  @override
-  Widget build(BuildContext context) {
-    final local = AppLocalizations.of(context);
-
-    return ExpansionPanelList(
-      expansionCallback: (int index, bool isExpanded) {
-        setState(() {
-          this.isExpanded = !this.isExpanded;
-        });
-      },
-      children: [
-        ExpansionPanel(
-          isExpanded: isExpanded,
-          headerBuilder: (BuildContext context, bool isExpanded) {
-            return ListTile(
-              title: Text(local.task_detail_section),
-            );
-          },
-          body: Column(
-            children: [
-              ListTile(
-                title: Text(local.task_detail_created_at),
-                subtitle: Text(widget.task.createdAt.toString()),
-              ),
-              ListTile(
-                title: Text(local.task_detail_status),
-                subtitle: Text(
-                  local.task_status_name("${widget.task.status.index}"),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
     );
   }
 }

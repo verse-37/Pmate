@@ -214,6 +214,10 @@
             }
         }
     },
+    "task_checklist_section": "Checklist",
+    "@task_checklist_section": {},
+    "task_checklist_item_placeholder": "Add an entry...",
+    "@task_checklist_item_placeholder": {},
     "bug_and_fixes_title": "Need more help?",
     "@bug_and_fixes_title": {},
     "bug_and_fixes_message": "Send an email to {email} and we will get back to you as soon as possible.",
